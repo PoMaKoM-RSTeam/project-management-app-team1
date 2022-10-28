@@ -37,7 +37,7 @@
             "style": "kebab-case"
           }
         ],
-        "@typescript-eslint/comma-dangle": "off",
+        "@typescript-eslint/comma-dangle": "off"
       }
     },
     {

@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 10% auto;
+}
+
+form {
+  width: 350px;
+  height: 320px;
+  border-radius: 5px;
+  background: #efefef;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 45px;
+
+  h2 {
+    margin-top: 16px;
+  }
+
+  mat-form-field {
+    width: 300px;
+    border-bottom: transparent !important;
+  }
+
+  input {
+    border: none;
+    background-color: #e5e5e5;
+    height: 24px;
+    width: 300px;
+    color: #929292;
+  }
+
+  button[type="submit"] {
+    width: 120px;
+    float: right;
+    margin: 40px 48px 0;
+  }
+
+  button[type="submit"]:enabled {
+    color: white;
+    background-color: #2f80ed;
+  }
+}
