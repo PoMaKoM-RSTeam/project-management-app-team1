@@ -6,6 +6,11 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', component: WelocomePageComponent },
   {
+    path: 'home',
+    loadChildren: () =>
+      import('./home/home.module').then((a) => a.HomeModule),
+  },
+  {
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((a) => a.LoginModule),
