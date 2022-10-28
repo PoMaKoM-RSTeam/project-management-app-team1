@@ -1,0 +1,59 @@
+{
+  "Cancel": "Cancel",
+  "Create-Board": "Create board",
+
+  "Delete": "Delete",
+
+  "Edit-Profile": "Edit profile",
+  "Email": "Email address",
+  "Email-required": "Email is required",
+  "Error": "Error",
+  "ErrorMessage-title": "404 error 😱",
+  "ErrorMessage-default": "Something went wrong or works improperly. Please try to reload page in order to fix the problem. If it doesn't help - then please try to navigate to root route - that should do it.",
+  "ErrorPage": "Error 404",
+
+  "Firstname": "First Name",
+
+  "Lastname": "Last Name",
+  "Loading": "Loading . . . Please Wait",
+  "Login": "Login",
+  "Login-error": "Can't login? Write to the administrator",
+  "Login-name": "Login",
+  "Login-pass-err": "Incorrect login or password",
+  "Login-question": "Already have an account?",
+  "Logout": "Logout",
+
+  "Name": "Name",
+
+  "Password": "Password",
+  "Password-new": "New password",
+  "Password-required": "Password is required",
+  "Project-Title": "Project manager",
+  "Profile": "Profile",
+
+  "Register": "Register",
+  "Register-result": "You are registered! Click Login",
+  "Remember": "Remember me",
+
+  "Signup": "Registration",
+  "Signup-question": "Don't have an account?",
+  "Signup-welcome": "Sign up",
+  "SiteTitle": "Project Management System",
+  "SiteSubTitle": "The Task of The Rolling Scopes School",
+  "Submit": "Submit",
+
+  "Update": "Update",
+  "Username": "User name",
+  "Username-required": "Username is required",
+
+  "Validation-login": "Please, enter a login email",
+  "Validation-login-error": "The login email is invalid",
+  "Validation-name": "Please, enter a name",
+  "Validation-password": "Please, enter a password",
+  "Validation-password-new": "Please, enter a new password",
+  "Validation-password-general": "Password is not strong enough. Consider to:",
+  "Validation-password-numbers": "include numbers",
+  "Validation-password-short": "Password should be at least 8 characters long",
+  "Validation-password-special": "include special characters (?!#@)",
+  "Validation-password-upper": "combine both uppercase and lowercase letters"
+}
