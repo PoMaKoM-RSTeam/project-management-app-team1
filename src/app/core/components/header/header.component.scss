@@ -1,0 +1,20 @@
+@import "src/assets/styles/variables";
+
+.header {
+  display: flex;
+  max-width: 1200px;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  margin: 0 auto;
+  //background-color: $color1;
+  //color: #454349;
+
+  color: #FFFFFF;
+  //background-color: ;
+}
+
+.logo {
+  font-size: 24px;
+  white-space: pre-wrap;
+}
