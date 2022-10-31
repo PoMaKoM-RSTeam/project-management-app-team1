@@ -33,15 +33,16 @@
       [type]="hide ? 'password' : 'text'"
       placeholder="Password"
     />
-    <!--button
+    <button
+      mat-icon-button
       matSuffix
       (click)="hide = !hide"
       [attr.aria-label]="'Hide password'"
       [attr.aria-pressed]="hide"
       type="button"
     >
-      <label>{{ hide ? "visibility_off" : "visibility" }}</label>
-    </button-->
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
     <div class="alert">
       <p
         *ngIf="

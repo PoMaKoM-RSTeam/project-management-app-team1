@@ -36,6 +36,11 @@ form {
     color: #929292;
   }
 
+  button[type="button"] {
+    float: right;
+    border: none;
+  }
+
   button[type="submit"] {
     width: 120px;
     float: right;

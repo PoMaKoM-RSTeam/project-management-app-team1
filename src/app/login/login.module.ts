@@ -6,6 +6,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [{ path: '', component: LoginPageComponent }];
 
@@ -14,6 +15,7 @@ const routes: Routes = [{ path: '', component: LoginPageComponent }];
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MatIconModule,
     TranslateModule,
     RouterModule.forChild(routes),
   ],
