@@ -2,12 +2,12 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 10% auto;
+  margin: 5% auto;
 }
 
 form {
   width: 350px;
-  height: 320px;
+  height: 400px;
   border-radius: 5px;
   background: #efefef;
   align-items: center;
@@ -19,9 +19,13 @@ form {
     margin-top: 16px;
   }
 
-  mat-form-field {
-    width: 300px;
-    border-bottom: transparent !important;
+  .form__question {
+    font-size: 14px;
+  }
+
+  .form__link {
+    margin-left: 5px;
+    cursor: pointer;
   }
 
   input {
@@ -30,6 +34,11 @@ form {
     height: 24px;
     width: 300px;
     color: #929292;
+  }
+
+  button[type="button"] {
+    float: right;
+    border: none;
   }
 
   button[type="submit"] {
@@ -41,5 +50,28 @@ form {
   button[type="submit"]:enabled {
     color: white;
     background-color: #2f80ed;
+  }
+
+  .alert {
+    padding: 0;
+    color: red;
+  }
+
+  .alert-input {
+    border-color: red;
+    &:focus {
+      border-color: red;
+    }
+  }
+
+  .validation-error {
+    margin: 0.5rem 0 0;
+    font-size: 14px;
+    &__indented {
+      text-indent: 1rem;
+      &::before {
+      content: "*";
+    }
+    }
   }
 }

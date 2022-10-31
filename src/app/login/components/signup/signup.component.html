@@ -1,1 +1,88 @@
-<p>signup works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="authorize()">
+  <div>
+    <h2>{{ "Signup" | translate }}</h2>
+  </div>
+  <p class="form__question">
+    {{ "Login-question" | translate
+    }}<a class="form__link" (click)="signin()">{{ "Login" | translate }}</a>
+  </p>
+  <div>
+    <p>{{ "Name" | translate }}</p>
+    <input
+      type="text"
+      class="form__input"
+      id="name"
+      formControlName="name"
+      autocomplete="off"
+      required
+      [ngClass]="name?.errors ? 'alert-input' : ''"
+    />
+    <div class="alert">
+      <p class="validation-error" *ngIf="name?.hasError('required')">
+        {{ "Validation-name" | translate }}
+      </p>
+    </div>
+
+    <p>{{ "Login-name" | translate }}</p>
+    <input
+      type="text"
+      class="form__input"
+      id="login"
+      formControlName="login"
+      autocomplete="off"
+      required
+      [ngClass]="login?.errors ? 'alert-input' : ''"
+    />
+    <div class="alert">
+      <p class="validation-error" *ngIf="login?.hasError('required')">
+        {{ "Validation-login" | translate }}
+      </p>
+      <p class="validation-error" *ngIf="login?.hasError('emailError')">
+        {{ "Validation-login-error" | translate }}
+      </p>
+    </div>
+
+    <p>{{ "Password" | translate }}</p>
+    <input
+      type="password"
+      class="form__input"
+      id="password"
+      formControlName="password"
+      autoComplete="current-password"
+      required
+      [ngClass]="password?.errors ? 'alert-input' : ''"
+    />
+    <div class="alert">
+      <p class="validation-error" *ngIf="password?.hasError('required')">
+        {{ "Validation-password" | translate }}
+      </p>
+      <p class="validation-error" *ngIf="password?.hasError('minlength')">
+        {{ "Validation-password-short" | translate }}
+      </p>
+      <p *ngIf="password?.errors && password?.value" class="validation-error">
+        {{ "Validation-password-general" | translate }}
+      </p>
+      <p
+        class="validation-error validation-error__indented"
+        *ngIf="password?.hasError('letterCases')"
+      >
+        {{ "Validation-password-upper" | translate }}
+      </p>
+      <p
+        class="validation-error validation-error__indented"
+        *ngIf="password?.hasError('numbers')"
+      >
+        {{ "Validation-password-numbers" | translate }}
+      </p>
+      <p
+        class="validation-error validation-error__indented"
+        *ngIf="password?.hasError('specialCharacter')"
+      >
+        {{ "Validation-password-special" | translate }}
+      </p>
+    </div>
+  </div>
+  <button type="submit" [disabled]="haveValidationErrors()">
+    {{ "Signup" | translate }}
+  </button>
+</form>

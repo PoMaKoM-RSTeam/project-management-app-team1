@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  baseUrl: 'https://gentle-waters-52058.herokuapp.com/',
 };
 
 /*

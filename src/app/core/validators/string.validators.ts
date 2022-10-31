@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/named
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 export class StringValidators {
@@ -19,8 +18,10 @@ export class StringValidators {
   static lettersAndNumbers(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       if (control.value == '') return null;
+
       let str = String(control.value).toLowerCase();
       let re = new RegExp('(?=.*[0-9])(?=.*[a-z]).{1,}$');
+
       if (re.test(str)) {
         return null;
       } else {
@@ -48,6 +49,7 @@ export class StringValidators {
       if (control.value == '') return null;
 
       let re = new RegExp('^[a-zA-Z ]*$');
+
       if (re.test(control.value)) {
         return null;
       } else {

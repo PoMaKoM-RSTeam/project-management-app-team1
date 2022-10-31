@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StringValidators } from '../../../core/validators/string.validators';
 import { AuthService } from '../../services/auth.service';
 
@@ -10,6 +10,8 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  @Output() public showSignup = new EventEmitter();
+
   public authForm: FormGroup;
 
   public hide: boolean = true;
@@ -32,6 +34,10 @@ export class LoginComponent {
         ],
       ],
     });
+  }
+
+  public signup(): void {
+    this.showSignup.emit();
   }
 
   public onSubmit(): void {

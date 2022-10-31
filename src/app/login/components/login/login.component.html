@@ -1,38 +1,75 @@
 <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
   <div>
-    <h2>Login</h2>
+    <h2>{{ "Login" | translate }}</h2>
   </div>
+  <p class="form__question">
+    {{ "Signup-question" | translate
+    }}<a class="form__link" (click)="signup()">{{
+      "Signup-welcome" | translate
+    }}</a>
+  </p>
   <div>
-    <mat-form-field appearance="fill">
-      <mat-label>Login</mat-label>
-      <input
-        matInput
-        type="email"
-        formControlName="login"
-        autocomplete="email"
-        placeholder="Login"
-      />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Password</mat-label>
-      <input
-        matInput
-        formControlName="password"
-        autocomplete="current-password"
-        [type]="hide ? 'password' : 'text'"
-        placeholder="Password"
-      />
-      <button
-        mat-icon-button
-        matSuffix
-        (click)="hide = !hide"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hide"
-        type="button"
+    <p>{{ "Login" | translate }}</p>
+    <input
+      matInput
+      type="email"
+      formControlName="login"
+      autocomplete="email"
+      placeholder="Login"
+    />
+    <div class="alert">
+      <p *ngIf="authForm.get('login')?.hasError('required')">
+        {{ "Validation-login" | translate }}
+      </p>
+      <p *ngIf="authForm.get('login')?.hasError('email')">
+        {{ "Validation-login-error" | translate }}
+      </p>
+    </div>
+    <p>Password</p>
+    <input
+      matInput
+      formControlName="password"
+      autocomplete="current-password"
+      [type]="hide ? 'password' : 'text'"
+      placeholder="Password"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+      type="button"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    <div class="alert">
+      <p
+        *ngIf="
+          authForm.get('password')?.hasError('minlength') ||
+          authForm.get('password')?.hasError('lowerAndUpperCase') ||
+          authForm.get('password')?.hasError('lettersAndNumbers') ||
+          authForm.get('password')?.hasError('leastOneSpecChar')
+        "
       >
-        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-      </button>
-    </mat-form-field>
+        Your password isn't strong enough:
+      </p>
+      <p *ngIf="authForm.get('password')?.hasError('leastOneSpecChar')">
+        {{ "Validation-password-special" | translate }}
+      </p>
+      <p *ngIf="authForm.get('password')?.hasError('minlength')">
+        {{ "Validation-password-short" | translate }}
+      </p>
+      <p *ngIf="authForm.get('password')?.hasError('lowerAndUpperCase')">
+        {{ "Validation-password-upper" | translate }}
+      </p>
+      <p *ngIf="authForm.get('password')?.hasError('lettersAndNumbers')">
+        {{ "Validation-password-numbers" | translate }}
+      </p>
+      <p *ngIf="authForm.get('password')?.hasError('required')">
+        {{ "Validation-password" | translate }}
+      </p>
+    </div>
   </div>
   <div>
     <button type="submit" mat-raised-button [disabled]="authForm.invalid">

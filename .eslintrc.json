@@ -37,7 +37,16 @@
             "style": "kebab-case"
           }
         ],
-        "@typescript-eslint/comma-dangle": "off"
+        "@typescript-eslint/comma-dangle": "off",
+        "@typescript-eslint/default-param-last": "off",
+        "@typescript-eslint/no-use-before-define": "off"
+      },
+      "settings": {
+        "import/resolver": {
+          "typescript": {
+            "alwaysTryTypes": true
+          }
+        }
       }
     },
     {
