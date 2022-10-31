@@ -1,3 +1,5 @@
+import { CoreModule } from './../core/core.module';
+import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoardsListComponent } from './components/boards-list/boards-list.component';
@@ -13,7 +15,9 @@ const routes: Routes = [{ path: '', component: HomePageComponent }];
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    CoreModule,
+    MatIconModule,
+    RouterModule.forChild(routes)
   ],
   exports: [
     RouterModule

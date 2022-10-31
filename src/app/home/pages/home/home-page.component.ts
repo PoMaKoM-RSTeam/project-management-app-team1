@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent {
+  currentDate: string = new Date().toDateString();
 
+  constructor() {
+    console.log(this.currentDate);
+  }
+  
 }

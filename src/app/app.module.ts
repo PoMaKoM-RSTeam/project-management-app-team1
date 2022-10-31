@@ -10,7 +10,10 @@ import { HeaderComponent } from './core/components/header/header.component';
 import { CoreModule, HttpLoaderFactory } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
 
+registerLocaleData(localeRu);
 @NgModule({
   declarations: [
     AppComponent,
