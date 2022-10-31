@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/named
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -15,7 +14,6 @@ import { HttpClient } from '@angular/common/http';
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },

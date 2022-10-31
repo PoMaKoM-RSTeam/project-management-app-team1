@@ -1,0 +1,72 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 5% auto;
+}
+
+form {
+  width: 350px;
+  height: 480px;
+  border-radius: 5px;
+  background: #efefef;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 45px;
+
+  h2 {
+    margin-top: 16px;
+  }
+
+  .form__question {
+    font-size: 14px;
+  }
+
+  .form__link {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  input {
+    border: none;
+    background-color: #e5e5e5;
+    height: 24px;
+    width: 300px;
+    color: #929292;
+  }
+
+  button[type="submit"] {
+    width: 120px;
+    float: right;
+    margin: 40px 48px 0;
+  }
+
+  button[type="submit"]:enabled {
+    color: white;
+    background-color: #2f80ed;
+  }
+
+  .alert {
+    padding: 0;
+    color: red;
+  }
+
+  .alert-input {
+    border-color: red;
+    &:focus {
+      border-color: red;
+    }
+  }
+
+  .validation-error {
+    margin: 0.5rem 0 0;
+    font-size: 14px;
+    &__indented {
+      text-indent: 1rem;
+      &::before {
+      content: "*";
+    }
+    }
+  }
+}
