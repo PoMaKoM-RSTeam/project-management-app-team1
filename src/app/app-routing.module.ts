@@ -1,10 +1,10 @@
-import { WelocomePageComponent } from './core/pages/welocome-page/welocome-page.component';
+import { WelcomePageComponent } from './core/pages/welcome-page/welcome-page.component';
 import { NgModule } from '@angular/core';
 // eslint-disable-next-line import/named
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: WelocomePageComponent },
+  { path: '', component: WelcomePageComponent },
   {
     path: 'home',
     loadChildren: () =>

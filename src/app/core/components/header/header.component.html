@@ -1,19 +1,13 @@
 <header class="header">
-  <p class="log">{{title}}</p>
+  <p class="log">{{ "Project-Title" | translate | uppercase }}</p>
 
   <div class="edit-profile">
-    EDIT PROFILE
+    {{ "Edit-Profile" | translate | uppercase }}
   </div>
 
-  <div class="create-board">
-    CREATE NEW BOARD
-  </div>
+  <div class="create-board">{{ "Create-Board" | translate | uppercase }}</div>
 
-  <div class="language">
-    RU/EN
-  </div>
+  <div class="language" (click)="switchLang()">RU/EN</div>
 
-  <div class="logout">
-    LOGOUT
-  </div>
+  <div class="logout">{{ "Logout" | translate | uppercase }}</div>
 </header>
