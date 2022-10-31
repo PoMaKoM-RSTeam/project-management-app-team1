@@ -7,6 +7,7 @@ import {
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { LocalizedDatePipe } from './pipes/localized-date.pipe';
 
 @NgModule({
   imports: [
@@ -20,7 +21,10 @@ import { HttpClient } from '@angular/common/http';
       isolate: false,
     }),
   ],
-  exports: [TranslateModule],
+  exports: [TranslateModule, LocalizedDatePipe],
+  declarations: [
+    LocalizedDatePipe
+  ],
 })
 export class CoreModule {
   constructor(private translate: TranslateService) {

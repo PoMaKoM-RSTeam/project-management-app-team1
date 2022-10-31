@@ -31,6 +31,10 @@
   "Project-Title": "Project manager",
   "Profile": "Profile",
 
+  "Home-Projects": "Projects",
+  "Home-Hello": "Hello",
+  "Home-CurrDate": "{{date}}",
+
   "Register": "Register",
   "Register-result": "You are registered! Click Login",
   "Remember": "Remember me",
