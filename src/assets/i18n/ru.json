@@ -31,6 +31,10 @@
   "Project-Title": "Менеджер проектов",
   "Profile": "Профиль",
 
+  "Home-Projects": "Проекты",
+  "Home-Hello": "Здравствуйте",
+  "Home-CurrDate": "{{date}}",
+
   "Register": "Регистрация",
   "Register-result": "Вы успешно зарегистрированы. Нажмите 'Войти'",
   "Remember": "Запомнить меня",
