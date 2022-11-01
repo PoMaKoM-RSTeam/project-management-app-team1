@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+} from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -12,6 +17,7 @@ import { StringValidators } from 'src/app/core/validators/string.validators';
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignupComponent {
   @Output() public showSignin = new EventEmitter();
