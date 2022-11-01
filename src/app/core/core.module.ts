@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { LocalizedDatePipe } from './pipes/localized-date.pipe';
 import { UserStatusComponent } from './components/user-status/user-status.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 const routes: Routes = [];
 
@@ -34,7 +35,7 @@ const routes: Routes = [];
     RouterModule,
     UserStatusComponent,
   ],
-  declarations: [UserStatusComponent, LocalizedDatePipe],
+  declarations: [UserStatusComponent, LocalizedDatePipe, ConfirmDialogComponent],
 })
 export class CoreModule {
   constructor(private translate: TranslateService) {
