@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StringValidators } from '../../../core/validators/string.validators';
 import { AuthService } from '../../services/auth.service';
@@ -14,13 +13,11 @@ export class LoginComponent {
 
   public authForm: FormGroup;
 
+  public loginErrorMessage: string = '';
+
   public hide: boolean = true;
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private authService: AuthService
-  ) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.authForm = this.fb.group({
       login: ['user@project.test', [Validators.required, Validators.email]],
       password: [
@@ -41,11 +38,18 @@ export class LoginComponent {
   }
 
   public onSubmit(): void {
-    this.authService.logIn({
-      login: this.authForm.controls['login'].value,
-      password: this.authForm.controls['password'].value,
-    });
-
-    this.router.navigate(['']);
+    this.loginErrorMessage = '';
+    const subs = this.authService
+      .logIn({
+        login: this.authForm.controls['login'].value,
+        password: this.authForm.controls['password'].value,
+      })
+      .subscribe({
+        error: (error: string) => {
+          this.loginErrorMessage =
+            Number(error) === 403 ? 'User not found' : error;
+          subs.unsubscribe();
+        },
+      });
   }
 }

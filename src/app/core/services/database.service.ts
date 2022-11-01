@@ -14,6 +14,7 @@ import {
   TTaskInfo,
   TTaskInfoExtended,
 } from '../models/data.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -21,111 +22,145 @@ import {
 export class DatabaseService {
   constructor(private http: HttpClient) {}
 
-  signUp(credentials: IUserCredentials) {
+  public signUp(credentials: IUserCredentials): Observable<IError | IUser> {
     return this.http.post<IError | IUser>('api/signup', credentials);
   }
 
-  signIn(loginInfo: TUserSignIn) {
+  public signIn(loginInfo: TUserSignIn): Observable<IError | ITokenResponse> {
     return this.http.post<IError | ITokenResponse>('api/signin', loginInfo);
   }
 
-  getUsers() {
+  public getUsers(): Observable<IError | IUser[]> {
     return this.http.get<IError | IUser[]>('api/users');
   }
 
-  getUser(id: string) {
+  public getUser(id: string): Observable<IError | IUser> {
     return this.http.get<IError | IUser>(`api/users/${id}`);
   }
 
-  deleteUser(id: string) {
+  public deleteUser(id: string): Observable<IError | null> {
     return this.http.delete<IError | null>(`api/users/${id}`);
   }
 
-  updateUser(id: string, credentials: IUserCredentials) {
+  public updateUser(
+    id: string,
+    credentials: IUserCredentials
+  ): Observable<IError | IUser> {
     return this.http.put<IError | IUser>(`api/users/${id}`, credentials);
   }
 
-  getBoards() {
+  public getBoards(): Observable<IError | IBoard[]> {
     return this.http.get<IError | IBoard[]>('api/boards');
   }
 
-  createBoard(title: string) {
+  public createBoard(title: string): Observable<IError | IBoard> {
     return this.http.post<IError | IBoard>('api/boards', { title: title });
   }
 
-  getBoard(id: string) {
+  public getBoard(id: string): Observable<IError | IBoardComplete> {
     return this.http.get<IError | IBoardComplete>(`api/boards/${id}`);
   }
 
-  deleteBoard(id: string) {
+  public deleteBoard(id: string): Observable<IError | null> {
     return this.http.delete<IError | null>(`api/boards/${id}`);
   }
 
-  updateBoard(id: string, boardTitle: TBoardTitle) {
+  public updateBoard(
+    id: string,
+    boardTitle: TBoardTitle
+  ): Observable<IError | IBoard> {
     return this.http.put<IError | IBoard>(`api/boards/${id}`, boardTitle);
   }
 
-  getColumns(boardId: string) {
+  public getColumns(boardId: string): Observable<IError | IColumn[]> {
     return this.http.get<IError | IColumn[]>(`api/boards/${boardId}/columns`);
   }
 
-  createColumn(boardId: string, columnInfo: TColumnInfo) {
+  public createColumn(
+    boardId: string,
+    columnInfo: TColumnInfo
+  ): Observable<IError | IColumn> {
     return this.http.post<IError | IColumn>(
       `api/boards/${boardId}/columns`,
       columnInfo
     );
   }
 
-  getColumn(boardId: string, columnId: string) {
+  public getColumn(
+    boardId: string,
+    columnId: string
+  ): Observable<IError | IColumnComplete> {
     return this.http.get<IError | IColumnComplete>(
       `api/boards/${boardId}/columns/${columnId}`
     );
   }
 
-  deleteColumn(boardId: string, columnId: string) {
+  public deleteColumn(
+    boardId: string,
+    columnId: string
+  ): Observable<IError | null> {
     return this.http.delete<IError | null>(
       `api/boards/${boardId}/columns/${columnId}`
     );
   }
 
-  updateColumn(boardId: string, columnId: string, columnInfo: TColumnInfo) {
+  public updateColumn(
+    boardId: string,
+    columnId: string,
+    columnInfo: TColumnInfo
+  ): Observable<IError | IColumn> {
     return this.http.put<IError | IColumn>(
       `api/boards/${boardId}/columns/${columnId}`,
       columnInfo
     );
   }
 
-  getTasks(boardId: string, columnId: string) {
+  public getTasks(
+    boardId: string,
+    columnId: string
+  ): Observable<IError | ITask[]> {
     return this.http.get<IError | ITask[]>(
       `api/boards/${boardId}/columns/${columnId}/tasks`
     );
   }
 
-  createTask(boardId: string, columnId: string, taskInfo: TTaskInfo) {
+  public createTask(
+    boardId: string,
+    columnId: string,
+    taskInfo: TTaskInfo
+  ): Observable<IError | ITask> {
     return this.http.post<IError | ITask>(
       `api/boards/${boardId}/columns/${columnId}/tasks`,
       taskInfo
     );
   }
 
-  getTask(boardId: string, columnId: string, taskId: string) {
+  public getTask(
+    boardId: string,
+    columnId: string,
+    taskId: string
+  ): Observable<IError | ITask> {
     return this.http.get<IError | ITask>(
       `api/boards/${boardId}/columns/${columnId}/tasks/${taskId}`
     );
   }
 
-  deleteTask(boardId: string, columnId: string, taskId: string) {
+  public deleteTask(
+    boardId: string,
+    columnId: string,
+    taskId: string
+  ): Observable<IError | null> {
     return this.http.delete<IError | null>(
       `api/boards/${boardId}/columns/${columnId}/tasks/${taskId}`
     );
   }
 
-  updateTask(
+  public updateTask(
     boardId: string,
     columnId: string,
     taskId: string,
     taskInfo: TTaskInfoExtended
-  ) {
+  ): Observable<IError | ITask> {
     return this.http.put<IError | ITask>(
       `api/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
       taskInfo

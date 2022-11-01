@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import {
   AbstractControl,
   FormControl,
@@ -17,18 +16,14 @@ import { StringValidators } from 'src/app/core/validators/string.validators';
 export class SignupComponent {
   @Output() public showSignin = new EventEmitter();
 
-  loginForm: FormGroup;
+  public authErrorMessage: string = '';
 
-  constructor(private router: Router, private auth: AuthService) {
-    this.loginForm = new FormGroup({
+  signupForm: FormGroup;
+
+  constructor(private authService: AuthService) {
+    this.signupForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
-      login: new FormControl('', [
-        StringValidators.leastOneSpecChar(),
-        StringValidators.lowerAndUpperCase(),
-        StringValidators.lettersAndNumbers(),
-        Validators.minLength(8),
-        Validators.required,
-      ]),
+      login: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [
         StringValidators.leastOneSpecChar(),
         StringValidators.lowerAndUpperCase(),
@@ -40,31 +35,38 @@ export class SignupComponent {
   }
 
   authorize(): void {
-    this.auth.signup({
-      name: this.name?.value,
-      login: this.login?.value,
-      password: this.password?.value,
-    });
-    this.router.navigate(['/auth/login']).then();
+    this.authErrorMessage = '';
+    const subs = this.authService
+      .signUp({
+        name: this.name?.value,
+        login: this.login?.value,
+        password: this.password?.value,
+      })
+      .subscribe({
+        next: () => {
+          this.signin();
+        },
+        error: (error: string) => {
+          this.authErrorMessage =
+            Number(error) === 409 ? 'User already registered' : error;
+          subs.unsubscribe();
+        },
+      });
   }
 
   get name(): AbstractControl | null {
-    return this.loginForm.get('name');
+    return this.signupForm.get('name');
   }
 
   get login(): AbstractControl | null {
-    return this.loginForm.get('login');
+    return this.signupForm.get('login');
   }
 
   get password(): AbstractControl | null {
-    return this.loginForm.get('password');
+    return this.signupForm.get('password');
   }
 
   public signin(): void {
     this.showSignin.emit();
-  }
-
-  haveValidationErrors(): boolean {
-    return !(this.login?.errors === null && this.password?.errors === null);
   }
 }
