@@ -1,0 +1,16 @@
+<ng-container *ngIf="isLogged$ | async; else login">
+  <button mat-button type="menu">
+    <span>{{ userName$ | async }}</span>
+  </button>
+  <button mat-button type="menu" (click)="logout()">
+    <span>&nbsp;{{ "Logout" | translate | uppercase }}</span>
+  </button>
+</ng-container>
+<ng-template #login>
+  <button *ngIf="!isLoginPage" mat-button type="menu" routerLink="login">
+    <span>{{ "Login" | translate | uppercase }}</span>
+  </button>
+  <button *ngIf="!isLoginPage" mat-button type="menu" routerLink="login">
+    <span>{{ "Signup" | translate | uppercase }}</span>
+  </button>
+</ng-template>

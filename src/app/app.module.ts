@@ -9,9 +9,14 @@ import { FooterComponent } from './core/components/footer/footer.component';
 import { HeaderComponent } from './core/components/header/header.component';
 import { CoreModule, HttpLoaderFactory } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import { UrlInterceptor } from './core/interceptors/url.interceptor';
 
 registerLocaleData(localeRu);
 @NgModule({
@@ -35,6 +40,13 @@ registerLocaleData(localeRu);
       },
       isolate: false,
     }),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UrlInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

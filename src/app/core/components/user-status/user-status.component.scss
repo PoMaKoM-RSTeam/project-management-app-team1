@@ -1,0 +1,14 @@
+@import "src/assets/styles/variables";
+
+:host {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+button {
+  background: none;
+  color: white;
+  cursor: pointer;
+}

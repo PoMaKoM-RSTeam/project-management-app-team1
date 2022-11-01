@@ -25,15 +25,22 @@ form {
 
   .form__link {
     margin-left: 5px;
+    font-weight: bold;
+    color: #2f80ed;
     cursor: pointer;
   }
 
   input {
     border: none;
     background-color: #e5e5e5;
-    height: 24px;
+    height: 30px;
     width: 300px;
     color: #929292;
+  }
+
+  input:focus {
+    border: none;
+    outline: none!important;
   }
 
   button[type="submit"] {
@@ -50,23 +57,13 @@ form {
   .alert {
     padding: 0;
     color: red;
+    font-size: x-small;
   }
 
   .alert-input {
     border-color: red;
     &:focus {
       border-color: red;
-    }
-  }
-
-  .validation-error {
-    margin: 0.5rem 0 0;
-    font-size: 14px;
-    &__indented {
-      text-indent: 1rem;
-      &::before {
-      content: "*";
-    }
     }
   }
 }

@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
 import {
   TranslateLoader,
   TranslateModule,
@@ -8,6 +9,10 @@ import {
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
 import { LocalizedDatePipe } from './pipes/localized-date.pipe';
+import { UserStatusComponent } from './components/user-status/user-status.component';
+import { MatIconModule } from '@angular/material/icon';
+
+const routes: Routes = [];
 
 @NgModule({
   imports: [
@@ -20,11 +25,16 @@ import { LocalizedDatePipe } from './pipes/localized-date.pipe';
       },
       isolate: false,
     }),
+    MatIconModule,
+    RouterModule.forChild(routes),
   ],
-  exports: [TranslateModule, LocalizedDatePipe],
-  declarations: [
-    LocalizedDatePipe
+  exports: [
+    TranslateModule,
+    LocalizedDatePipe,
+    RouterModule,
+    UserStatusComponent,
   ],
+  declarations: [UserStatusComponent, LocalizedDatePipe],
 })
 export class CoreModule {
   constructor(private translate: TranslateService) {

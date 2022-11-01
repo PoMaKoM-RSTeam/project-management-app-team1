@@ -72,8 +72,13 @@
     </div>
   </div>
   <div>
-    <button type="submit" mat-raised-button [disabled]="authForm.invalid">
-      Login
+    <div class="alert">
+      <p *ngIf="loginErrorMessage">
+        {{ "Signup-question" | translate }}
+      </p>
+    </div>
+    <button type="submit" [disabled]="authForm.invalid">
+      {{ "Login" | translate }}
     </button>
   </div>
 </form>

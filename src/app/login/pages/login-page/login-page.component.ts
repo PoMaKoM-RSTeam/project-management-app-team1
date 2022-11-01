@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
-import { AuthService } from '../../services/auth.service';
+import { UserStatusService } from 'src/app/core/services/user-status.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,10 +13,13 @@ export class LoginPageComponent implements OnInit {
 
   public isSignup: boolean = false;
 
-  constructor(private authService: AuthService, private title: Title) {}
+  constructor(
+    private title: Title,
+    private userStatusService: UserStatusService
+  ) {}
 
   ngOnInit(): void {
-    this.isLogin$ = this.authService.getLogStatus();
+    this.isLogin$ = this.userStatusService.getLogStatus();
     this.title.setTitle('Login');
   }
 

@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" (ngSubmit)="authorize()">
+<form [formGroup]="signupForm" (ngSubmit)="authorize()">
   <div>
     <h2>{{ "Signup" | translate }}</h2>
   </div>
@@ -18,7 +18,7 @@
       [ngClass]="name?.errors ? 'alert-input' : ''"
     />
     <div class="alert">
-      <p class="validation-error" *ngIf="name?.hasError('required')">
+      <p *ngIf="name?.hasError('required')">
         {{ "Validation-name" | translate }}
       </p>
     </div>
@@ -34,10 +34,10 @@
       [ngClass]="login?.errors ? 'alert-input' : ''"
     />
     <div class="alert">
-      <p class="validation-error" *ngIf="login?.hasError('required')">
+      <p *ngIf="login?.hasError('required')">
         {{ "Validation-login" | translate }}
       </p>
-      <p class="validation-error" *ngIf="login?.hasError('emailError')">
+      <p *ngIf="login?.hasError('emailError')">
         {{ "Validation-login-error" | translate }}
       </p>
     </div>
@@ -53,36 +53,32 @@
       [ngClass]="password?.errors ? 'alert-input' : ''"
     />
     <div class="alert">
-      <p class="validation-error" *ngIf="password?.hasError('required')">
+      <p *ngIf="password?.hasError('required')">
         {{ "Validation-password" | translate }}
       </p>
-      <p class="validation-error" *ngIf="password?.hasError('minlength')">
+      <p *ngIf="password?.hasError('minlength')">
         {{ "Validation-password-short" | translate }}
       </p>
-      <p *ngIf="password?.errors && password?.value" class="validation-error">
+      <p *ngIf="password?.errors && password?.value">
         {{ "Validation-password-general" | translate }}
       </p>
-      <p
-        class="validation-error validation-error__indented"
-        *ngIf="password?.hasError('letterCases')"
-      >
+      <p *ngIf="password?.hasError('letterCases')">
         {{ "Validation-password-upper" | translate }}
       </p>
-      <p
-        class="validation-error validation-error__indented"
-        *ngIf="password?.hasError('numbers')"
-      >
+      <p *ngIf="password?.hasError('numbers')">
         {{ "Validation-password-numbers" | translate }}
       </p>
-      <p
-        class="validation-error validation-error__indented"
-        *ngIf="password?.hasError('specialCharacter')"
-      >
+      <p *ngIf="password?.hasError('specialCharacter')">
         {{ "Validation-password-special" | translate }}
       </p>
     </div>
   </div>
-  <button type="submit" [disabled]="haveValidationErrors()">
+  <div class="alert">
+    <p *ngIf="authErrorMessage">
+      {{ "Register-result" | translate }}
+    </p>
+  </div>
+  <button type="submit" [disabled]="signupForm.invalid">
     {{ "Signup" | translate }}
   </button>
 </form>
