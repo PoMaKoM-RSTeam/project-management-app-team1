@@ -31,7 +31,7 @@ export class AuthService {
           localStorage.setItem(LocalStorageKeys.userId, id);
           localStorage.setItem(LocalStorageKeys.login, login);
           this.userStatusService.isLogged.next(true);
-          this.router.navigate(['']).then();
+          this.router.navigate(['home']).then();
         }
       })
     );
