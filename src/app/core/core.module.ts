@@ -12,12 +12,17 @@ import { LocalizedDatePipe } from './pipes/localized-date.pipe';
 import { UserStatusComponent } from './components/user-status/user-status.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [];
 
 @NgModule({
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -26,16 +31,23 @@ const routes: Routes = [];
       },
       isolate: false,
     }),
-    MatIconModule,
     RouterModule.forChild(routes),
   ],
   exports: [
     TranslateModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
     LocalizedDatePipe,
     RouterModule,
     UserStatusComponent,
   ],
-  declarations: [UserStatusComponent, LocalizedDatePipe, ConfirmDialogComponent],
+  declarations: [
+    UserStatusComponent,
+    LocalizedDatePipe,
+    ConfirmDialogComponent,
+    ProfilePageComponent,
+  ],
 })
 export class CoreModule {
   constructor(private translate: TranslateService) {

@@ -1,7 +1,9 @@
 <header class="header">
-  <p class="log">{{ "Project-Title" | translate | uppercase }}</p>
+  <p class="log" routerLink="">
+    {{ "Project-Title" | translate | uppercase }}
+  </p>
 
-  <div class="edit-profile">
+  <div class="edit-profile" routerLink="profile">
     {{ "Edit-Profile" | translate | uppercase }}
   </div>
 

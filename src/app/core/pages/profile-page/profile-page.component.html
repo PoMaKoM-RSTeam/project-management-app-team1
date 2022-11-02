@@ -1,0 +1,83 @@
+<form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+  <div>
+    <h2>{{ "Profile" | translate }}</h2>
+  </div>
+  <div>
+    <p>{{ "Name" | translate }}</p>
+    <input
+      type="text"
+      class="form__input"
+      id="name"
+      formControlName="name"
+      autocomplete="off"
+      required
+      [ngClass]="name?.errors ? 'alert-input' : ''"
+    />
+    <div class="alert">
+      <p *ngIf="name?.hasError('required')">
+        {{ "Validation-name" | translate }}
+      </p>
+    </div>
+
+    <p>{{ "Login-name" | translate }}</p>
+    <input
+      type="text"
+      class="form__input"
+      id="login"
+      formControlName="login"
+      autocomplete="off"
+      required
+      [ngClass]="login?.errors ? 'alert-input' : ''"
+    />
+    <div class="alert">
+      <p *ngIf="login?.hasError('required')">
+        {{ "Validation-login" | translate }}
+      </p>
+      <p *ngIf="login?.hasError('emailError')">
+        {{ "Validation-login-error" | translate }}
+      </p>
+    </div>
+
+    <p>{{ "Password" | translate }}</p>
+    <input
+      type="password"
+      class="form__input"
+      id="password"
+      formControlName="password"
+      autoComplete="current-password"
+      required
+      [ngClass]="password?.errors ? 'alert-input' : ''"
+    />
+    <div class="alert">
+      <p *ngIf="password?.hasError('required')">
+        {{ "Validation-password" | translate }}
+      </p>
+      <p *ngIf="password?.hasError('minlength')">
+        {{ "Validation-password-short" | translate }}
+      </p>
+      <p *ngIf="password?.errors && password?.value">
+        {{ "Validation-password-general" | translate }}
+      </p>
+      <p *ngIf="password?.hasError('letterCases')">
+        {{ "Validation-password-upper" | translate }}
+      </p>
+      <p *ngIf="password?.hasError('numbers')">
+        {{ "Validation-password-numbers" | translate }}
+      </p>
+      <p *ngIf="password?.hasError('specialCharacter')">
+        {{ "Validation-password-special" | translate }}
+      </p>
+    </div>
+  </div>
+  <div class="alert">
+    <p *ngIf="updateErrorMessage">
+      {{ "Update-result" | translate }}
+    </p>
+  </div>
+  <button type="button" (click)="deleteUser()">
+    {{ "Delete" | translate }}
+  </button>
+  <button type="submit" [disabled]="profileForm.invalid">
+    {{ "Update" | translate }}
+  </button>
+</form>
