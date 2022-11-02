@@ -1,33 +1,35 @@
-# ProjectManager
+# Project Manager
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.2.
 
-### Welcome route - max 70 points
+## Contains
 
-- [ ] The welcome page should contain general information about the developer, project, and course. **10 points**
+### Welcome page - max 70 points
+
+- [ ] The welcome page contain general information about the developers, project, and course. **10 points**
 - [ ] In the upper right corner there are 2 buttons: login and sign up. **10 points**
-- [ ] If there is an unexpired token, the user should be redirected to the "Main route" of the application automatically. **20 points**
-- [ ] When the token expires - the user should be redirected to the "Welcome page" automatically. **20 points**
+- [ ] If there is an unexpired token, the user redirected to the "Main route" of the application automatically. **20 points**
+- [ ] When the token expires - the user redirected to the "Welcome page" automatically. **20 points**
 - [ ] Pressing the Login / Sign up button redirects a user to the route with the Login / Sign up form. **10 points**
 
 ### Login / Sign up  - max 80 points
 
-- [ ] Login/log out should be present on all pages **20 points**
-- [ ] Form fields should be implemented according to the backend API. Validation should be implemented. **50 points**
-- [ ] Upon successful login, the user should be redirected to "Main route" **10 points**
+- [ ] Login/log out present on all pages **20 points**
+- [ ] Form fields implemented according to the backend API. Validation implemented. **50 points**
+- [ ] After successful login, the user redirected to the "Main route" **10 points**
 
-### Main route - max 100 points
+### Main route - Core module - Home page - max 100 points
 
 - [ ] Board creation functionality **20 points**
 - [ ] Displays all created boards as a list **10 points**
 - [ ] Each board in the list is displayed with a small preview of available information (title, description, etc). By clicking an element the user navigates to the board item (Board route). There's also a button for board deletion. **10 points**
 - [ ] When trying to delete the board, we should receive a confirmation modal. The confirmation modal must be a generic component (one for the entire application). **10 points**
 - [ ] Global search: search for a task by a task number, name, users who participate in it, and by the text of the task description. **20 points**
-- [ ] The user profile editing functionality is implemented. **30 points**
+- [ ] Implemented the user profile editing functionality. **30 points**
 
 ### Board route - max 260 points
 
-- [ ] Button for column creation is displayed **10 points**
+- [ ] Displayed the button for column creation  **10 points**
 - [ ] If a board contains at least one column - a button for task creation is displayed as well **10 points**
 - [ ] A modal window with form is displayed for column and task creation  **30 points**
 - [ ] A vertical scrollbar is displayed in the column when overflowing with the number of column tasks  **20 points**
