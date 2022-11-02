@@ -24,6 +24,7 @@ export interface ITokenInfo {
 
 export enum LocalStorageKeys {
   authToken = 'authToken',
+  userName = 'userName',
   login = 'login',
   userId = 'userId',
 }

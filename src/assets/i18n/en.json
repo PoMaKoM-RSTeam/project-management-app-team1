@@ -30,6 +30,8 @@
   "Password-required": "Password is required",
   "Project-Title": "Project manager",
   "Profile": "Profile",
+  "Profile-user-delete-title": "Delete Profile",
+  "Profile-user-delete-message": "Delete Current User Profile from App",
 
   "Home-Projects": "Projects",
   "Home-Hello": "Hello",

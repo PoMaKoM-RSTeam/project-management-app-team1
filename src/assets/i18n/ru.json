@@ -30,6 +30,8 @@
   "Password-required": "Пароль обязателен",
   "Project-Title": "Менеджер проектов",
   "Profile": "Профиль",
+  "Profile-user-delete-title": "Удаление профиля",
+  "Profile-user-delete-message": "Профиль пользователя будет удален",
 
   "Home-Projects": "Проекты",
   "Home-Hello": "Здравствуйте",
