@@ -8,8 +8,9 @@
       "Signup-welcome" | translate
     }}</a>
   </p>
-  <div>
-    <p>{{ "Login" | translate }}</p>
+
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "Login" | translate }}</mat-label>
     <input
       matInput
       type="email"
@@ -17,15 +18,15 @@
       autocomplete="email"
       placeholder="Login"
     />
-    <div class="alert">
-      <p *ngIf="authForm.get('login')?.hasError('required')">
-        {{ "Validation-login" | translate }}
-      </p>
-      <p *ngIf="authForm.get('login')?.hasError('email')">
-        {{ "Validation-login-error" | translate }}
-      </p>
-    </div>
-    <p>Password</p>
+    <mat-error *ngIf="authForm.get('login')?.hasError('required')">
+      {{ "Validation-login" | translate }}
+    </mat-error>
+    <mat-error *ngIf="authForm.get('login')?.hasError('email')">
+      {{ "Validation-login-error" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "Password" | translate }}</mat-label>
     <input
       matInput
       formControlName="password"
@@ -43,41 +44,37 @@
     >
       <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
-    <div class="alert">
-      <p
-        *ngIf="
-          authForm.get('password')?.hasError('minlength') ||
-          authForm.get('password')?.hasError('lowerAndUpperCase') ||
-          authForm.get('password')?.hasError('lettersAndNumbers') ||
-          authForm.get('password')?.hasError('leastOneSpecChar')
-        "
-      >
-        Your password isn't strong enough:
-      </p>
-      <p *ngIf="authForm.get('password')?.hasError('leastOneSpecChar')">
-        {{ "Validation-password-special" | translate }}
-      </p>
-      <p *ngIf="authForm.get('password')?.hasError('minlength')">
-        {{ "Validation-password-short" | translate }}
-      </p>
-      <p *ngIf="authForm.get('password')?.hasError('lowerAndUpperCase')">
-        {{ "Validation-password-upper" | translate }}
-      </p>
-      <p *ngIf="authForm.get('password')?.hasError('lettersAndNumbers')">
-        {{ "Validation-password-numbers" | translate }}
-      </p>
-      <p *ngIf="authForm.get('password')?.hasError('required')">
-        {{ "Validation-password" | translate }}
-      </p>
-    </div>
-  </div>
+    <mat-error
+      *ngIf="
+        authForm.get('password')?.hasError('minlength') ||
+        authForm.get('password')?.hasError('lowerAndUpperCase') ||
+        authForm.get('password')?.hasError('lettersAndNumbers') ||
+        authForm.get('password')?.hasError('leastOneSpecChar')
+      "
+    >
+      {{ "Validation-password-general" | translate }}
+    </mat-error>
+    <mat-error *ngIf="authForm.get('password')?.hasError('leastOneSpecChar')">
+      {{ "Validation-password-special" | translate }}
+    </mat-error>
+    <mat-error *ngIf="authForm.get('password')?.hasError('lowerAndUpperCase')">
+      {{ "Validation-password-upper" | translate }}
+    </mat-error>
+    <mat-error *ngIf="authForm.get('password')?.hasError('minlength')">
+      {{ "Validation-password-short" | translate }}
+    </mat-error>
+    <mat-error *ngIf="authForm.get('password')?.hasError('lettersAndNumbers')">
+      {{ "Validation-password-numbers" | translate }}
+    </mat-error>
+    <mat-error *ngIf="authForm.get('password')?.hasError('required')">
+      {{ "Validation-password" | translate }}
+    </mat-error>
+  </mat-form-field>
   <div>
-    <div class="alert">
-      <p *ngIf="loginErrorMessage">
-        {{ "Signup-question" | translate }}
-      </p>
-    </div>
-    <button type="submit" [disabled]="authForm.invalid">
+    <mat-error *ngIf="loginErrorMessage">
+      {{ "Signup-question" | translate }}
+    </mat-error>
+    <button type="submit" mat-raised-button [disabled]="authForm.invalid">
       {{ "Login" | translate }}
     </button>
   </div>

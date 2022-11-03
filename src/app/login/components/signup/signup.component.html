@@ -6,79 +6,79 @@
     {{ "Login-question" | translate
     }}<a class="form__link" (click)="signin()">{{ "Login" | translate }}</a>
   </p>
-  <div>
-    <p>{{ "Name" | translate }}</p>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "Name" | translate }}</mat-label>
     <input
-      type="text"
-      class="form__input"
-      id="name"
+      matInput
+      type="name"
       formControlName="name"
-      autocomplete="off"
-      required
-      [ngClass]="name?.errors ? 'alert-input' : ''"
+      autocomplete="name"
+      placeholder="Name"
     />
-    <div class="alert">
-      <p *ngIf="name?.hasError('required')">
-        {{ "Validation-name" | translate }}
-      </p>
-    </div>
-
-    <p>{{ "Login-name" | translate }}</p>
+    <mat-error *ngIf="name?.hasError('required')">
+      {{ "Validation-name" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "Login-name" | translate }}</mat-label>
     <input
-      type="text"
-      class="form__input"
-      id="login"
+      matInput
+      type="email"
       formControlName="login"
-      autocomplete="off"
-      required
-      [ngClass]="login?.errors ? 'alert-input' : ''"
+      autocomplete="email"
+      placeholder="Login"
     />
-    <div class="alert">
-      <p *ngIf="login?.hasError('required')">
-        {{ "Validation-login" | translate }}
-      </p>
-      <p *ngIf="login?.hasError('emailError')">
-        {{ "Validation-login-error" | translate }}
-      </p>
-    </div>
-
-    <p>{{ "Password" | translate }}</p>
+    <mat-error *ngIf="login?.hasError('required')">
+      {{ "Validation-login" | translate }}
+    </mat-error>
+    <mat-error *ngIf="login?.hasError('emailError')">
+      {{ "Validation-login-error" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "Password" | translate }}</mat-label>
     <input
-      type="password"
-      class="form__input"
-      id="password"
+      matInput
       formControlName="password"
-      autoComplete="current-password"
-      required
-      [ngClass]="password?.errors ? 'alert-input' : ''"
+      autocomplete="current-password"
+      placeholder="Password"
     />
-    <div class="alert">
-      <p *ngIf="password?.hasError('required')">
-        {{ "Validation-password" | translate }}
-      </p>
-      <p *ngIf="password?.hasError('minlength')">
-        {{ "Validation-password-short" | translate }}
-      </p>
-      <p *ngIf="password?.errors && password?.value">
-        {{ "Validation-password-general" | translate }}
-      </p>
-      <p *ngIf="password?.hasError('letterCases')">
-        {{ "Validation-password-upper" | translate }}
-      </p>
-      <p *ngIf="password?.hasError('numbers')">
-        {{ "Validation-password-numbers" | translate }}
-      </p>
-      <p *ngIf="password?.hasError('specialCharacter')">
-        {{ "Validation-password-special" | translate }}
-      </p>
-    </div>
-  </div>
-  <div class="alert">
-    <p *ngIf="authErrorMessage">
+    <mat-error
+      *ngIf="
+        signupForm.get('password')?.hasError('minlength') ||
+        signupForm.get('password')?.hasError('lowerAndUpperCase') ||
+        signupForm.get('password')?.hasError('lettersAndNumbers') ||
+        signupForm.get('password')?.hasError('leastOneSpecChar')
+      "
+    >
+      {{ "Validation-password-general" | translate }}
+    </mat-error>
+    <mat-error *ngIf="signupForm.get('password')?.hasError('leastOneSpecChar')">
+      {{ "Validation-password-special" | translate }}
+    </mat-error>
+    <mat-error
+      *ngIf="signupForm.get('password')?.hasError('lowerAndUpperCase')"
+    >
+      {{ "Validation-password-upper" | translate }}
+    </mat-error>
+    <mat-error *ngIf="signupForm.get('password')?.hasError('minlength')">
+      {{ "Validation-password-short" | translate }}
+    </mat-error>
+    <mat-error
+      *ngIf="signupForm.get('password')?.hasError('lettersAndNumbers')"
+    >
+      {{ "Validation-password-numbers" | translate }}
+    </mat-error>
+    <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
+      {{ "Validation-password" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <div>
+    <mat-error *ngIf="authErrorMessage">
       {{ "Register-result" | translate }}
-    </p>
+    </mat-error>
+    <button type="submit" mat-raised-button [disabled]="signupForm.invalid">
+      {{ "Signup" | translate }}
+    </button>
   </div>
-  <button type="submit" [disabled]="signupForm.invalid">
-    {{ "Signup" | translate }}
-  </button>
 </form>
