@@ -30,9 +30,24 @@ export class AuthService {
           const [id, login] = [...this.decodeToken(data.token)];
           localStorage.setItem(LocalStorageKeys.userId, id);
           localStorage.setItem(LocalStorageKeys.login, login);
+          this.getUserNameFromDB(id);
           this.userStatusService.isLogged.next(true);
           this.router.navigate(['home']).then();
         }
+      })
+    );
+  }
+
+  private getUserNameFromDB(userId: string) {
+    this.database.getUser(userId).pipe(
+      map((data) => {
+        let currentUser = '';
+        if (data) {
+          let currUser: IUser = data as IUser;
+          currentUser = currUser.name;
+          localStorage.setItem(LocalStorageKeys.userName, currUser.name);
+        }
+        return currentUser;
       })
     );
   }

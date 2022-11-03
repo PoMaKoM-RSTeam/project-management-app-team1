@@ -17,6 +17,7 @@ import {
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import { UrlInterceptor } from './core/interceptors/url.interceptor';
+import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
 registerLocaleData(localeRu);
 @NgModule({
@@ -47,6 +48,7 @@ registerLocaleData(localeRu);
       useClass: UrlInterceptor,
       multi: true,
     },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

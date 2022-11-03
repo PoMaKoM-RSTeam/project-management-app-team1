@@ -39,7 +39,7 @@ export class UserStatusComponent implements OnInit {
       }
     });
 
-    this.userName$ = this.userStatusService.userNameFromDB$;
+    this.userName$ = this.userStatusService.getUserName();
   }
 
   public logout(): void {
