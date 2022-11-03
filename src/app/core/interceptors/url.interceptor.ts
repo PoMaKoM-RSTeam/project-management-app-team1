@@ -19,7 +19,7 @@ export class UrlInterceptor implements HttpInterceptor {
       ? `${environment.baseUrl}${request.url.replace('api/', '')}`
       : request.url;
 
-    const requestClone: HttpRequest<any> = request.clone({
+    const requestClone: HttpRequest<unknown> = request.clone({
       url: determinedUrl,
     });
 

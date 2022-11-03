@@ -57,36 +57,6 @@ export class UserStatusService {
     return localStorage.getItem(LocalStorageKeys.login) ?? '';
   }
 
-  get userNameFromDatabase$(): Observable<string> {
-    return this.database.getUsers().pipe(
-      map((data) => {
-        if (Array.isArray(data)) {
-          let userName =
-            data.find((user) => {
-              return user.id === this.userId;
-            })?.name ?? '';
-          localStorage.setItem(LocalStorageKeys.userName, userName);
-          return userName;
-        }
-        return '';
-      })
-    );
-  }
-
-  get userNameFromDB$(): Observable<string> {
-    return this.database.getUser(this.userId).pipe(
-      map((data) => {
-        let currentUser = '';
-        if (data) {
-          let currUser: IUser = data as IUser;
-          currentUser = currUser.name;
-          localStorage.setItem(LocalStorageKeys.userName, currUser.name);
-        }
-        return currentUser;
-      })
-    );
-  }
-
   public logOut() {
     localStorage.removeItem(LocalStorageKeys.authToken);
     localStorage.removeItem(LocalStorageKeys.userId);
