@@ -1,21 +1,19 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import {
   TranslateLoader,
   TranslateModule,
   TranslateService,
 } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClient } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../shared/material.module';
 import { LocalizedDatePipe } from './pipes/localized-date.pipe';
-import { UserStatusComponent } from './components/user-status/user-status.component';
-import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+import { UserStatusComponent } from './components/user-status/user-status.component';
 
 const routes: Routes = [];
 
@@ -23,6 +21,7 @@ const routes: Routes = [];
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MaterialModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -34,19 +33,16 @@ const routes: Routes = [];
     RouterModule.forChild(routes),
   ],
   exports: [
-    TranslateModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatIconModule,
     LocalizedDatePipe,
     RouterModule,
+    TranslateModule,
     UserStatusComponent,
   ],
   declarations: [
-    UserStatusComponent,
-    LocalizedDatePipe,
     ConfirmDialogComponent,
     ProfilePageComponent,
+    UserStatusComponent,
+    LocalizedDatePipe,
   ],
 })
 export class CoreModule {
