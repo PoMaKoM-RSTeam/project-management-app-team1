@@ -35,7 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
         },
       });
     }
-    console.log('requestClone', requestClone);
+
     return next.handle(requestClone).pipe(
       catchError((errorResponse: HttpErrorResponse) => {
         if (errorResponse.status === 401 || errorResponse.status === 403) {
