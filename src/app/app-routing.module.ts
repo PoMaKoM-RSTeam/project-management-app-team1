@@ -6,7 +6,7 @@ import { LoadGuard } from './core/guards/load.guard';
 import { ProfilePageComponent } from './core/pages/profile-page/profile-page.component';
 
 const routes: Routes = [
-  { path: '', component: WelcomePageComponent },
+  { path: '', component: WelcomePageComponent, title: 'Project Manager' },
   { path: 'profile', component: ProfilePageComponent },
   {
     path: 'home',

@@ -1,20 +1,38 @@
 @import "src/assets/styles/variables";
 
-.header {
+.header{
+  box-shadow: 0 5px 10px $shadowColor;
+  cursor: default;
+  user-select: none;
+}
+.nav {
   display: flex;
   max-width: 1200px;
   justify-content: space-around;
   align-items: center;
-  height: 50px;
+  min-height: 50px;
   margin: 0 auto;
-  //background-color: $color1;
-  //color: #454349;
-
-  color: #FFFFFF;
-  //background-color: ;
+  color: $whiteColor;
 }
 
-.logo {
-  font-size: 24px;
-  white-space: pre-wrap;
+.nav * {
+  flex: 1;
+  text-align: center;
+  transition: .2s;
+  height: 100%;
+}
+
+.header-element-container *:hover:not(.active) {
+  text-shadow: 0 0 3px $whiteColor;
+  cursor: pointer;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.active {
+  opacity: 1;
+}
+
+.disabled {
+  opacity: .5;
 }
