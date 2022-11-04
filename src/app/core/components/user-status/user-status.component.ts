@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { UserStatusService } from '../../services/user-status.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class UserStatusComponent implements OnInit {
 
   public isLoginPage!: boolean;
 
-  public userName$!: Observable<string | null>;
+  public userName$!: Observable<string>;
 
   constructor(
     private router: Router,

@@ -17,6 +17,14 @@ export class UserStatusService {
     ? new BehaviorSubject<boolean>(true)
     : new BehaviorSubject<boolean>(false);
 
+  public UserName: BehaviorSubject<string> = new BehaviorSubject<string>(
+    this.userName
+  );
+
+  public Login: BehaviorSubject<string> = new BehaviorSubject<string>(
+    this.userLogin
+  );
+
   constructor(private database: DatabaseService, private router: Router) {
     this.init();
   }
@@ -34,11 +42,11 @@ export class UserStatusService {
   }
 
   getUserName(): Observable<string> {
-    return of(this.userName);
+    return this.UserName.asObservable();
   }
 
   getUserLogin(): Observable<string> {
-    return of(this.userLogin);
+    return this.Login.asObservable();
   }
 
   get token(): string {
