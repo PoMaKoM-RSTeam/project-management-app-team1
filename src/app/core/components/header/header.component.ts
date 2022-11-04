@@ -11,13 +11,20 @@ import { TranslateService } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  private currentLang = 'en';
+  currentLang = window.navigator.language.replace(/-.+/gsi, '');
 
   constructor(public translate: TranslateService,
     private projectModal: MatDialog) {}
 
-  switchLang() {
-    this.currentLang = this.currentLang === 'en' ? 'ru' : 'en';
+  ngOnInit() {
+    this.translate.use(this.currentLang);
+  }
+
+  switchLang(lang:string) {
+    if (this.currentLang === lang) {
+      return;
+    }
+    this.currentLang = lang;
     this.translate.use(this.currentLang);
   }
 

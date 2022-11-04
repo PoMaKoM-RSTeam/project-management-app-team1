@@ -14,6 +14,9 @@ import { LocalizedDatePipe } from './pipes/localized-date.pipe';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { UserStatusComponent } from './components/user-status/user-status.component';
+import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 const routes: Routes = [];
 
@@ -37,12 +40,18 @@ const routes: Routes = [];
     RouterModule,
     TranslateModule,
     UserStatusComponent,
+    WelcomePageComponent,
+    FooterComponent,
+    HeaderComponent,
   ],
   declarations: [
     ConfirmDialogComponent,
     ProfilePageComponent,
     UserStatusComponent,
     LocalizedDatePipe,
+    WelcomePageComponent,
+    FooterComponent,
+    HeaderComponent,
   ],
 })
 export class CoreModule {

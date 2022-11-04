@@ -1,15 +1,34 @@
 <header class="header">
-  <div class="log" routerLink="">
-    {{ "Project-Title" | translate | uppercase }}
-  </div>
+  <nav class="nav">
+    <div class="header-element-container">
+      <span class="logo" routerLink="">{{ "Project-Title" | translate | uppercase }}</span>
+    </div>
 
-  <div class="edit-profile" routerLink="profile">
-    {{ "Edit-Profile" | translate | uppercase }}
-  </div>
+    <div class="header-element-container">
+      <span class="edit-profile" routerLink="profile">{{ "Edit-Profile" | translate | uppercase }}</span>
+    </div>
 
   <div class="create-board" (click)="createProject()">{{ "Create-Board" | translate | uppercase }}</div>
 
-  <div class="language" (click)="switchLang()">RU/EN</div>
+    <div class="header-element-container" >
+      <span class="language"
+            (click)="switchLang('ru')"
+            [ngClass]="{
+              active: currentLang === 'ru',
+              disabled: currentLang === 'en'
+            }"
+      >RU</span>
+      |
+      <span class="language"
+            (click)="switchLang('en')"
+            [ngClass]="{
+              active: currentLang === 'en',
+              disabled: currentLang === 'ru'
+            }"
+      >EN</span>
+    </div>
 
-  <app-user-status class="right"></app-user-status>
+    <app-user-status class="right"></app-user-status>
+  </nav>
+
 </header>
