@@ -1,6 +1,7 @@
 <ng-container *ngIf="isLogged$ | async; else login">
   <button mat-button type="menu">
-    <span>{{ userName$ | async }}</span>
+    <span>{{ userName$ | async }}&nbsp;</span>
+    <mat-icon>account_circle</mat-icon>
   </button>
   <button mat-button type="menu" (click)="logout()">
     <span>&nbsp;{{ "Logout" | translate | uppercase }}</span>
