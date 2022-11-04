@@ -1,5 +1,8 @@
-import { UserStatusService } from 'src/app/core/services/user-status.service';
+
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserStatusService } from 'src/app/core/services/user-status.service';
+
 
 @Component({
   selector: 'app-home-page',
@@ -9,13 +12,14 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 })
 export class HomePageComponent implements OnInit {
   currentDate: string = new Date().toDateString();
-  
-  currentUserName!: string;
 
-  constructor( private userStatusService: UserStatusService) {
+  public userName$!: Observable<string>;
+
+  constructor(private userStatusService: UserStatusService) {
+    console.log(this.currentDate);
   }
 
   ngOnInit(): void {
-    this.userStatusService.getUserLogin().subscribe(value => this.currentUserName  = value);
+    this.userName$ = this.userStatusService.getUserName();
   }
 }

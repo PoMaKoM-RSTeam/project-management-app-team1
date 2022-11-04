@@ -1,10 +1,13 @@
 <div class="boards">
   <div class="boards-date__title">
-    {{ "Home-CurrDate"  | translate:{date: currentDate | localizedDate:'longDate'} }}
+    {{
+      "Home-CurrDate"
+        | translate: { date: currentDate | localizedDate: "longDate" }
+    }}
   </div>
   <div class="boards-user__wrap">
     <span class="boards-user__subtitle">{{ "Home-Hello" | translate }}, </span>
-    <span class="boards-user__name">{{ currentUserName }}</span>
+    <span class="boards-user__name">{{ userName$ | async }}</span>
   </div>
   <app-boards-list></app-boards-list>
 </div>
