@@ -1,15 +1,20 @@
 <header class="header">
-  <div class="log" routerLink="">
-    {{ "Project-Title" | translate | uppercase }}
-  </div>
+  <nav class="nav">
+    <div class="log" routerLink="">
+      {{ "Project-Title" | translate | uppercase }}
+    </div>
 
-  <div class="edit-profile" routerLink="profile">
-    {{ "Edit-Profile" | translate | uppercase }}
-  </div>
+    <div class="edit-profile" routerLink="profile">
+      {{ "Edit-Profile" | translate | uppercase }}
+    </div>
 
-  <div class="create-board">{{ "Create-Board" | translate | uppercase }}</div>
+    <div class="create-board">{{ "Create-Board" | translate | uppercase }}</div>
 
-  <div class="language" (click)="switchLang()">RU/EN</div>
+    <div class="language-container" (click)="switchLang()">
+      <span class="language">RU</span> | <span class="language">EN</span>
+    </div>
 
-  <app-user-status class="right"></app-user-status>
+    <app-user-status class="right"></app-user-status>
+  </nav>
+
 </header>

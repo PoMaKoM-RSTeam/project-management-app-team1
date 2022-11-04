@@ -1,17 +1,33 @@
 @import "src/assets/styles/variables";
 
-.header {
+.header{
+  box-shadow: 0 3px 5px $shadowColor;
+}
+.nav {
   display: flex;
   max-width: 1200px;
   justify-content: space-around;
   align-items: center;
   height: 50px;
   margin: 0 auto;
+  gap: 20px;
   //background-color: $color1;
   //color: #454349;
 
-  color: #FFFFFF;
+  color: $whiteColor;
   //background-color: ;
+
+}
+
+.nav * {
+  flex: 1;
+  text-align: center;
+  transition: .2s;
+}
+
+.nav *:hover {
+  text-shadow: 0 0 3px $whiteColor;
+  cursor: pointer;
 }
 
 .logo {
