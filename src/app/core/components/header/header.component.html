@@ -7,7 +7,7 @@
     {{ "Edit-Profile" | translate | uppercase }}
   </div>
 
-  <div class="create-board">{{ "Create-Board" | translate | uppercase }}</div>
+  <div class="create-board" (click)="createProject()">{{ "Create-Board" | translate | uppercase }}</div>
 
   <div class="language" (click)="switchLang()">RU/EN</div>
 
