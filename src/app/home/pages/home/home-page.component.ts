@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { UserStatusService } from 'src/app/core/services/user-status.service';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-home-page',
@@ -6,10 +7,15 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./home-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   currentDate: string = new Date().toDateString();
+  
+  currentUserName!: string;
 
-  constructor() {
-    console.log(this.currentDate);
+  constructor( private userStatusService: UserStatusService) {
+  }
+
+  ngOnInit(): void {
+    this.userStatusService.getUserLogin().subscribe(value => this.currentUserName  = value);
   }
 }
