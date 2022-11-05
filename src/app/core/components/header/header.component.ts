@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { UserStatusService } from '../../services/user-status.service';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +12,16 @@ import { TranslateService } from '@ngx-translate/core';
 export class HeaderComponent implements OnInit {
   currentLang = window.navigator.language.replace(/-.+/gis, '');
 
-  constructor(public translate: TranslateService) {}
+  public isLogged$!: Observable<boolean>;
+
+  constructor(
+    public translate: TranslateService,
+    private userStatusService: UserStatusService
+  ) {}
 
   ngOnInit() {
     this.translate.use(this.currentLang);
+    this.isLogged$ = this.userStatusService.getLoginStatus();
   }
 
   switchLang(lang: string) {
