@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -7,8 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
-  currentLang = window.navigator.language.replace(/-.+/gsi, '');
+export class HeaderComponent implements OnInit {
+  currentLang = window.navigator.language.replace(/-.+/gis, '');
 
   constructor(public translate: TranslateService) {}
 
@@ -16,9 +16,9 @@ export class HeaderComponent {
     this.translate.use(this.currentLang);
   }
 
-  switchLang(lang:string) {
+  switchLang(lang: string) {
     if (this.currentLang === lang) {
-      return
+      return;
     }
     this.currentLang = lang;
     this.translate.use(this.currentLang);
