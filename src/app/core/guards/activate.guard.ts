@@ -24,7 +24,7 @@ export class ActivateGuard implements CanActivate {
     | UrlTree {
     route.toString();
     state.toString();
-
+    console.log('canActivate');
     if (!this.userStatusService.isAuthenticated()) {
       this.userStatusService.logOut();
       return false;

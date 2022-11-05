@@ -4,14 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { ActivateGuard } from './core/guards/activate.guard';
 import { LoadGuard } from './core/guards/load.guard';
 import { ProfilePageComponent } from './core/pages/profile-page/profile-page.component';
+import { NotFoundPageComponent } from './core/pages/not-found-page/not-found-page.component';
 
 const routes: Routes = [
   { path: '', component: WelcomePageComponent, title: 'Project Manager' },
-  { path: 'profile', component: ProfilePageComponent },
+  {
+    path: 'profile',
+    component: ProfilePageComponent,
+    canActivate: [ActivateGuard],
+  },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then((a) => a.HomeModule),
-    canActivate: [ActivateGuard],
     canLoad: [LoadGuard],
   },
   {
@@ -19,7 +23,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./login/login.module').then((a) => a.LoginModule),
   },
-  { path: '**', component: WelcomePageComponent },
+  { path: '**', component: NotFoundPageComponent },
 ];
 
 @NgModule({

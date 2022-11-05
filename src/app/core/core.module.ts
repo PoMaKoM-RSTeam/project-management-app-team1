@@ -17,6 +17,7 @@ import { UserStatusComponent } from './components/user-status/user-status.compon
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 const routes: Routes = [];
 
@@ -52,6 +53,7 @@ const routes: Routes = [];
     WelcomePageComponent,
     FooterComponent,
     HeaderComponent,
+    NotFoundPageComponent,
   ],
 })
 export class CoreModule {
