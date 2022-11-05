@@ -19,7 +19,7 @@ export class LoadGuard implements CanLoad {
     | UrlTree {
     route.toString();
     segments.toString();
-    console.log('CanLoad');
+
     if (!this.userStatusService.isAuthenticated()) {
       this.userStatusService.logOut();
       return false;
