@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
-  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
@@ -13,10 +12,7 @@ import { UserStatusService } from '../services/user-status.service';
   providedIn: 'root',
 })
 export class ActivateGuard implements CanActivate {
-  constructor(
-    private userStatusService: UserStatusService,
-    private router: Router
-  ) {}
+  constructor(private userStatusService: UserStatusService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -29,8 +25,8 @@ export class ActivateGuard implements CanActivate {
     route.toString();
     state.toString();
 
-    if (!this.userStatusService.isLogged) {
-      this.router.navigate(['login']);
+    if (!this.userStatusService.isAuthenticated()) {
+      this.userStatusService.logOut();
       return false;
     }
     return true;

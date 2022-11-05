@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLogin$ = this.userStatusService.getLogStatus();
+    this.isLogin$ = this.userStatusService.getLoginStatus();
     this.title.setTitle('Login');
   }
 

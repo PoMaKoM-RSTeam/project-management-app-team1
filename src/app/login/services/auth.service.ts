@@ -27,11 +27,13 @@ export class AuthService {
       map<IError | ITokenResponse, string>((data) => {
         let userId = '';
         if ('token' in data) {
+          const tokenInfo: ITokenInfo = this.userStatusService.parseJwt(
+            data.token
+          );
           localStorage.setItem(LocalStorageKeys.authToken, data.token);
-          const [id, login] = [...this.decodeToken(data.token)];
-          userId = id;
-          localStorage.setItem(LocalStorageKeys.userId, id);
-          localStorage.setItem(LocalStorageKeys.login, login);
+          localStorage.setItem(LocalStorageKeys.userId, tokenInfo.userId);
+          localStorage.setItem(LocalStorageKeys.login, tokenInfo.login);
+          userId = tokenInfo.userId;
         }
         return userId;
       }),
@@ -69,18 +71,5 @@ export class AuthService {
         }
       })
     );
-  }
-
-  private decodeToken(token: string): string[] {
-    let id = '';
-    let login = '';
-    try {
-      const tokenInfo: ITokenInfo = JSON.parse(atob(token.split('.')[1]));
-      id = tokenInfo.userId;
-      login = tokenInfo.login;
-    } catch (e) {
-      console.log(e);
-    }
-    return [id, login];
   }
 }
