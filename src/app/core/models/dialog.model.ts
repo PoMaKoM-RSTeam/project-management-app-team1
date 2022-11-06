@@ -10,5 +10,7 @@ export interface ICreateEditProject {
   projectTitleLabel: string;
   projectDescriptionLabel: string;
   commandName: string;
+  projectTitle?: string;
+  projectDescription?: string;
 }
 
