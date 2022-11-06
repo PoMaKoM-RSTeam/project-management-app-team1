@@ -13,21 +13,17 @@
     </div>
 
     <div *ngIf="isLogged$ | async" class="header-element-container">
-      <span class="create-board">{{
-        "Create-Board" | translate | uppercase
-      }}</span>
+      <span class="create-board" (click)="createProject()">{{ "Create-Board" | translate | uppercase }}</span>
     </div>
 
-    <div class="header-element-container">
-      <span
-        class="language"
-        (click)="switchLang('ru')"
-        [ngClass]="{
-          active: currentLang === 'ru',
-          disabled: currentLang === 'en'
-        }"
-        >RU</span
-      >
+    <div class="header-element-container" >
+      <span class="language"
+            (click)="switchLang('ru')"
+            [ngClass]="{
+              active: currentLang === 'ru',
+              disabled: currentLang === 'en'
+            }"
+      >RU</span>
       |
       <span
         class="language"

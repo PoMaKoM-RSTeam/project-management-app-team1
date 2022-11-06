@@ -33,6 +33,11 @@
   "Profile-user-delete-title": "Delete Profile",
   "Profile-user-delete-message": "Delete Current User Profile from App",
 
+  "Project-modal-add-title": "Add Project",
+  "Project-modal-title": "Project Title",
+  "Project-modal-description": "Project Description",
+  "Project-modal-add": "Create",
+
   "Home-Projects": "Projects",
   "Home-Hello": "Hello",
   "Home-CurrDate": "{{date}}",

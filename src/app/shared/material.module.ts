@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,9 +8,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ProjectCreateUpdateModalComponent } from './components/project-create-update-modal/project-create-update-modal.component';
+import { FormsModule } from '@angular/forms';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @NgModule({
-  imports: [HttpClientModule],
+  imports: [
+    HttpClientModule, 
+    TranslateModule, 
+    MatFormFieldModule, 
+    FormsModule, 
+    TextFieldModule, 
+    MatButtonModule,
+    MatInputModule,
+    MatDialogModule],
   exports: [
     MatButtonModule,
     MatCardModule,
@@ -18,6 +30,10 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatFormFieldModule,
     MatNativeDateModule,
+    TextFieldModule
+  ],
+  declarations: [
+    ProjectCreateUpdateModalComponent
   ],
 })
 export class MaterialModule {}

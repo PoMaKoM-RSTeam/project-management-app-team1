@@ -33,6 +33,11 @@
   "Profile-user-delete-title": "Удаление профиля",
   "Profile-user-delete-message": "Профиль пользователя будет удален",
 
+  "Project-modal-add-title": "Создать Проект",
+  "Project-modal-title": "Название Проекта",
+  "Project-modal-description": "Описание Проекта",
+  "Project-modal-add": "Создать",
+
   "Home-Projects": "Проекты",
   "Home-Hello": "Здравствуйте",
   "Home-CurrDate": "{{date}}",

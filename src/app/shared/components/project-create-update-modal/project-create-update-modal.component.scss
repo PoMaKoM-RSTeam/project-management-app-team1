@@ -1,0 +1,76 @@
+@import "src/assets/styles/variables";
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #212121;
+  background: #efefef;
+  width: 300px;
+  height: 100%;
+  padding: 10px 0;
+  border-radius: 10px;
+}
+
+.form__question {
+  font-size: 12px;
+}
+
+.form__link {
+  margin-left: 5px;
+  font-weight: bold;
+  color: #2f80ed;
+  cursor: pointer;
+}
+
+.modal-wrap {
+  width: 100%;
+}
+
+.project-title__label,
+.project-description__label {
+  margin-bottom: 5px;
+}
+
+h2 {
+  margin-top: 18px;
+}
+
+mat-form-field {
+  width: 300px;
+  padding-bottom: 0;
+  border-bottom: transparent !important;
+}
+
+::ng-deep .mat-form-field-wrapper{
+  padding-bottom: 0 !important;
+}
+mat-error {
+  color: red;
+}
+
+span {
+  margin-bottom: 10px;
+}
+
+input {
+  text-indent: 5px;
+  border: none;
+  background-color: #e5e5e5;
+  height: 33px;
+  color: #929292;
+  width: 280px;
+}
+
+textarea {
+  width: 280px;
+  background-color: #e5e5e5;
+  color: #929292;
+  text-indent: 5px;
+  padding-top: 5px;
+}
+
+.cancel-btn {
+  color: red;
+}

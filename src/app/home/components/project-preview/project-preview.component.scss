@@ -1,33 +1,3 @@
-.board-container {
-  width: 100%;
-  height: 500px;
-  background-color: #2e2b36;
-  border: 1px solid #767185;
-  border-radius: 24px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.board-title {
-  color: #81759E;
-  font-size: 1.4rem;
-  padding: 13px 17px 10px;
-  border-bottom: 1px solid;
-}
-
-.boards-wrap {
-  padding: 12px 17px 8px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.boards-rows {
-  display: grid;
-  margin-bottom: 12px;
-  gap: 8px;
-  grid-template-columns: repeat(2, minmax(240px, 1fr));
-}
-
 .board-item {
   display: flex;
   min-height: 64px;
@@ -39,6 +9,11 @@
   &__title {
     font-size: 1.125rem;
     color: #fff;
+    transition: 0.2s;
+  }
+  &__description {
+    color: #797589;
+    margin-top: 5px;
     transition: 0.2s;
   }
   &__remove-icon {
@@ -65,9 +40,6 @@
 .board-item:hover .board-item__title {
   color: #58C2BD;
 }
-
-@media (max-width: 980px) {
-  .boards-rows{
-      grid-template-columns: repeat(1, minmax(240px, 1fr));
-  }
+.board-item:hover .board-item__description {
+  color: #fff;
 }
