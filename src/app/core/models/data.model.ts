@@ -1,6 +1,7 @@
 export interface IBoard {
   id: string;
   title: string;
+  description: string;
 }
 
 export type TBoardTitle = Omit<IBoard, 'id'>;

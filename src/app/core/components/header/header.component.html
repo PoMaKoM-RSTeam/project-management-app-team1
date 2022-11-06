@@ -7,9 +7,9 @@
     <div class="header-element-container">
       <span class="edit-profile" routerLink="profile">{{ "Edit-Profile" | translate | uppercase }}</span>
     </div>
-
-  <div class="create-board" (click)="createProject()">{{ "Create-Board" | translate | uppercase }}</div>
-
+    <div class="header-element-container">
+      <div class="create-board" (click)="createProject()">{{ "Create-Board" | translate | uppercase }}</div>
+    </div>
     <div class="header-element-container" >
       <span class="language"
             (click)="switchLang('ru')"

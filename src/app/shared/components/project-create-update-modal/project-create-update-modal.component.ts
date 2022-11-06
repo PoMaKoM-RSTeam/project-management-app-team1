@@ -32,7 +32,7 @@ export class ProjectCreateUpdateModalComponent {
   }
 
   onCommand(): void {
-    this.dialogRef.close(true);
+    this.dialogRef.close([this.projectTitle, this.projectDescription]);
   }
 
   onCancel(): void {

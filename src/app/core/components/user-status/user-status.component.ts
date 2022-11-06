@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UserStatusService } from '../../services/user-status.service';
 
 @Component({
