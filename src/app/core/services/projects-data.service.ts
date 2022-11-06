@@ -56,4 +56,12 @@ export class ProjectsDataService {
     );
   }
 
+  public updateProject(projectId: string, title: string, description: string ): Observable<IBoard> {
+    return this.database.updateBoard(projectId, { title, description }).pipe(
+      map((result) => {
+        return result as IBoard;
+      })
+    );
+  }
+
 }

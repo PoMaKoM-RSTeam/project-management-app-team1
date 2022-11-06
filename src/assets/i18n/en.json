@@ -33,10 +33,17 @@
   "Profile-user-delete-title": "Delete Profile",
   "Profile-user-delete-message": "Delete Current User Profile from App",
 
+  "Preview-edit": "Edite Project",
+  "Preview-delete": "Delete Project",
+  
+  "Project-modal-delete-title": "Delete Project",
+  "Project-modal-delete-message": "Delete Current Project from App",
   "Project-modal-add-title": "Add Project",
+  "Project-modal-edit-title": "Edit Project",
   "Project-modal-title": "Project Title",
   "Project-modal-description": "Project Description",
   "Project-modal-add": "Create",
+  "Project-modal-edit": "Edit",
 
   "Home-Projects": "Projects",
   "Home-Hello": "Hello",
