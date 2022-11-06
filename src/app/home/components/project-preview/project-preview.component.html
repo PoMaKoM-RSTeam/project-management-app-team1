@@ -1,7 +1,10 @@
 <div class="board-item">
-  <div class="board-item__title">{{project.title}}</div>
-  <div class="board-item__remove-wrap">
-    <mat-icon class="board-item__remove-icon">highlight_off</mat-icon>
+  <div class="board-item__text">
+    <div class="board-item__title">{{project.title}}</div>
+    <div class="board-item__description">{{project.description}}</div>
   </div>
-  <div>{{project.description}}</div>
+  <div class="board-item__remove-wrap" >
+    <mat-icon class="board-item__remove-icon" (click)="deleteProject(project.id)">highlight_off</mat-icon>
+  </div>
+  
 </div>

@@ -11,6 +11,11 @@
     color: #fff;
     transition: 0.2s;
   }
+  &__description {
+    color: #797589;
+    margin-top: 5px;
+    transition: 0.2s;
+  }
   &__remove-icon {
     color: #C25284;
     opacity: 0;
@@ -34,4 +39,7 @@
 }
 .board-item:hover .board-item__title {
   color: #58C2BD;
+}
+.board-item:hover .board-item__description {
+  color: #fff;
 }

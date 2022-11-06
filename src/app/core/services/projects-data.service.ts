@@ -1,5 +1,5 @@
 import { DatabaseService } from './database.service';
-import { IBoard } from './../models/data.model';
+import { IBoard, IError } from './../models/data.model';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 
@@ -33,6 +33,25 @@ export class ProjectsDataService {
           this.projects.next(boards);
         }
         return result as IBoard[];
+      })
+    );
+  }
+
+  public deleteProject(projectId: string): Observable<IError | null> {
+    return this.database.deleteBoard(projectId).pipe(
+      map((result) => {
+        if (result === null) {
+          this.database.getBoards().pipe(
+            map((project) => {
+              if (project) {
+                const boards: IBoard[] = project as IBoard[];
+                this.projects.next(boards);
+              }
+              return project as IBoard[];
+            })
+          );
+        }
+        return result;
       })
     );
   }

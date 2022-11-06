@@ -1,3 +1,4 @@
+import { switchMap, map } from 'rxjs';
 import { IBoard } from './../../../core/models/data.model';
 import { ProjectsDataService } from './../../../core/services/projects-data.service';
 import { Component, Input } from '@angular/core';
@@ -9,11 +10,15 @@ import { Component, Input } from '@angular/core';
 })
 export class ProjectPreviewComponent {
 
-
   @Input() public project!: IBoard;
 
   constructor(private projectsService: ProjectsDataService) {
-    
+  
   }
-
+    
+  deleteProject(projectId: string) {
+    this.projectsService.deleteProject(projectId).pipe(
+      switchMap(()=>this.projectsService.getProjects().pipe(map((value)=>value)))
+    ).subscribe();
+  }
 }

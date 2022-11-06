@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { switchMap, map, Observable } from 'rxjs';
 import { ProjectsDataService } from './../../services/projects-data.service';
 import { ProjectCreateUpdateModalComponent } from './../../../shared/components/project-create-update-modal/project-create-update-modal.component';
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   public isLogged$!: Observable<boolean>;
 
   constructor(
-    
+    private router: Router,
     public translate: TranslateService,
     private projectModal: MatDialog,
     private projectsService: ProjectsDataService,
@@ -40,6 +41,7 @@ export class HeaderComponent implements OnInit {
   }
 
   createProject() {
+    this.router.navigate(['home']);
     const dialogData: ICreateEditProject = {
       title:'Project-modal-add-title',
       projectTitleLabel:'Project-modal-title',
