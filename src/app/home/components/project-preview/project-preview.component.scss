@@ -21,8 +21,17 @@
     opacity: 0;
     transition: 0.2s;
   }
+  &__edit-icon {
+    color: #04761d;
+    font-size: 1.425rem;
+    opacity: 0;
+    transition: 0.2s;
+  }
 }
-
+.board-item__remove-wrap {
+  display: flex;
+  gap: 9px;
+}
 .board-item:hover {
   cursor: pointer;
   background-color: #1b1a20;
@@ -34,7 +43,13 @@
 .board-item:hover .board-item__remove-icon {
   opacity: 1;
 }
+.board-item:hover .board-item__edit-icon {
+  opacity: 1;
+}
 .board-item__remove-icon:hover {
+  transform: scale(1.1)
+}
+.board-item__edit-icon:hover {
   transform: scale(1.1)
 }
 .board-item:hover .board-item__title {

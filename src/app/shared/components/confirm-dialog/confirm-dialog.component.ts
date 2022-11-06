@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ConfirmDialogModel } from '../../models/dialog.model';
+import { ConfirmDialogModel } from '../../../core/models/dialog.model';
 
 @Component({
   selector: 'app-confirm-dialog',

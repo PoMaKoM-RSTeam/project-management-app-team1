@@ -11,7 +11,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../shared/material.module';
 import { LocalizedDatePipe } from './pipes/localized-date.pipe';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../shared/components/confirm-dialog/confirm-dialog.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { UserStatusComponent } from './components/user-status/user-status.component';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';

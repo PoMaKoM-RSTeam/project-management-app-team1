@@ -33,10 +33,17 @@
   "Profile-user-delete-title": "Удаление профиля",
   "Profile-user-delete-message": "Профиль пользователя будет удален",
 
+  "Preview-edit": "Изменить Проект",
+  "Preview-delete": "Удалить проект",
+
+  "Project-modal-delete-title": "Удаление проекта",
+  "Project-modal-delete-message": "Проект будет удален",
   "Project-modal-add-title": "Создать Проект",
+  "Project-modal-edit-title": "Изменить Проект",
   "Project-modal-title": "Название Проекта",
   "Project-modal-description": "Описание Проекта",
   "Project-modal-add": "Создать",
+  "Project-modal-edit": "Изменить",
 
   "Home-Projects": "Проекты",
   "Home-Hello": "Здравствуйте",
