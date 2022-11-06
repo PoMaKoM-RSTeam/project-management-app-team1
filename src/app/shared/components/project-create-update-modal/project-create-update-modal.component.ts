@@ -29,6 +29,8 @@ export class ProjectCreateUpdateModalComponent {
     this.projectTitleLabel = dialog.projectTitleLabel;
     this.projectDescriptionLabel = dialog.projectDescriptionLabel;
     this.commandName = dialog.commandName;
+    this.projectTitle = dialog.projectTitle ?? '';
+    this.projectDescription = dialog.projectDescription ?? '';
   }
 
   onCommand(): void {
