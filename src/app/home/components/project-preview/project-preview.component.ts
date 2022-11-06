@@ -16,9 +16,7 @@ export class ProjectPreviewComponent {
 
   @Input() public project!: IBoard;
 
-  constructor(private projectsService: ProjectsDataService,  private projectModal: MatDialog) {
-  
-  }
+  constructor(private projectsService: ProjectsDataService,  private projectModal: MatDialog) { }
     
   deleteProject(projectId: string) {
     const dialogData = new ConfirmDialogModel(
@@ -48,7 +46,6 @@ export class ProjectPreviewComponent {
       projectDescriptionLabel:'Project-modal-description',
       commandName:'Project-modal-edit',
     };
-
 
     const dialogRef = this.projectModal.open(ProjectCreateUpdateModalComponent, {
       maxWidth: '600px',
