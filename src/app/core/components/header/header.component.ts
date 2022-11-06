@@ -1,10 +1,11 @@
-import { switchMap, map } from 'rxjs';
+import { switchMap, map, Observable } from 'rxjs';
 import { ProjectsDataService } from './../../services/projects-data.service';
 import { ProjectCreateUpdateModalComponent } from './../../../shared/components/project-create-update-modal/project-create-update-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ICreateEditProject } from './../../models/dialog.model';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { UserStatusService } from '../../services/user-status.service';
 
 @Component({
   selector: 'app-header',
@@ -12,19 +13,25 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {
-  currentLang = window.navigator.language.replace(/-.+/gsi, '');
+export class HeaderComponent implements OnInit {
+  currentLang = window.navigator.language.replace(/-.+/gis, '');
+
+  public isLogged$!: Observable<boolean>;
 
   constructor(
+    
     public translate: TranslateService,
     private projectModal: MatDialog,
-    private projectsService: ProjectsDataService) {}
+    private projectsService: ProjectsDataService,
+    private userStatusService: UserStatusService
+  ) {}
 
   ngOnInit() {
     this.translate.use(this.currentLang);
+    this.isLogged$ = this.userStatusService.getLoginStatus();
   }
 
-  switchLang(lang:string) {
+  switchLang(lang: string) {
     if (this.currentLang === lang) {
       return;
     }

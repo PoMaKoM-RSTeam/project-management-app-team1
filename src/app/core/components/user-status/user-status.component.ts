@@ -28,7 +28,7 @@ export class UserStatusComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLogged$ = this.userStatusService.getLogStatus();
+    this.isLogged$ = this.userStatusService.getLoginStatus();
 
     this.isLoginPage = this.router.url === '/login';
 

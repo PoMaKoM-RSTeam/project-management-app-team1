@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { IError } from '../models/data.model';
 import {
+  ITokenInfo,
   IUser,
   IUserCredentials,
   LocalStorageKeys,
@@ -13,7 +14,7 @@ import { DatabaseService } from './database.service';
   providedIn: 'root',
 })
 export class UserStatusService {
-  public isLogged: BehaviorSubject<boolean> = this.token
+  public isLogged: BehaviorSubject<boolean> = this.isAuthenticated()
     ? new BehaviorSubject<boolean>(true)
     : new BehaviorSubject<boolean>(false);
 
@@ -26,18 +27,10 @@ export class UserStatusService {
   );
 
   constructor(private database: DatabaseService, private router: Router) {
-    this.init();
+    this.isLogged.next(this.isAuthenticated());
   }
 
-  private init(): void {
-    if (this.token) {
-      this.isLogged.next(true);
-    } else {
-      this.isLogged.next(false);
-    }
-  }
-
-  getLogStatus(): Observable<boolean> {
+  getLoginStatus(): Observable<boolean> {
     return this.isLogged.asObservable();
   }
 
@@ -96,5 +89,34 @@ export class UserStatusService {
         return result;
       })
     );
+  }
+
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem(LocalStorageKeys.authToken);
+    if (token) {
+      try {
+        const { iat } = this.parseJwt(token) as ITokenInfo;
+        return Date.now() >= iat * 1000;
+      } catch (err) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  public parseJwt(token: string): ITokenInfo {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split('')
+        .map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join('')
+    );
+    return JSON.parse(jsonPayload);
   }
 }

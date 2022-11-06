@@ -1,15 +1,24 @@
 <header class="header">
   <nav class="nav">
     <div class="header-element-container">
-      <span class="logo" routerLink="">{{ "Project-Title" | translate | uppercase }}</span>
+      <span class="logo" routerLink="home">{{
+        "Project-Title" | translate | uppercase
+      }}</span>
     </div>
 
-    <div class="header-element-container">
-      <span class="edit-profile" routerLink="profile">{{ "Edit-Profile" | translate | uppercase }}</span>
+    <div *ngIf="isLogged$ | async" class="header-element-container">
+      <span class="edit-profile" routerLink="profile">{{
+        "Edit-Profile" | translate | uppercase
+      }}</span>
+    </div>
+
+    <div *ngIf="isLogged$ | async" class="header-element-container">
+      <span class="create-board" (click)="createProject()">{{ "Create-Board" | translate | uppercase }}</span>
     </div>
     <div class="header-element-container">
-      <div class="create-board" (click)="createProject()">{{ "Create-Board" | translate | uppercase }}</div>
+      <span class="create-board">{{ "Create-Board" | translate | uppercase }}</span>
     </div>
+
     <div class="header-element-container" >
       <span class="language"
             (click)="switchLang('ru')"
@@ -19,16 +28,17 @@
             }"
       >RU</span>
       |
-      <span class="language"
-            (click)="switchLang('en')"
-            [ngClass]="{
-              active: currentLang === 'en',
-              disabled: currentLang === 'ru'
-            }"
-      >EN</span>
+      <span
+        class="language"
+        (click)="switchLang('en')"
+        [ngClass]="{
+          active: currentLang === 'en',
+          disabled: currentLang === 'ru'
+        }"
+        >EN</span
+      >
     </div>
 
     <app-user-status class="right"></app-user-status>
   </nav>
-
 </header>
