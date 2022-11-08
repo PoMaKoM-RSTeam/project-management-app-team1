@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ProjectCreateUpdateModalComponent } from './../../../shared/components/project-create-update-modal/project-create-update-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,7 +17,7 @@ export class ProjectPreviewComponent {
 
   @Input() public project!: IBoard;
 
-  constructor(private projectsService: ProjectsDataService,  private projectModal: MatDialog) { }
+  constructor(private projectsService: ProjectsDataService,  private projectModal: MatDialog, private router: Router,) { }
     
   deleteProject(projectId: string) {
     const dialogData = new ConfirmDialogModel(
@@ -61,5 +62,9 @@ export class ProjectPreviewComponent {
         ).subscribe();
       }
     });
+  }
+
+  openBoard() {
+    this.router.navigate(['board', this.project.id]);
   }
 }
