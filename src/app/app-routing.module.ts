@@ -19,6 +19,11 @@ const routes: Routes = [
     canLoad: [LoadGuard],
   },
   {
+    path: 'board',
+    loadChildren: () => import('./board/board.module').then((a) => a.BoardModule),
+    canLoad: [LoadGuard],
+  },
+  {
     path: 'login',
     loadChildren: () =>
       import('./login/login.module').then((a) => a.LoginModule),
