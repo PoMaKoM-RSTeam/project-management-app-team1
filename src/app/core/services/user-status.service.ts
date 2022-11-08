@@ -18,6 +18,10 @@ export class UserStatusService {
     ? new BehaviorSubject<boolean>(true)
     : new BehaviorSubject<boolean>(false);
 
+  public isSignup: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+
   public UserName: BehaviorSubject<string> = new BehaviorSubject<string>(
     this.userName
   );
@@ -32,6 +36,10 @@ export class UserStatusService {
 
   getLoginStatus(): Observable<boolean> {
     return this.isLogged.asObservable();
+  }
+
+  getSignupStatus(): Observable<boolean> {
+    return this.isSignup.asObservable();
   }
 
   getUserName(): Observable<string> {
@@ -56,6 +64,10 @@ export class UserStatusService {
 
   get userLogin(): string {
     return localStorage.getItem(LocalStorageKeys.login) ?? '';
+  }
+
+  public setSignup(set: boolean) {
+    this.isSignup.next(set);
   }
 
   public logOut() {

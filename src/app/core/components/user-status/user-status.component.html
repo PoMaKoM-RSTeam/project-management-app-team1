@@ -11,7 +11,7 @@
   <button *ngIf="!isLoginPage" mat-button type="menu" routerLink="login">
     <span>{{ "Login" | translate | uppercase }}</span>
   </button>
-  <button *ngIf="!isLoginPage" mat-button type="menu" routerLink="login">
+  <button *ngIf="!isLoginPage" mat-button type="menu" (click)="signup()">
     <span>{{ "Signup" | translate | uppercase }}</span>
   </button>
 </ng-template>
