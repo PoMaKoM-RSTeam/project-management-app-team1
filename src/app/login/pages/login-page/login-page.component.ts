@@ -12,7 +12,7 @@ import { UserStatusService } from 'src/app/core/services/user-status.service';
 export class LoginPageComponent implements OnInit {
   public isLogin$!: Observable<boolean>;
 
-  public isSignup: boolean = false;
+  public isSignup$!: Observable<boolean>;
 
   constructor(
     private title: Title,
@@ -21,15 +21,16 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLogin$ = this.userStatusService.getLoginStatus();
+    this.isSignup$ = this.userStatusService.getSignupStatus();
     this.title.setTitle('Login');
   }
 
   public showForm(showLogin: boolean) {
     if (showLogin) {
-      this.isSignup = false;
+      this.userStatusService.setSignup(false);
       this.title.setTitle('Login');
     } else {
-      this.isSignup = true;
+      this.userStatusService.setSignup(true);
       this.title.setTitle('Signup');
     }
   }

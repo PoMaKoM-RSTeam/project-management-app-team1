@@ -42,6 +42,11 @@ export class UserStatusComponent implements OnInit {
     this.userName$ = this.userStatusService.getUserName();
   }
 
+  public signup(): void {
+    this.userStatusService.setSignup(true);
+    this.router.navigate(['login']);
+  }
+
   public logout(): void {
     this.userStatusService.logOut();
   }
