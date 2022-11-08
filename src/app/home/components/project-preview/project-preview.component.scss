@@ -6,6 +6,9 @@
   justify-content: space-between;
   padding: 0 20px;
   transition: 0.2s;
+  &__text {
+    width: 100%;
+  }
   &__title {
     font-size: 1.125rem;
     color: #fff;
