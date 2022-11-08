@@ -33,6 +33,7 @@ export class AuthService {
           localStorage.setItem(LocalStorageKeys.authToken, data.token);
           localStorage.setItem(LocalStorageKeys.userId, tokenInfo.userId);
           localStorage.setItem(LocalStorageKeys.login, tokenInfo.login);
+          this.userStatusService.isLogged.next(true);
           userId = tokenInfo.userId;
         }
         return userId;
@@ -41,8 +42,7 @@ export class AuthService {
         return this.getUserNameFromDB(userId).pipe(
           map((name: string) => {
             this.userStatusService.UserName.next(name);
-            this.userStatusService.isLogged.next(true);
-            this.router.navigate(['home']).then();
+            this.router.navigate(['home']);
           })
         );
       })
@@ -67,7 +67,7 @@ export class AuthService {
     return this.database.signUp(credentials).pipe(
       map<IError | IUser, void>((data) => {
         if ('id' in data) {
-          this.router.navigate(['login']).then();
+          this.router.navigate(['login']);
         }
       })
     );

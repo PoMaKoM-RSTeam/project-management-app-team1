@@ -76,7 +76,7 @@ export class UserStatusService {
     localStorage.removeItem(LocalStorageKeys.userName);
     localStorage.removeItem(LocalStorageKeys.login);
     this.isLogged.next(false);
-    this.router.navigate(['login']).then();
+    this.router.navigate(['login']);
   }
 
   public updateUser(userInfo: IUserCredentials): Observable<IError | IUser> {
