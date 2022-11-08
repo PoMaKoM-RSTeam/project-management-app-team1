@@ -21,7 +21,6 @@ export class LoadGuard implements CanLoad {
     segments.toString();
 
     if (!this.userStatusService.isAuthenticated()) {
-      this.userStatusService.logOut();
       return false;
     }
     return true;

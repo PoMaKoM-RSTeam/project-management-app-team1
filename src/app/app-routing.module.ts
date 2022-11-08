@@ -20,7 +20,8 @@ const routes: Routes = [
   },
   {
     path: 'board',
-    loadChildren: () => import('./board/board.module').then((a) => a.BoardModule),
+    loadChildren: () =>
+      import('./board/board.module').then((a) => a.BoardModule),
     canLoad: [LoadGuard],
   },
   {
@@ -32,7 +33,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      useHash: true,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
