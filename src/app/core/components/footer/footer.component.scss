@@ -1,21 +1,16 @@
 @import "src/assets/styles/variables";
 
-
-:host {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-}
-
 .footer {
+  overflow-x: hidden;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   color: $whiteColor;
   box-shadow: 0 -5px 10px $shadowColor;
   padding-top: 5px;
+  margin-top: 40px;
 }
-
 
 .gh-list {
   list-style-type: none;
@@ -36,7 +31,7 @@
 }
 
 .rs-logo {
-  width: 100px;
+  width: 80px;
   opacity: 0.7;
   transition: .2s;
 }
@@ -45,7 +40,3 @@
   scale: 105%;
   opacity: 1;
 }
-
-
-
-

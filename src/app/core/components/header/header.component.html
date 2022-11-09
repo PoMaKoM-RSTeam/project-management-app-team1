@@ -16,6 +16,8 @@
       <span class="create-board" (click)="createProject()">{{ "Create-Board" | translate | uppercase }}</span>
     </div>
 
+    <app-user-status class="right"></app-user-status>
+
     <div class="header-element-container" >
       <span class="language"
             (click)="switchLang('ru')"
@@ -32,11 +34,9 @@
           active: currentLang === 'en',
           disabled: currentLang === 'ru'
         }"
-        >EN</span
+      >EN</span
       >
     </div>
-
-    <app-user-status class="right"></app-user-status>
   </nav>
   <div *ngIf="loading">
     <mat-progress-bar mode="query"></mat-progress-bar>
