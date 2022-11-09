@@ -71,8 +71,8 @@
     </mat-error>
   </mat-form-field>
   <div>
-    <mat-error *ngIf="loginErrorMessage">
-      {{ "Signup-question" | translate }}
+    <mat-error *ngIf="isLoginError">
+      {{ "Login-pass-err" | translate }}
     </mat-error>
     <button type="submit" mat-raised-button [disabled]="authForm.invalid">
       {{ "Login" | translate }}
