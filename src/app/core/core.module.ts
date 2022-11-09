@@ -18,6 +18,7 @@ import { WelcomePageComponent } from './pages/welcome-page/welcome-page.componen
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const routes: Routes = [];
 
@@ -35,6 +36,7 @@ const routes: Routes = [];
       isolate: false,
     }),
     RouterModule.forChild(routes),
+    MatProgressBarModule,
   ],
   exports: [
     LocalizedDatePipe,
