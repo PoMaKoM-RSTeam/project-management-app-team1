@@ -35,7 +35,7 @@
 
   "Preview-edit": "Edite Project",
   "Preview-delete": "Delete Project",
-  
+
   "Project-modal-delete-title": "Delete Project",
   "Project-modal-delete-message": "Delete Current Project from App",
   "Project-modal-add-title": "Add Project",
@@ -73,5 +73,8 @@
   "Validation-password-numbers": "- include numbers",
   "Validation-password-short": "- should be at least 8 characters long",
   "Validation-password-special": "- include special characters (?!#@)",
-  "Validation-password-upper": "- combine both uppercase and lowercase letters"
+  "Validation-password-upper": "- combine both uppercase and lowercase letters",
+
+  "Go-Home": "go home",
+  "Not-found-message": "Page not found"
 }
