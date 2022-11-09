@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Output,
@@ -19,11 +20,15 @@ export class LoginComponent {
 
   public authForm: FormGroup;
 
-  public loginErrorMessage: string = '';
+  public isLoginError: boolean = false;
 
   public hide: boolean = true;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private cdr: ChangeDetectorRef
+  ) {
     this.authForm = this.fb.group({
       login: ['', [Validators.required, Validators.email]],
       password: [
@@ -44,16 +49,16 @@ export class LoginComponent {
   }
 
   public onSubmit(): void {
-    this.loginErrorMessage = '';
+    this.isLoginError = false;
     const subs = this.authService
       .logIn({
         login: this.authForm.controls['login'].value,
         password: this.authForm.controls['password'].value,
       })
       .subscribe({
-        error: (error: string) => {
-          this.loginErrorMessage =
-            Number(error) === 403 ? 'User not found' : error;
+        error: (error) => {
+          this.isLoginError = Number(error) === 403;
+          this.cdr.detectChanges();
           subs.unsubscribe();
         },
       });

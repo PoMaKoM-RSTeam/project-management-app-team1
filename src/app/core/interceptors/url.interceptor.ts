@@ -24,8 +24,8 @@ export class UrlInterceptor implements HttpInterceptor {
     });
 
     return next.handle(requestClone).pipe(
-      catchError((error: HttpErrorResponse) => {
-        return throwError(() => error.status);
+      catchError((errorResponse: HttpErrorResponse) => {
+        return throwError(() => errorResponse.status);
       })
     );
   }
