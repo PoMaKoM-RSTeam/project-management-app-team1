@@ -38,3 +38,10 @@ $error: rgba(255, 0, 0, 0.7);
 $wBackground: #1b1a20;
 
 
+mat-progress-bar .mat-progress-bar-buffer {
+  background: $darkGray;
+}
+
+mat-progress-bar .mat-progress-bar-fill::after {
+  background: linear-gradient(45deg, $lightBlue, $color14);
+}

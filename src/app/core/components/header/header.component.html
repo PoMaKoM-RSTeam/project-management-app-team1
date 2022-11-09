@@ -38,4 +38,7 @@
 
     <app-user-status class="right"></app-user-status>
   </nav>
+  <div *ngIf="loading">
+    <mat-progress-bar mode="query"></mat-progress-bar>
+  </div>
 </header>
