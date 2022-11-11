@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://gentle-waters-52058.herokuapp.com/',
+  baseUrl: 'https://pma-backend-production.up.railway.app/',
 };

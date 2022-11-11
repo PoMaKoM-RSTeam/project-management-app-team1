@@ -1,29 +1,29 @@
 export interface IBoard {
-  id: string;
+  _id: string;
   title: string;
   description: string;
 }
 
-export type TBoardTitle = Omit<IBoard, 'id'>;
+export type TBoardTitle = Omit<IBoard, '_id'>;
 
 export interface IBoardComplete extends IBoard {
   columns: IColumnComplete[];
 }
 
 export interface IColumn {
-  id: string;
+  _id: string;
   title: string;
   order: number;
 }
 
-export type TColumnInfo = Omit<IColumn, 'id'>;
+export type TColumnInfo = Omit<IColumn, '_id'>;
 
 export interface IColumnComplete extends IColumn {
   tasks: ITask[];
 }
 
 export interface ITask {
-  id: string;
+  _id: string;
   title: string;
   order: number;
   description: string;
@@ -32,7 +32,7 @@ export interface ITask {
   columnId: string;
 }
 
-export type TTaskInfoExtended = Omit<ITask, 'id'>;
+export type TTaskInfoExtended = Omit<ITask, '_id'>;
 
 export type TTaskInfo = Omit<TTaskInfoExtended, 'boardId' | 'columnId'>;
 

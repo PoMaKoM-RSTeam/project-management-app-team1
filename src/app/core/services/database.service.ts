@@ -23,11 +23,14 @@ export class DatabaseService {
   constructor(private http: HttpClient) {}
 
   public signUp(credentials: IUserCredentials): Observable<IError | IUser> {
-    return this.http.post<IError | IUser>('api/signup', credentials);
+    return this.http.post<IError | IUser>('api/auth/signup', credentials);
   }
 
   public signIn(loginInfo: TUserSignIn): Observable<IError | ITokenResponse> {
-    return this.http.post<IError | ITokenResponse>('api/signin', loginInfo);
+    return this.http.post<IError | ITokenResponse>(
+      'api/auth/signin',
+      loginInfo
+    );
   }
 
   public getUsers(): Observable<IError | IUser[]> {
@@ -53,8 +56,14 @@ export class DatabaseService {
     return this.http.get<IError | IBoard[]>('api/boards');
   }
 
-  public createBoard(title: string, description: string): Observable<IError | IBoard> {
-    return this.http.post<IError | IBoard>('api/boards', { title: title, description: description });
+  public createBoard(
+    title: string,
+    description: string
+  ): Observable<IError | IBoard> {
+    return this.http.post<IError | IBoard>('api/boards', {
+      title: title,
+      description: description,
+    });
   }
 
   public getBoard(id: string): Observable<IError | IBoardComplete> {
