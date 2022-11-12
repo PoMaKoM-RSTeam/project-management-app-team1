@@ -3,7 +3,7 @@ export interface ILogin {
   password: string;
 }
 export interface IUser {
-  id: string;
+  _id: string;
   name: string;
   login: string;
 }
@@ -17,9 +17,10 @@ export interface IUserCredentials {
 export type TUserSignIn = Omit<IUserCredentials, 'name'>;
 
 export interface ITokenInfo {
-  userId: string;
+  id: string;
   login: string;
   iat: number;
+  exp: number;
 }
 
 export enum LocalStorageKeys {

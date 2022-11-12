@@ -31,10 +31,10 @@ export class AuthService {
             data.token
           );
           localStorage.setItem(LocalStorageKeys.authToken, data.token);
-          localStorage.setItem(LocalStorageKeys.userId, tokenInfo.userId);
+          localStorage.setItem(LocalStorageKeys.userId, tokenInfo.id);
           localStorage.setItem(LocalStorageKeys.login, tokenInfo.login);
           this.userStatusService.isLogged.next(true);
-          userId = tokenInfo.userId;
+          userId = tokenInfo.id;
         }
         return userId;
       }),
@@ -66,7 +66,7 @@ export class AuthService {
   public signUp(credentials: IUserCredentials) {
     return this.database.signUp(credentials).pipe(
       map<IError | IUser, void>((data) => {
-        if ('id' in data) {
+        if ('_id' in data) {
           this.router.navigate(['login']);
         }
       })
