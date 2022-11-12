@@ -21,7 +21,7 @@ export class ProjectsDataService {
     title: string,
     description: string,
     owner: string
-  ): Observable<IError | null> {
+  ): Observable<IBoard | IError | null> {
     return this.database.createBoard({ title, description, owner }).pipe(
       map((result) => {
         if (result === null) {
