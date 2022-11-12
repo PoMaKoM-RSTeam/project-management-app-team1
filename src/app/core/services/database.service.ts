@@ -56,8 +56,10 @@ export class DatabaseService {
     return this.http.get<IError | IBoard[]>('api/boards');
   }
 
-  public createBoard(boardInfo: TBoardInfo): Observable<IError | null> {
-    return this.http.post<IError | null>('api/boards', boardInfo);
+  public createBoard(
+    boardInfo: TBoardInfo
+  ): Observable<IBoard | IError | null> {
+    return this.http.post<IBoard | IError | null>('api/boards', boardInfo);
   }
 
   public getBoard(id: string): Observable<IError | IBoardComplete> {
