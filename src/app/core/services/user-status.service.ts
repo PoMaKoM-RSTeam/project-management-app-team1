@@ -107,8 +107,8 @@ export class UserStatusService {
     const token = localStorage.getItem(LocalStorageKeys.authToken);
     if (token) {
       try {
-        const { iat } = this.parseJwt(token) as ITokenInfo;
-        return Date.now() >= iat * 1000;
+        const { exp } = this.parseJwt(token) as ITokenInfo;
+        return Date.now() <= exp * 1000;
       } catch (err) {
         return false;
       }
