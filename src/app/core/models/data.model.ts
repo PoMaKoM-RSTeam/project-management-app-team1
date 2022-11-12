@@ -3,7 +3,7 @@ export interface IBoard {
   title: string;
   description: string;
   owner: string; // "userId of owner",
-  users: string[]; // [ "userId of invited user #1", "userId of invited user #2" ]
+  users?: string[]; // [ "userId of invited user #1", "userId of invited user #2" ]
 }
 
 export type TBoardInfo = Omit<IBoard, '_id'>;

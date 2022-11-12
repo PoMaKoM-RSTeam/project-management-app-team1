@@ -4,7 +4,12 @@ import { ProjectsDataService } from './../../services/projects-data.service';
 import { ProjectCreateUpdateModalComponent } from './../../../shared/components/project-create-update-modal/project-create-update-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ICreateEditProject } from './../../models/dialog.model';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { UserStatusService } from '../../services/user-status.service';
 import { LoadingService } from '../../services/loading.service';
@@ -40,12 +45,10 @@ export class HeaderComponent implements OnInit {
   }
 
   listenToLoading(): void {
-    this.loadingService.loadingSub
-      .pipe(delay(0))
-      .subscribe((loading) => {
-        this.loading = loading;
-        this.cdr.detectChanges();
-      });
+    this.loadingService.loadingSub.pipe(delay(0)).subscribe((loading) => {
+      this.loading = loading;
+      this.cdr.detectChanges();
+    });
   }
 
   switchLang(lang: string) {
@@ -59,23 +62,34 @@ export class HeaderComponent implements OnInit {
   createProject() {
     this.router.navigate(['home']);
     const dialogData: ICreateEditProject = {
-      title:'Project-modal-add-title',
-      projectTitleLabel:'Project-modal-title',
-      projectDescriptionLabel:'Project-modal-description',
-      commandName:'Project-modal-add',
+      title: 'Project-modal-add-title',
+      projectTitleLabel: 'Project-modal-title',
+      projectDescriptionLabel: 'Project-modal-description',
+      commandName: 'Project-modal-add',
     };
 
-
-    const dialogRef = this.projectModal.open(ProjectCreateUpdateModalComponent, {
-      maxWidth: '600px',
-      data: dialogData,
-    });
+    const dialogRef = this.projectModal.open(
+      ProjectCreateUpdateModalComponent,
+      {
+        maxWidth: '600px',
+        data: dialogData,
+      }
+    );
 
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
-        this.projectsService.createProject(dialogResult[0], dialogResult[1]).pipe(
-          switchMap(()=>this.projectsService.getProjects().pipe(map((value)=>value)))
-        ).subscribe();
+        this.projectsService
+          .createProject(
+            dialogResult[0],
+            dialogResult[1],
+            this.userStatusService.userId
+          )
+          .pipe(
+            switchMap(() =>
+              this.projectsService.getProjects().pipe(map((value) => value))
+            )
+          )
+          .subscribe();
       }
     });
   }
