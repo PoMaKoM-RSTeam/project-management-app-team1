@@ -18,12 +18,24 @@ export class ProjectsDataService {
   }
 
   public createProject(
-    projectTitle: string,
-    projectDescription: string
-  ): Observable<IBoard> {
-    return this.database.createBoard(projectTitle, projectDescription).pipe(
+    title: string,
+    description: string,
+    owner: string
+  ): Observable<IError | null> {
+    return this.database.createBoard({ title, description, owner }).pipe(
       map((result) => {
-        return result as IBoard;
+        if (result === null) {
+          this.database.getBoards().pipe(
+            map((project) => {
+              if (project) {
+                const boards: IBoard[] = project as IBoard[];
+                this.projects.next(boards);
+              }
+              return project as IBoard[];
+            })
+          );
+        }
+        return result;
       })
     );
   }
