@@ -1,11 +1,20 @@
-<div class="board-item" >
+<div class="board-item">
   <div class="board-item__text" (click)="openBoard()">
-    <div class="board-item__title">{{project.title}}</div>
-    <div class="board-item__description">{{project.description}}</div>
+    <div class="board-item__title">{{ project.title }}</div>
+    <div class="board-item__description">{{ project.description }}</div>
   </div>
-  <div class="board-item__remove-wrap" >
-    <mat-icon class="board-item__edit-icon" [title]="'Preview-edit'| translate" (click)="updateProject(project.id)">edit</mat-icon>
-    <mat-icon class="board-item__remove-icon" [title]="'Preview-delete'| translate" (click)="deleteProject(project.id)">highlight_off</mat-icon>
+  <div class="board-item__remove-wrap">
+    <mat-icon
+      class="board-item__edit-icon"
+      [title]="'Preview-edit' | translate"
+      (click)="updateProject(project._id)"
+      >edit</mat-icon
+    >
+    <mat-icon
+      class="board-item__remove-icon"
+      [title]="'Preview-delete' | translate"
+      (click)="deleteProject(project._id)"
+      >highlight_off</mat-icon
+    >
   </div>
-  
 </div>
