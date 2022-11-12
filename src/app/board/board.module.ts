@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BoardComponent } from './pages/board/board.component';
 import { TaskComponent } from './components/task/task.component';
 import { BoardColumnComponent } from './components/board-column/board-column.component';
+import { ColumnsComponent } from './components/columns/columns.component';
 
 const routes: Routes = [
   { path: ':id', component: BoardComponent, canActivate: [ActivateGuard] },
@@ -16,7 +17,8 @@ const routes: Routes = [
   declarations: [
     BoardComponent,
     TaskComponent,
-    BoardColumnComponent
+    BoardColumnComponent,
+    ColumnsComponent
   ],
   imports: [
     CommonModule, 

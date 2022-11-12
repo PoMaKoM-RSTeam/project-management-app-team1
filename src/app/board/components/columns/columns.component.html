@@ -1,0 +1,13 @@
+<div class="columns-wrap">
+  <div cdkDropList cdkDropListOrientation="horizontal" class="column-list" (cdkDropListDropped)="drop($event)">
+    <div class="column-wrap" cdkDrag>
+      <app-board-column ></app-board-column>
+    </div>
+    <div class="column-wrap" cdkDrag>
+      <app-board-column ></app-board-column>
+    </div>
+  </div>
+  <div class="new-column__wrap">
+      <button>ADd</button>
+  </div>
+</div>

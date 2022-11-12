@@ -1,0 +1,64 @@
+.column {
+  color: aliceblue;
+  min-height: 550px;
+  &-settings {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px;
+    border-bottom: 1px solid #81759E;
+    cursor: pointer;
+    &__title {
+      color: #81759E;
+      font-size: 1.4rem;
+    }
+    &__icons {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    &__remove-icon {
+      color: #C25284;
+      transition: 0.2s;
+    }
+    &__edit-icon {
+      color: #04761d;
+      font-size: 1.425rem;
+      transition: 0.2s;
+    }
+  }
+ 
+}
+
+.column-new-task__btn {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #58C2BD;
+  font-size: 0.94rem;
+  line-height: 20pt;
+  cursor: pointer;
+}
+
+.example-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 420px;
+  width: 100%;
+  padding: 12px 0 20px 0;
+  overflow-y: auto;
+}
+
+.example-box {
+  background-color: rgb(33, 33, 34);
+  min-height: 60px;
+  color: aliceblue;
+  margin: 0 5px;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+

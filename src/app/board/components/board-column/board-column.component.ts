@@ -8,7 +8,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class BoardColumnComponent {
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep', 'Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
@@ -23,5 +23,13 @@ export class BoardColumnComponent {
         event.currentIndex,
       );
     }
+  }
+
+  updateColum() {
+
+  }
+
+  deleteColumn() {
+
   }
 }
