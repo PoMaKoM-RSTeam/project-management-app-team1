@@ -11,6 +11,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ProjectCreateUpdateModalComponent } from './components/project-create-update-modal/project-create-update-modal.component';
 import { FormsModule } from '@angular/forms';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   imports: [
@@ -21,7 +22,9 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     TextFieldModule, 
     MatButtonModule,
     MatInputModule,
-    MatDialogModule],
+    MatDialogModule,
+    DragDropModule
+  ],
   exports: [
     MatButtonModule,
     MatCardModule,
@@ -30,7 +33,8 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     MatInputModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    TextFieldModule
+    TextFieldModule,
+    DragDropModule
   ],
   declarations: [
     ProjectCreateUpdateModalComponent
