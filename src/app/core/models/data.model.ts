@@ -2,9 +2,11 @@ export interface IBoard {
   _id: string;
   title: string;
   description: string;
+  owner: string; // "userId of owner",
+  users: string[]; // [ "userId of invited user #1", "userId of invited user #2" ]
 }
 
-export type TBoardTitle = Omit<IBoard, '_id'>;
+export type TBoardInfo = Omit<IBoard, '_id'>;
 
 export interface IBoardComplete extends IBoard {
   columns: IColumnComplete[];
@@ -14,6 +16,7 @@ export interface IColumn {
   _id: string;
   title: string;
   order: number;
+  boardId: string;
 }
 
 export type TColumnInfo = Omit<IColumn, '_id'>;
@@ -27,7 +30,8 @@ export interface ITask {
   title: string;
   order: number;
   description: string;
-  userId: string;
+  userId: string; // "userId of task owner"
+  users: string[]; // [ "userId of responsible user #1", "userId of responsible user #2" ]
   boardId: string;
   columnId: string;
 }

@@ -72,7 +72,13 @@ export class ProjectPreviewComponent {
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.projectsService
-          .updateProject(projectId, dialogResult[0], dialogResult[1])
+          .updateProject(
+            projectId,
+            dialogResult[0],
+            dialogResult[1],
+            dialogResult[2],
+            dialogResult[3]
+          )
           .pipe(
             switchMap(() =>
               this.projectsService.getProjects().pipe(map((value) => value))

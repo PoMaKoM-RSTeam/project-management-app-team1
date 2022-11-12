@@ -9,7 +9,7 @@ import {
   IError,
   ITask,
   ITokenResponse,
-  TBoardTitle,
+  TBoardInfo,
   TColumnInfo,
   TTaskInfo,
   TTaskInfoExtended,
@@ -76,9 +76,9 @@ export class DatabaseService {
 
   public updateBoard(
     id: string,
-    boardTitle: TBoardTitle
+    boardInfo: TBoardInfo
   ): Observable<IError | IBoard> {
-    return this.http.put<IError | IBoard>(`api/boards/${id}`, boardTitle);
+    return this.http.put<IError | IBoard>(`api/boards/${id}`, boardInfo);
   }
 
   public getColumns(boardId: string): Observable<IError | IColumn[]> {

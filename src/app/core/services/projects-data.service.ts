@@ -4,20 +4,23 @@ import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectsDataService {
-  public projects: BehaviorSubject<IBoard[]> = new BehaviorSubject<IBoard[]>([]);
+  public projects: BehaviorSubject<IBoard[]> = new BehaviorSubject<IBoard[]>(
+    []
+  );
 
-  constructor(private database: DatabaseService) {
-
-  }
+  constructor(private database: DatabaseService) {}
 
   getProjectField(): Observable<IBoard[]> {
     return this.projects.asObservable();
   }
 
-  public createProject(projectTitle: string, projectDescription: string ): Observable<IBoard> {
+  public createProject(
+    projectTitle: string,
+    projectDescription: string
+  ): Observable<IBoard> {
     return this.database.createBoard(projectTitle, projectDescription).pipe(
       map((result) => {
         return result as IBoard;
@@ -56,12 +59,19 @@ export class ProjectsDataService {
     );
   }
 
-  public updateProject(projectId: string, title: string, description: string ): Observable<IBoard> {
-    return this.database.updateBoard(projectId, { title, description }).pipe(
-      map((result) => {
-        return result as IBoard;
-      })
-    );
+  public updateProject(
+    projectId: string,
+    title: string,
+    description: string,
+    owner: string,
+    users: string[]
+  ): Observable<IBoard> {
+    return this.database
+      .updateBoard(projectId, { title, description, owner, users })
+      .pipe(
+        map((result) => {
+          return result as IBoard;
+        })
+      );
   }
-
 }
