@@ -1,1 +1,17 @@
-<p>task works!</p>
+<div class="task-box" >
+  <div class="task-box__title">Task1</div>
+  <div class="task-box__description">Description</div>
+
+  <div class="task-box__info">
+    <div class="task-box__info-user">{{ 'User' | firstLetter }}</div>
+    <div class="task-settings__icons">
+      <mat-icon
+        class="task-settings__remove-icon"
+        [title]="'Preview-delete' | translate"
+        (click)="deleteTask()"
+        >delete</mat-icon
+      >
+    </div>
+  </div>
+  
+</div>

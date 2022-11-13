@@ -7,5 +7,12 @@ import { Component } from '@angular/core';
 })
 export class TaskComponent {
 
+  updateTask() {
+
+  }
+
+  deleteTask() {
+
+  }
 
 }

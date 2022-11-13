@@ -39,9 +39,13 @@
   font-size: 0.94rem;
   line-height: 20pt;
   cursor: pointer;
+  transition: 0.2s;
+}
+.column-new-task__btn:hover {
+  color: #73e5e0;
 }
 
-.example-list {
+.tasks-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -50,13 +54,14 @@
   padding: 12px 0 20px 0;
   overflow-y: auto;
 }
-
-.example-box {
-  background-color: rgb(33, 33, 34);
-  min-height: 60px;
-  color: aliceblue;
-  margin: 0 5px;
+.tasks-list::-webkit-scrollbar {
+  width: 8px;
+  background-color: #161415;
 }
+.tasks-list::-webkit-scrollbar-thumb {
+  background-color: #81759E;
+}
+
 
 .cdk-drag-placeholder {
   opacity: 0;

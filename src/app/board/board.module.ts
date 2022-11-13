@@ -9,6 +9,7 @@ import { BoardComponent } from './pages/board/board.component';
 import { TaskComponent } from './components/task/task.component';
 import { BoardColumnComponent } from './components/board-column/board-column.component';
 import { ColumnsComponent } from './components/columns/columns.component';
+import { FirstLetterPipe } from './pipes/first-letter.pipe';
 
 const routes: Routes = [
   { path: ':id', component: BoardComponent, canActivate: [ActivateGuard] },
@@ -18,7 +19,8 @@ const routes: Routes = [
     BoardComponent,
     TaskComponent,
     BoardColumnComponent,
-    ColumnsComponent
+    ColumnsComponent,
+    FirstLetterPipe
   ],
   imports: [
     CommonModule, 

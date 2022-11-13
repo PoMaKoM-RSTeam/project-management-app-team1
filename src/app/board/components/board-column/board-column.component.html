@@ -7,7 +7,7 @@
       <mat-icon
         class="column-settings__edit-icon"
         [title]="'Preview-edit' | translate"
-        (click)="updateColum()"
+        (click)="updateColumn()"
         >edit</mat-icon
       >
       <mat-icon
@@ -23,9 +23,11 @@
     cdkDropList
     #todoList="cdkDropList"
     [cdkDropListData]="todo"
-    class="example-list"
+    class="tasks-list"
     (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+
+    <app-task *ngFor="let item of todo" cdkDrag></app-task>
+    
   </div>
   <div class="column-new-task__btn">
     <mat-icon>add</mat-icon>
