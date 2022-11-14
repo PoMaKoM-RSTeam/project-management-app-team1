@@ -9,7 +9,7 @@
     border-bottom: 1px solid #81759E;
     cursor: pointer;
     &__title {
-      color: #81759E;
+      
       font-size: 1.4rem;
     }
     &__icons {
@@ -21,10 +21,55 @@
       color: #C25284;
       transition: 0.2s;
     }
-    &__edit-icon {
+    &__save-icon {
       color: #04761d;
       font-size: 1.425rem;
       transition: 0.2s;
+    }
+    &__cancel-icon {
+      color: #f5f5f5;
+      font-size: 1.425rem;
+      transition: 0.2s;
+    }
+    &__item {
+      max-height: 56vh;
+      overflow-y: auto;
+      font-size: 1.2rem;
+      letter-spacing: -.5px;
+      padding: .4rem 1rem;
+      border: 1px solid #161415;
+      border-radius: 5px;
+
+      transition: all .25s;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #f5f5f5;
+      }
+
+      &-descr {
+        margin-right: .5rem;
+      }
+
+      &-input {
+        font-size: 1.2rem;
+        color: #81759E;;
+        padding: 2px 5px;
+        font-weight: 500;
+        outline: none;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        background-color: transparent;
+
+        transition: all .25s;
+
+        &:focus {
+          font-size: 0.9rem;
+          color: #161415;
+          border: 1px solid #161415;
+          background-color: #f5f5f5;
+        }
+      }
     }
   }
 }

@@ -2,14 +2,33 @@
 
 <div class="column">
   <div class="column-settings">
-    <div class="column-settings__title">{{ column.title }}</div>
+    <mat-icon
+      *ngIf="titleEditMode"
+      class="column-settings__cancel-icon"
+      [title]="'Cancel' | translate"
+      (click)="onCancel()"
+      >cancel</mat-icon
+    >
+    <mat-icon
+      *ngIf="titleEditMode"
+      class="column-settings__save-icon"
+      [title]="'' | translate"
+      (click)="updateColumn(colTitle.value)"
+      >save</mat-icon
+    >
+    <div class="column-settings__title">
+      <input
+        type="text"
+        class="column-settings__item-input"
+        id="colTitle"
+        name="colTitle"
+        value="{{ column.title }}"
+        #colTitle
+        (click)="editTitle()"
+      />
+    </div>
     <div class="column-settings__icons">
-      <mat-icon
-        class="column-settings__edit-icon"
-        [title]="'Column-edit' | translate"
-        (click)="updateColumn()"
-        >edit</mat-icon
-      >
+     
       <mat-icon
         class="column-settings__remove-icon"
         [title]="'Column-delete' | translate"
@@ -24,9 +43,10 @@
     #todoList="cdkDropList"
     [cdkDropListData]="todo"
     class="tasks-list"
-    (cdkDropListDropped)="drop($event)">
+    (cdkDropListDropped)="drop($event)"
+    *ngIf="(tasks$ | async) as tasks ">
 
-    <app-task *ngFor="let item of todo" cdkDrag></app-task>
+    <app-task *ngFor="let task of tasks" cdkDrag [task]="task"></app-task>
     
   </div>
   <div class="column-new-task__btn" (click)="addNewTask()">

@@ -1,3 +1,4 @@
+import { TasksDataService } from './../../../core/services/tasks-data.service';
 import { UserStatusService } from './../../../core/services/user-status.service';
 import { IUser } from './../../../core/models/user.model';
 import { switchMap, map, Observable } from 'rxjs';
@@ -7,7 +8,7 @@ import { ConfirmDialogComponent } from './../../../shared/components/confirm-dia
 import { CreateUpdateModalComponent } from '../../../shared/components/project-create-update-modal/create-update-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogModel, ICreateEditModel } from './../../../core/models/dialog.model';
-import { IColumn } from './../../../core/models/data.model';
+import { IColumn, ITask, TColumnInfo } from './../../../core/models/data.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
@@ -21,20 +22,29 @@ export class BoardColumnComponent implements OnInit {
 
   public users$!: Observable<IUser[]>;
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep', 'Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  public tasks$!: Observable<ITask[]>;
 
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+  titleEditMode: boolean = false;
+
+  columnTitle: string = '';
+
+  currentTitle: string = '';
+
+  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep', 'Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
   constructor(
     private projectModal: MatDialog, 
     private columnsService: ColumnsDataService,
     private activatedRoute: ActivatedRoute,
-    private userStatusService: UserStatusService
+    private userStatusService: UserStatusService,
+    private tasksService: TasksDataService
   ) { }
 
   ngOnInit(): void {
     this.userStatusService.getAllUsers().subscribe();
     this.users$ = this.userStatusService.getUsers().pipe(value => value);
+    this.tasksService.getTasks(this.activatedRoute.snapshot.params['id'], this.column._id).subscribe();
+    this.tasks$ = this.tasksService.getTasksField().pipe(value => value);
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -50,10 +60,33 @@ export class BoardColumnComponent implements OnInit {
     }
   }
 
-  updateColumn() {
-
+  editTitle() {
+    this.titleEditMode = true;
   }
 
+  onCancel() {
+    this.titleEditMode = false;
+    this.columnTitle = this.currentTitle;
+  }
+
+  updateColumn(columnTitle: string) {
+    this.titleEditMode = false;
+    const columnInfo: TColumnInfo = {
+      title: columnTitle,
+      order: this.column.order,
+    };
+    this.columnsService
+      .updateColumn(this.column.boardId, this.column._id, columnInfo)
+      .pipe(
+        switchMap(() =>
+          this.columnsService
+            .getColumns(this.column.boardId)
+            .pipe(map((value) => value))
+        )
+      )
+      .subscribe();
+  }
+  
   deleteColumn(columnId: string) {
     const dialogData = new ConfirmDialogModel(
       'Columns-modal-delete-title',
@@ -100,7 +133,21 @@ export class BoardColumnComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
-        console.log(dialogResult);
+        this.tasksService
+          .createTask(
+            dialogResult[0],
+            dialogResult[1],
+            this.tasksService.tasks.value.length,
+            this.column._id,
+            this.activatedRoute.snapshot.params['id'],
+            dialogResult[2]
+          )
+          .pipe(
+            switchMap(() =>
+              this.tasksService.getTasks(this.activatedRoute.snapshot.params['id'], this.column._id).pipe(map((value) => value))
+            )
+          )
+          .subscribe();
       }
     });
   }

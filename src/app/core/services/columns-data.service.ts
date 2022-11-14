@@ -1,5 +1,5 @@
 import { BehaviorSubject, Observable, map } from 'rxjs';
-import { IColumn, IError } from './../models/data.model';
+import { IColumn, IError, TColumnInfo } from './../models/data.model';
 import { DatabaseService } from './database.service';
 import { Injectable } from '@angular/core';
 
@@ -16,6 +16,29 @@ export class ColumnsDataService {
   }
 
   constructor(private database: DatabaseService) {}
+
+  public updateColumn(
+    boardId: string,
+    columnId: string,
+    columnInfo: TColumnInfo
+  ): Observable<IColumn | IError | null> {
+    return this.database.updateColumn(boardId, columnId, columnInfo).pipe(
+      map((result) => {
+        if (result === null) {
+          this.database.getColumns(boardId).pipe(
+            map((column) => {
+              if (column) {
+                const columns: IColumn[] = column as IColumn[];
+                this.columns.next(columns);
+              }
+              return column as IColumn[];
+            })
+          );
+        }
+        return result;
+      })
+    );
+  }
 
   public createColumn(
     title: string,
