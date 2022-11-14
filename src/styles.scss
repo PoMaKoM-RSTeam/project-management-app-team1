@@ -4,7 +4,8 @@
 
 html, body {height: 100%;}
 body {
-  margin: 0;
+  margin: 0 calc(-1 * (100vw - 100%)) 0 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $wBackground;
+  overflow-x: hidden;
 }

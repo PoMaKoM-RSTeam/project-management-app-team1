@@ -96,5 +96,39 @@
   "Validation-password-upper": "- combine both uppercase and lowercase letters",
 
   "Go-Home": "go home",
-  "Not-found-message": "Page not found"
+  "Not-found-message": "Page not found",
+
+  "project-title": "Project management application",
+
+  "About-curse": "About angular course",
+
+  "FREE-OF-CHARGE LEARNING-title": "FREE LEARNING",
+  "FREE-OF-CHARGE LEARNING-text": "The RS School is working by the principle of \"Pay it forward\". Members of our community share their knowledge and check students' tasks for free. And we hope that our students will continue this work as our mentors in the future",
+
+  "ABOUT-COURSE-title": "About the course",
+  "ABOUT-COURSE-text": "The course is intended for front-end developers who would like to get acquainted with Angular, learn the basics of RXJS, as well as NGRX. The duration of the course is 9 weeks, during which it will be necessary to create two applications",
+  "CERTIFICATE-title": "CERTIFICATE",
+  "CERTIFICATE-text": "After accomplishing all three stages of education, students will receive an electronic certificate of completion",
+
+  "SCHEDULE-title": "SCHEDULE",
+  "SCHEDULE-text1": "Twice a week in the evenings",
+  "SCHEDULE-text2": "Duration: 9 weeks",
+  "SCHEDULE-text3": "Types of training: webinars",
+
+  "OPEN TO EVERYONE-title": "OPEN TO EVERYONE",
+  "OPEN TO EVERYONE-text": "Everyone can study at RS School, regardless of age, professional employment, or place of residence. However, you should have sufficient base knowledge before the program begins",
+
+  "Enroll": "enroll",
+
+  "motto": "THE PERFECT SOLUTION TO MANAGE YOUR TASKS IN ONE PLACE FOR EVERYONE",
+
+  "quote": "Project management can be defined as a way of developing structure in a complex project, where the independent variables of time, cost, resources and human behavior come together",
+  "quote-author": "Rory Burke",
+
+  "About-team": "About team",
+
+  "wixhub-text": "With more than 6 years of experience developing software and 1 year with Angular and TypeScript I always advocate for the best available solutions and the cleanest code",
+  "zhagun-text": "My interests are programming and computer science. I can attribute to my positive qualities: sociability, sense of humor, purposefulness. I also like to work in a team",
+  "nonebeer-text": "I am 25 years old. I've been interested in programming since school. I'm learn Front-End Development in RS School"
+
 }
