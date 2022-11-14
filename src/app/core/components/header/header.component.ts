@@ -65,9 +65,7 @@ export class HeaderComponent implements OnInit {
       title: 'Project-modal-add-title',
       titleLabel: 'Project-modal-title',
       descriptionLabel: 'Project-modal-description',
-      descriptionField: '',
-      commandName: 'Project-modal-add',
-      showDescription: true
+      commandName: 'Project-modal-add'
     };
 
     const dialogRef = this.projectModal.open(

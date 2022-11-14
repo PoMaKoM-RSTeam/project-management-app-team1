@@ -30,6 +30,10 @@ export class UserStatusService {
     this.userLogin
   );
 
+  public users: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>(
+    []
+  );
+
   constructor(private database: DatabaseService, private router: Router) {
     this.isLogged.next(this.isAuthenticated());
   }
@@ -48,6 +52,10 @@ export class UserStatusService {
 
   getUserLogin(): Observable<string> {
     return this.Login.asObservable();
+  }
+
+  getUsers(): Observable<IUser[]> {
+    return this.users.asObservable();
   }
 
   get token(): string {
@@ -88,6 +96,18 @@ export class UserStatusService {
           localStorage.setItem(LocalStorageKeys.login, user.login);
         }
         return result;
+      })
+    );
+  }
+
+  public getAllUsers(): Observable<IError | IUser[]> {
+    return this.database.getUsers().pipe(
+      map((result) => {
+        if (result) {
+          const users: IUser[] = result as IUser[];
+          this.users.next(users);
+        }
+        return result as IUser[];
       })
     );
   }

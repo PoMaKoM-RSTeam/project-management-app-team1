@@ -2,18 +2,18 @@
 
 <div class="column">
   <div class="column-settings">
-    <div class="column-settings__title">Title</div>
+    <div class="column-settings__title">{{ column.title }}</div>
     <div class="column-settings__icons">
       <mat-icon
         class="column-settings__edit-icon"
-        [title]="'Preview-edit' | translate"
+        [title]="'Column-edit' | translate"
         (click)="updateColumn()"
         >edit</mat-icon
       >
       <mat-icon
         class="column-settings__remove-icon"
-        [title]="'Preview-delete' | translate"
-        (click)="deleteColumn()"
+        [title]="'Column-delete' | translate"
+        (click)="deleteColumn(column._id)"
         >highlight_off</mat-icon
       >
     </div>
@@ -29,8 +29,8 @@
     <app-task *ngFor="let item of todo" cdkDrag></app-task>
     
   </div>
-  <div class="column-new-task__btn">
+  <div class="column-new-task__btn" (click)="addNewTask()">
     <mat-icon>add</mat-icon>
-    <span>Add new Task</span>
+    <span>{{'Columns-task-add' | translate}}</span>
   </div>
 </div>

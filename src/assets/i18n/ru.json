@@ -2,10 +2,15 @@
   "Cancel": "Отменить",
   "Create-Board": "Создать проект",
 
-  "Columns-modal-delete-title": "Удалить Колонку",
+  "Column-edit": "Изменить название колонки",
+  "Column-delete": "Удалить колонку",
+
+  "Columns-create-column": "Добавить колонку",
+  "Columns-task-add": "Добавить задачу",
+  "Columns-modal-delete-title": "Удалить колонку",
   "Columns-modal-delete-message": "Удалить колонку из текущей доски",
-  "Columns-modal-add-title": "Добавить Колонку",
-  "Columns-modal-edit-title": "Изменить Колонку",
+  "Columns-modal-add-title": "Добавить колонку",
+  "Columns-modal-edit-title": "Изменить колонку",
   "Columns-modal-title": "Название колонки",
   "Columns-modal-add": "Создать",
   "Columns-modal-edit": "Изменить",
@@ -46,10 +51,10 @@
 
   "Project-modal-delete-title": "Удаление проекта",
   "Project-modal-delete-message": "Проект будет удален",
-  "Project-modal-add-title": "Создать Проект",
-  "Project-modal-edit-title": "Изменить Проект",
-  "Project-modal-title": "Название Проекта",
-  "Project-modal-description": "Описание Проекта",
+  "Project-modal-add-title": "Создать проект",
+  "Project-modal-edit-title": "Изменить проект",
+  "Project-modal-title": "Название проекта",
+  "Project-modal-description": "Описание проекта",
   "Project-modal-add": "Создать",
   "Project-modal-edit": "Изменить",
 
@@ -67,6 +72,12 @@
   "SiteTitle": "Система управления проектами",
   "SiteSubTitle": "Курсовой проект Rolling Scopes School",
   "Submit": "Отправить",
+
+  "Task-modal-add-title": "Создать задачу",
+  "Task-modal-title": "Название задачи",
+  "Task-modal-description": "Описание задачи",
+  "Task-modal-add": "Создать",
+  "Task-modal-user-titel": "Пользователь",
 
   "Update": "Обновить",
   "Username": "Логин: латинскиe строчныe буквы без пробелов",

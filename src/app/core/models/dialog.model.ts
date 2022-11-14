@@ -1,3 +1,4 @@
+import { IUser } from './user.model';
 export class ConfirmDialogModel {
   constructor(
     public title: string,
@@ -12,6 +13,7 @@ export interface ICreateEditModel {
   commandName: string;
   titleField?: string;
   descriptionField?: string;
-  showDescription: boolean;
+  usersLabel?: string;
+  users?: IUser[];
 }
 

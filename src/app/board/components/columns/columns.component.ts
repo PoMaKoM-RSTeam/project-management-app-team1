@@ -43,8 +43,7 @@ export class ColumnsComponent implements OnInit {
     const dialogData: ICreateEditModel = {
       title: 'Columns-modal-add-title',
       titleLabel: 'Columns-modal-title',
-      commandName: 'Columns-modal-add',
-      showDescription: false
+      commandName: 'Columns-modal-add'
     };
 
     const dialogRef = this.projectModal.open(
@@ -71,6 +70,5 @@ export class ColumnsComponent implements OnInit {
           .subscribe();
       }
     });
-    console.log(this.activatedRoute.snapshot.params['id']);
   }
 }

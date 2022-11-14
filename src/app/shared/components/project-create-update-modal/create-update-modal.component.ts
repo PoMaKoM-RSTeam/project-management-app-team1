@@ -1,3 +1,4 @@
+import { IUser } from './../../../core/models/user.model';
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ICreateEditModel } from '../../../core/models/dialog.model';
@@ -17,11 +18,15 @@ export class CreateUpdateModalComponent {
 
   descriptionLabel: string;
 
+  usersLabel: string;
+
   descriptionField: string = '';
   
   commandName: string;
 
-  showDescription: boolean = true;
+  users!: IUser[];
+
+  userId!: string;
 
   constructor(
     public dialogRef: MatDialogRef<CreateUpdateModalComponent>,
@@ -33,11 +38,12 @@ export class CreateUpdateModalComponent {
     this.commandName = dialog.commandName;
     this.titleField = dialog.titleField ?? '';
     this.descriptionField = dialog.descriptionField ?? '';
-    this.showDescription = dialog.showDescription;
+    this.usersLabel = dialog.usersLabel ?? '';
+    this.users = dialog.users ?? [];
   }
 
   onCommand(): void {
-    this.dialogRef.close([this.titleField, this.descriptionField]);
+    this.dialogRef.close([this.titleField, this.descriptionField, this.userId]);
   }
 
   onCancel(): void {

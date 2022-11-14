@@ -9,13 +9,22 @@
       <input matInput [(ngModel)]="titleField">
     </mat-form-field>
   
-    <mat-form-field class="description-field" appearance="fill" *ngIf="showDescription">
+    <mat-form-field class="description-field" appearance="fill" *ngIf="descriptionLabel.length > 0">
       <div class="project-description__label">{{ descriptionLabel | translate }}</div>
       <textarea matInput
         cdkTextareaAutosize
         cdkAutosizeMinRows="5"
         [(ngModel)]="descriptionField"
       ></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="users-field" appearance="fill" *ngIf="users.length > 0">
+      <div class="project-user__label">{{ usersLabel | translate }}</div>
+      <mat-select [(ngModel)]="userId">
+        <mat-option *ngFor="let user of users" [value]="user._id">
+          {{user.name}}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
 

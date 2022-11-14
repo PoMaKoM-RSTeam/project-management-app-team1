@@ -51,4 +51,23 @@ export class ColumnsDataService {
       })
     );
   }
+
+  public deleteColumn(boardId: string, columnId: string): Observable<IError | null> {
+    return this.database.deleteColumn(boardId, columnId).pipe(
+      map((result) => {
+        if (result === null) {
+          this.database.getColumns(boardId).pipe(
+            map((column) => {
+              if (column) {
+                const columns: IColumn[] = column as IColumn[];
+                this.columns.next(columns);
+              }
+              return column as IColumn[];
+            })
+          );
+        }
+        return result;
+      })
+    );
+  }
 }

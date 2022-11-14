@@ -13,6 +13,7 @@ import { CreateUpdateModalComponent } from './components/project-create-update-m
 import { FormsModule } from '@angular/forms';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatInputModule,
     MatDialogModule,
     DragDropModule,
+    MatSelectModule,
     CommonModule
   ],
   exports: [
@@ -36,6 +38,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatFormFieldModule,
     MatNativeDateModule,
     TextFieldModule,
+    MatSelectModule,
     DragDropModule
   ],
   declarations: [

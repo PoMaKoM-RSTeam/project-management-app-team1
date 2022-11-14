@@ -2,6 +2,11 @@
   "Cancel": "Cancel",
   "Create-Board": "Create board",
 
+  "Column-edit": "Edit Column",
+  "Column-delete": "Delete Column",
+
+  "Columns-create-column": "Create column",
+  "Columns-task-add": "Add new Task",
   "Columns-modal-delete-title": "Delete Column",
   "Columns-modal-delete-message": "Delete Current Column from Board",
   "Columns-modal-add-title": "Add Column",
@@ -67,6 +72,12 @@
   "SiteTitle": "Project Management System",
   "SiteSubTitle": "The Task of The Rolling Scopes School",
   "Submit": "Submit",
+
+  "Task-modal-add-title": "Add Task",
+  "Task-modal-title": "Task Title",
+  "Task-modal-description": "Task Description",
+  "Task-modal-add": "Create",
+  "Task-modal-user-titel": "User",
 
   "Update": "Update",
   "Username": "User name",

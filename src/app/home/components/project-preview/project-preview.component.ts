@@ -58,8 +58,7 @@ export class ProjectPreviewComponent {
       descriptionLabel: 'Project-modal-description',
       commandName: 'Project-modal-edit',
       titleField: this.project.title,
-      descriptionField: this.project.description,
-      showDescription: true
+      descriptionField: this.project.description
     };
 
     const dialogRef = this.projectModal.open(

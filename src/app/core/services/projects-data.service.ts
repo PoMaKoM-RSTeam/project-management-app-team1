@@ -13,7 +13,7 @@ export class ProjectsDataService {
 
   constructor(private database: DatabaseService) {}
 
-  getProjectField(): Observable<IBoard[]> {
+  public getProjectField(): Observable<IBoard[]> {
     return this.projects.asObservable();
   }
 
