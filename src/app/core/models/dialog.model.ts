@@ -5,12 +5,13 @@ export class ConfirmDialogModel {
     public commandName: string
   ) {}
 }
-export interface ICreateEditProject {
+export interface ICreateEditModel {
   title: string;
-  projectTitleLabel: string;
-  projectDescriptionLabel: string;
+  titleLabel: string;
+  descriptionLabel?: string;
   commandName: string;
-  projectTitle?: string;
-  projectDescription?: string;
+  titleField?: string;
+  descriptionField?: string;
+  showDescription: boolean;
 }
 

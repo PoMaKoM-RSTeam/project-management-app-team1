@@ -1,5 +1,6 @@
 import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';  
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -8,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ProjectCreateUpdateModalComponent } from './components/project-create-update-modal/project-create-update-modal.component';
+import { CreateUpdateModalComponent } from './components/project-create-update-modal/create-update-modal.component';
 import { FormsModule } from '@angular/forms';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -23,7 +24,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    CommonModule
   ],
   exports: [
     MatButtonModule,
@@ -37,7 +39,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     DragDropModule
   ],
   declarations: [
-    ProjectCreateUpdateModalComponent
+    CreateUpdateModalComponent
   ],
 })
 export class MaterialModule {}

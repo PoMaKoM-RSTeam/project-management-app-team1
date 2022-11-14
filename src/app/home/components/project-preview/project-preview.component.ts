@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { ProjectCreateUpdateModalComponent } from './../../../shared/components/project-create-update-modal/project-create-update-modal.component';
+import { CreateUpdateModalComponent } from '../../../shared/components/project-create-update-modal/create-update-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  ICreateEditProject,
+  ICreateEditModel,
   ConfirmDialogModel,
 } from './../../../core/models/dialog.model';
 import { switchMap, map } from 'rxjs';
@@ -52,17 +52,18 @@ export class ProjectPreviewComponent {
   }
 
   updateProject(projectId: string) {
-    const dialogData: ICreateEditProject = {
+    const dialogData: ICreateEditModel = {
       title: 'Project-modal-edit-title',
-      projectTitleLabel: 'Project-modal-title',
-      projectDescriptionLabel: 'Project-modal-description',
+      titleLabel: 'Project-modal-title',
+      descriptionLabel: 'Project-modal-description',
       commandName: 'Project-modal-edit',
-      projectTitle: this.project.title,
-      projectDescription: this.project.description,
+      titleField: this.project.title,
+      descriptionField: this.project.description,
+      showDescription: true
     };
 
     const dialogRef = this.projectModal.open(
-      ProjectCreateUpdateModalComponent,
+      CreateUpdateModalComponent,
       {
         maxWidth: '600px',
         data: dialogData,

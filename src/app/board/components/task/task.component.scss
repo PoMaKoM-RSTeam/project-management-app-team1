@@ -34,6 +34,7 @@
   font-size: 1.35rem;
   color: #C25284;
   cursor: pointer;
+  opacity: 0;
   transition: 0.2s;
 }
 .task-settings__remove-icon:hover {
@@ -42,4 +43,7 @@
 
 .task-box:hover {
   background-color: #2b2a30;
+}
+.task-box:hover .task-settings__remove-icon {
+  opacity: 1;
 }

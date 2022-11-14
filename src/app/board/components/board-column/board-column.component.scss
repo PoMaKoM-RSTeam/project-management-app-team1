@@ -27,7 +27,13 @@
       transition: 0.2s;
     }
   }
- 
+}
+
+.column-settings__edit-icon:hover {
+  transform: scale(1.1);
+}
+.column-settings__remove-icon:hover {
+  transform: scale(1.1);
 }
 
 .column-new-task__btn {

@@ -5,16 +5,16 @@
   
   <div class="modal-wrap" mat-dialog-content>
     <mat-form-field class="title-field" appearance="fill">
-      <div class="project-title__label">{{ projectTitleLabel | translate }}</div>
-      <input matInput [(ngModel)]="projectTitle">
+      <div class="project-title__label">{{ titleLabel | translate }}</div>
+      <input matInput [(ngModel)]="titleField">
     </mat-form-field>
   
-    <mat-form-field class="description-field" appearance="fill">
-      <div class="project-description__label">{{ projectDescriptionLabel | translate }}</div>
+    <mat-form-field class="description-field" appearance="fill" *ngIf="showDescription">
+      <div class="project-description__label">{{ descriptionLabel | translate }}</div>
       <textarea matInput
         cdkTextareaAutosize
         cdkAutosizeMinRows="5"
-        [(ngModel)]="projectDescription"
+        [(ngModel)]="descriptionField"
       ></textarea>
     </mat-form-field>
   </div>

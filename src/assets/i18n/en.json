@@ -2,6 +2,14 @@
   "Cancel": "Cancel",
   "Create-Board": "Create board",
 
+  "Columns-modal-delete-title": "Delete Column",
+  "Columns-modal-delete-message": "Delete Current Column from Board",
+  "Columns-modal-add-title": "Add Column",
+  "Columns-modal-edit-title": "Edit Column",
+  "Columns-modal-title": "Column Title",
+  "Columns-modal-add": "Create",
+  "Columns-modal-edit": "Edit",
+
   "Delete": "Delete",
 
   "Edit-Profile": "Edit profile",

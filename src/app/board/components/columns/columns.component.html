@@ -1,13 +1,10 @@
 <div class="columns-wrap">
-  <div cdkDropList cdkDropListOrientation="horizontal" class="column-list" (cdkDropListDropped)="drop($event)">
-    <div class="column-wrap" cdkDrag>
-      <app-board-column ></app-board-column>
-    </div>
-    <div class="column-wrap" cdkDrag>
-      <app-board-column ></app-board-column>
+  <div cdkDropList cdkDropListOrientation="horizontal" class="column-list" (cdkDropListDropped)="drop($event)" *ngIf="(columns$ | async) as columns ">
+    <div class="column-wrap" cdkDrag  *ngFor="let column of columns" >
+      <app-board-column [column]="column" ></app-board-column>
     </div>
   </div>
-  <div class="new-column">
+  <div class="new-column" (click)="createColumn()">
     <div class="new-column__icon">
       <mat-icon>add</mat-icon>
     </div>

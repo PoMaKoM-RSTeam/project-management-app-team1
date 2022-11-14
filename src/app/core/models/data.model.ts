@@ -19,7 +19,7 @@ export interface IColumn {
   boardId: string;
 }
 
-export type TColumnInfo = Omit<IColumn, '_id'>;
+export type TColumnInfo = Omit<IColumn, '_id' | 'boardId'>;
 
 export interface IColumnComplete extends IColumn {
   tasks: ITask[];

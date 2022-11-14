@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { IColumn } from './../../../core/models/data.model';
+import { Component, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -7,6 +8,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
   styleUrls: ['./board-column.component.scss']
 })
 export class BoardColumnComponent {
+  @Input() public column!: IColumn;
 
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep', 'Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 

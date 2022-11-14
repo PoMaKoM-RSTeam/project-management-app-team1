@@ -2,6 +2,14 @@
   "Cancel": "Отменить",
   "Create-Board": "Создать проект",
 
+  "Columns-modal-delete-title": "Удалить Колонку",
+  "Columns-modal-delete-message": "Удалить колонку из текущей доски",
+  "Columns-modal-add-title": "Добавить Колонку",
+  "Columns-modal-edit-title": "Изменить Колонку",
+  "Columns-modal-title": "Название колонки",
+  "Columns-modal-add": "Создать",
+  "Columns-modal-edit": "Изменить",
+
   "Delete": "Удалить",
 
   "Edit-Profile": "Редактировать профиль",
