@@ -24,6 +24,8 @@ export class BoardColumnComponent implements OnInit {
 
   public tasks$!: Observable<ITask[]>;
 
+  tasks: ITask[] = [];
+
   titleEditMode: boolean = false;
 
   columnTitle: string = '';
@@ -37,13 +39,15 @@ export class BoardColumnComponent implements OnInit {
     private columnsService: ColumnsDataService,
     private activatedRoute: ActivatedRoute,
     private userStatusService: UserStatusService,
-    private tasksService: TasksDataService
+    public tasksService: TasksDataService
   ) { }
 
   ngOnInit(): void {
     this.userStatusService.getAllUsers().subscribe();
     this.users$ = this.userStatusService.getUsers().pipe(value => value);
-    this.tasksService.getTasks(this.activatedRoute.snapshot.params['id'], this.column._id).subscribe();
+    this.tasksService.getTasks(this.activatedRoute.snapshot.params['id'], this.column._id).subscribe(tasks => {
+      this.tasks = tasks;
+    });
     this.tasks$ = this.tasksService.getTasksField().pipe(value => value);
   }
 
@@ -147,7 +151,9 @@ export class BoardColumnComponent implements OnInit {
               this.tasksService.getTasks(this.activatedRoute.snapshot.params['id'], this.column._id).pipe(map((value) => value))
             )
           )
-          .subscribe();
+          .subscribe(tasks => {
+            this.tasks = tasks;
+          });
       }
     });
   }
