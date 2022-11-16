@@ -14,6 +14,7 @@ export interface ICreateEditModel {
   titleField?: string;
   descriptionField?: string;
   usersLabel?: string;
+  user?: string;
   users?: IUser[];
 }
 

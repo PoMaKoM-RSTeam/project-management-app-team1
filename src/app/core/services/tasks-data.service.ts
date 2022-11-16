@@ -1,4 +1,4 @@
-import { ITask, IError } from './../models/data.model';
+import { ITask, IError, TTaskInfoExtended } from './../models/data.model';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { DatabaseService } from 'src/app/core/services/database.service';
 import { Injectable } from '@angular/core';
@@ -11,6 +11,8 @@ export class TasksDataService {
   public tasks: BehaviorSubject<ITask[]> = new BehaviorSubject<ITask[]>(
     []
   );
+
+  public task!: BehaviorSubject<ITask>;
 
   getTasksField(): Observable<ITask[]> {
     return this.tasks.asObservable();
@@ -25,14 +27,13 @@ export class TasksDataService {
     columnId: string,
     boardId: string,
     userId: string,
+    users: string[]
   ): Observable<ITask | IError | null> {
-    return this.database.createTask(boardId, columnId, { title, description, order, userId, users: ['Pavel'] }).pipe(
+    return this.database.createTask(boardId, columnId, { title, description, order, userId, users }).pipe(
       map((result) => {
-        console.log(result);
         if (result === null) {
           this.database.getTasks(boardId, columnId).pipe(
             map((task) => {
-              console.log(task);
               if (task) {
                 const tasks: ITask[] = task as ITask[];
                 this.tasks.next(tasks);
@@ -54,6 +55,61 @@ export class TasksDataService {
           this.tasks.next(tasks);
         }
         return result as ITask[];
+      })
+    );
+  }
+
+  public updateTask(
+    boardId: string,
+    columnId: string,
+    taskId: string,
+    taskInfo: TTaskInfoExtended
+  ): Observable<ITask | IError | null> {
+    return this.database.updateTask(boardId, columnId, taskId, taskInfo).pipe(
+      map((result) => {
+        if (result === null) {
+          this.database.getTasks(boardId, columnId).pipe(
+            map((task) => {
+              if (task) {
+                const tasks: ITask[] = task as ITask[];
+                this.tasks.next(tasks);
+              }
+              return task as ITask[];
+            })
+          );
+        }
+        return result;
+      })
+    );
+  }
+
+  public getTask(boardId: string, columnId: string, taskId: string): Observable<ITask> {
+    return this.database.getTask(boardId, columnId, taskId).pipe(
+      map((result) => {
+        if (result) {
+          const task: ITask = result as ITask;
+          this.task.next(task);
+        }
+        return result as ITask;
+      })
+    );
+  }
+
+  public deleteTask(boardId: string, columnId: string, taskId: string): Observable<IError | null> {
+    return this.database.deleteTask(boardId, columnId, taskId).pipe(
+      map((result) => {
+        if (result === null) {
+          this.database.getTasks(boardId, columnId).pipe(
+            map((task) => {
+              if (task) {
+                const tasks: ITask[] = task as ITask[];
+                this.tasks.next(tasks);
+              }
+              return task as ITask[];
+            })
+          );
+        }
+        return result;
       })
     );
   }

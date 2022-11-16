@@ -1,6 +1,8 @@
 
 .task-box {
   background-color: #1b1a20;
+  display: flex;
+  justify-content: space-between;
   min-height: 60px;
   color: aliceblue;
   margin: 0 5px;
@@ -12,10 +14,16 @@
   &__description {
     color: #797589;
   }
-  &__info {
+  &__btns {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
+  }
+  &__info {
+    width: 255px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     &-user {
       border-radius: 50%;
       background-color: #b36bd4;
@@ -30,10 +38,16 @@
     }
   }
 }
+.task-settings__icons {
+  display: flex;
+  align-items: center;
+}
 .task-settings__remove-icon {
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   color: #C25284;
   cursor: pointer;
+  width: 21px;
+  height: 21px;
   opacity: 0;
   transition: 0.2s;
 }

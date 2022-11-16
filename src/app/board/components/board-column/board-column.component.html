@@ -41,15 +41,13 @@
   <div
     cdkDropList
     #todoList="cdkDropList"
-    [cdkDropListData]="todo"
+    [cdkDropListData]="tasks"
     class="tasks-list"
     (cdkDropListDropped)="drop($event)"
-    *ngIf="tasks$|async"
+    *ngIf="(tasks$|async) as task1"
    >
-    <app-task *ngFor="let task of tasks" cdkDrag [task]="task"></app-task>
+    <app-task  *ngFor="let task of tasks" cdkDrag [task]="task" ></app-task>
 
-    
-    
   </div>
   <div class="column-new-task__btn" (click)="addNewTask()">
     <mat-icon>add</mat-icon>

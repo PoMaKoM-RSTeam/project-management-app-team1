@@ -20,8 +20,8 @@
 
     <mat-form-field class="users-field" appearance="fill" *ngIf="users.length > 0">
       <div class="project-user__label">{{ usersLabel | translate }}</div>
-      <mat-select [(ngModel)]="userId">
-        <mat-option *ngFor="let user of users" [value]="user._id">
+      <mat-select [(ngModel)]="userName">
+        <mat-option *ngFor="let user of users" [value]="user.name">
           {{user.name}}
         </mat-option>
       </mat-select>

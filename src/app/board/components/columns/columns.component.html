@@ -1,5 +1,5 @@
 <div class="columns-wrap">
-  <div cdkDropList cdkDropListOrientation="horizontal" class="column-list" (cdkDropListDropped)="drop($event)" *ngIf="(columns$ | async) as columns ">
+  <div cdkDropList cdkDropListOrientation="horizontal" class="column-list"  (cdkDropListDropped)="drop($event)" *ngIf="(columns$ | async) as columns " cdkDropListGroup>
     <div class="column-wrap" cdkDrag  *ngFor="let column of columns" >
       <app-board-column [column]="column" ></app-board-column>
     </div>

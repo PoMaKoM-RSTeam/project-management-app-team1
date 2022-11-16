@@ -36,9 +36,9 @@ export interface ITask {
   columnId: string;
 }
 
-export type TTaskInfoExtended = Omit<ITask, '_id'>;
+export type TTaskInfoExtended = Omit<ITask, '_id' | 'boardId'>;
 
-export type TTaskInfo = Omit<TTaskInfoExtended, 'boardId' | 'columnId'>;
+export type TTaskInfo = Omit<TTaskInfoExtended, '_id' | 'boardId' | 'columnId'>;
 
 export interface IError {
   statusCode: number;

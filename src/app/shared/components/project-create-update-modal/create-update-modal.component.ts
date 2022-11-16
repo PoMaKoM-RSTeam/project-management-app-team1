@@ -26,7 +26,9 @@ export class CreateUpdateModalComponent {
 
   users!: IUser[];
 
-  userId!: string;
+  user!: string;
+
+  userName!: string;
 
   constructor(
     public dialogRef: MatDialogRef<CreateUpdateModalComponent>,
@@ -39,11 +41,12 @@ export class CreateUpdateModalComponent {
     this.titleField = dialog.titleField ?? '';
     this.descriptionField = dialog.descriptionField ?? '';
     this.usersLabel = dialog.usersLabel ?? '';
+    this.userName = dialog.user ?? '';
     this.users = dialog.users ?? [];
   }
 
   onCommand(): void {
-    this.dialogRef.close([this.titleField, this.descriptionField, this.userId]);
+    this.dialogRef.close([this.titleField, this.descriptionField, this.userName]);
   }
 
   onCancel(): void {

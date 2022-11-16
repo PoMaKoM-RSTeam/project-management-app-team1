@@ -2,13 +2,12 @@ import { TasksDataService } from './../../../core/services/tasks-data.service';
 import { UserStatusService } from './../../../core/services/user-status.service';
 import { IUser } from './../../../core/models/user.model';
 import { switchMap, map, Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 import { ColumnsDataService } from './../../../core/services/columns-data.service';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { CreateUpdateModalComponent } from '../../../shared/components/project-create-update-modal/create-update-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogModel, ICreateEditModel } from './../../../core/models/dialog.model';
-import { IColumn, ITask, TColumnInfo } from './../../../core/models/data.model';
+import { IColumn, ITask, TColumnInfo,  TTaskInfoExtended } from './../../../core/models/data.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
@@ -32,12 +31,10 @@ export class BoardColumnComponent implements OnInit {
 
   currentTitle: string = '';
 
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep', 'Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
   constructor(
     private projectModal: MatDialog, 
     private columnsService: ColumnsDataService,
-    private activatedRoute: ActivatedRoute,
     private userStatusService: UserStatusService,
     public tasksService: TasksDataService
   ) { }
@@ -45,15 +42,36 @@ export class BoardColumnComponent implements OnInit {
   ngOnInit(): void {
     this.userStatusService.getAllUsers().subscribe();
     this.users$ = this.userStatusService.getUsers().pipe(value => value);
-    this.tasksService.getTasks(this.activatedRoute.snapshot.params['id'], this.column._id).subscribe(tasks => {
-      this.tasks = tasks;
+    this.tasksService.getTasks(this.column.boardId, this.column._id).subscribe(tasks => {
+      this.tasks = tasks.sort((a, b) => a.order > b.order ? 1 : -1);
     });
     this.tasks$ = this.tasksService.getTasksField().pipe(value => value);
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<ITask[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      if (this.tasks[event.previousIndex] !== this.tasks[event.currentIndex]) {
+        let taskInfo: TTaskInfoExtended = {
+          title: this.tasks[event.currentIndex].title,
+          order: event.currentIndex,
+          description: this.tasks[event.currentIndex].description,
+          userId: this.tasks[event.currentIndex].userId,
+          users: this.tasks[event.currentIndex].users,
+          columnId: this.tasks[event.currentIndex].columnId
+        };
+        this.tasksService.updateTask(this.tasks[event.currentIndex].boardId, this.tasks[event.currentIndex].columnId, this.tasks[event.currentIndex]._id, taskInfo).subscribe();
+        taskInfo = {
+          title: this.tasks[event.previousIndex].title,
+          order: event.previousIndex,
+          description: this.tasks[event.previousIndex].description,
+          userId: this.tasks[event.previousIndex].userId,
+          users: this.tasks[event.previousIndex].users,
+          columnId: this.tasks[event.previousIndex].columnId
+        };
+        this.tasksService.updateTask(this.tasks[event.previousIndex].boardId, this.tasks[event.previousIndex].columnId, this.tasks[event.previousIndex]._id, taskInfo).subscribe();
+      }
+     
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -61,6 +79,26 @@ export class BoardColumnComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+      let taskInfo: TTaskInfoExtended = {
+        title: this.tasks[event.currentIndex].title,
+        order: event.currentIndex,
+        description: this.tasks[event.currentIndex].description,
+        userId: this.tasks[event.currentIndex].userId,
+        users: this.tasks[event.currentIndex].users,
+        columnId: this.column._id
+      };
+      this.tasksService.updateTask(this.tasks[event.currentIndex].boardId, this.column._id, this.tasks[event.currentIndex]._id, taskInfo).subscribe();
+      if (this.tasks[event.previousIndex] !== this.tasks[event.currentIndex]) {
+        taskInfo = {
+          title: this.tasks[event.previousIndex].title,
+          order: event.previousIndex,
+          description: this.tasks[event.previousIndex].description,
+          userId: this.tasks[event.previousIndex].userId,
+          users: this.tasks[event.previousIndex].users,
+          columnId: this.tasks[event.previousIndex].columnId
+        };
+        this.tasksService.updateTask(this.tasks[event.previousIndex].boardId, this.tasks[event.previousIndex].columnId, this.tasks[event.previousIndex]._id, taskInfo).subscribe();
+      }
     }
   }
 
@@ -106,10 +144,10 @@ export class BoardColumnComponent implements OnInit {
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.columnsService
-          .deleteColumn(this.activatedRoute.snapshot.params['id'], columnId)
+          .deleteColumn(this.column.boardId, columnId)
           .pipe(
             switchMap(() =>
-              this.columnsService.getColumns(this.activatedRoute.snapshot.params['id']).pipe(map((value) => value))
+              this.columnsService.getColumns(this.column.boardId).pipe(map((value) => value))
             )
           )
           .subscribe();
@@ -141,20 +179,22 @@ export class BoardColumnComponent implements OnInit {
           .createTask(
             dialogResult[0],
             dialogResult[1],
-            this.tasksService.tasks.value.length,
+            this.tasks.length,
             this.column._id,
-            this.activatedRoute.snapshot.params['id'],
+            this.column.boardId,
+            this.userStatusService.userId,
             dialogResult[2]
           )
           .pipe(
             switchMap(() =>
-              this.tasksService.getTasks(this.activatedRoute.snapshot.params['id'], this.column._id).pipe(map((value) => value))
+              this.tasksService.getTasks(this.column.boardId, this.column._id).pipe(map((value) => value))
             )
           )
           .subscribe(tasks => {
-            this.tasks = tasks;
+            this.tasks = tasks.sort((a, b) => a.order > b.order ? 1 : -1);
           });
       }
     });
   }
+
 }
