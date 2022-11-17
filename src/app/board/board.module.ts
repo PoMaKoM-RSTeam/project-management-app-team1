@@ -10,6 +10,7 @@ import { TaskComponent } from './components/task/task.component';
 import { BoardColumnComponent } from './components/board-column/board-column.component';
 import { ColumnsComponent } from './components/columns/columns.component';
 import { FirstLetterPipe } from './pipes/first-letter.pipe';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: ':id', component: BoardComponent, canActivate: [ActivateGuard] },
@@ -20,14 +21,15 @@ const routes: Routes = [
     TaskComponent,
     BoardColumnComponent,
     ColumnsComponent,
-    FirstLetterPipe
+    FirstLetterPipe,
   ],
   imports: [
-    CommonModule, 
+    CommonModule,
     TranslateModule,
     CoreModule,
     MaterialModule,
-    RouterModule.forChild(routes)
+    FormsModule,
+    RouterModule.forChild(routes),
   ],
   exports: [RouterModule],
 })

@@ -3,19 +3,16 @@
   min-height: 550px;
   &-settings {
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 14px;
     border-bottom: 1px solid #81759E;
     cursor: pointer;
-    &__title {
-      
-      font-size: 1.4rem;
-    }
     &__icons {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 11px;
     }
     &__remove-icon {
       color: #C25284;
@@ -32,13 +29,11 @@
       transition: 0.2s;
     }
     &__item {
-      max-height: 56vh;
-      overflow-y: auto;
+      height: 56vh;
+      overflow-y: hidden;
       font-size: 1.2rem;
       letter-spacing: -.5px;
       padding: .4rem 1rem;
-      border: 1px solid #161415;
-      border-radius: 5px;
 
       transition: all .25s;
 
@@ -54,7 +49,7 @@
       &-input {
         font-size: 1.2rem;
         color: #81759E;;
-        padding: 2px 5px;
+        padding: 0 5px;
         font-weight: 500;
         outline: none;
         border: 1px solid transparent;

@@ -1,7 +1,7 @@
 import { TasksDataService } from './../../../core/services/tasks-data.service';
 import { UserStatusService } from './../../../core/services/user-status.service';
 import { IUser } from './../../../core/models/user.model';
-import { switchMap, map, Observable } from 'rxjs';
+import { switchMap, map, Observable, Subject, takeUntil } from 'rxjs';
 import { ColumnsDataService } from './../../../core/services/columns-data.service';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { CreateUpdateModalComponent } from '../../../shared/components/project-create-update-modal/create-update-modal.component';
@@ -16,7 +16,7 @@ import {
   TColumnInfo,
   TTaskInfoExtended,
 } from './../../../core/models/data.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -28,20 +28,22 @@ import {
   templateUrl: './board-column.component.html',
   styleUrls: ['./board-column.component.scss'],
 })
-export class BoardColumnComponent implements OnInit {
+export class BoardColumnComponent implements OnInit, OnDestroy {
   @Input() public column!: IColumn;
 
   public users$!: Observable<IUser[]>;
 
   public tasks$!: Observable<ITask[]>;
 
-  tasks: ITask[] = [];
+  private destroy$: Subject<boolean> = new Subject();
+
+  public tasks: ITask[] = [];
 
   titleEditMode: boolean = false;
 
-  columnTitle: string = '';
+  public columnTitle: string = '';
 
-  currentTitle: string = '';
+  private currentTitle: string = '';
 
   constructor(
     private projectModal: MatDialog,
@@ -51,7 +53,12 @@ export class BoardColumnComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userStatusService.getAllUsers().subscribe();
+    this.columnTitle = this.column.title;
+    this.currentTitle = this.columnTitle;
+    this.userStatusService
+      .getAllUsers()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
     this.users$ = this.userStatusService.getUsers().pipe((value) => value);
     this.tasks$ = this.tasksService.getTasksField().pipe((value) => value);
     this.getList();
@@ -60,6 +67,7 @@ export class BoardColumnComponent implements OnInit {
   getList() {
     this.tasksService
       .getTasks(this.column.boardId, this.column._id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((tasks) => {
         this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
       });
@@ -72,6 +80,7 @@ export class BoardColumnComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+
       if (this.tasks[event.previousIndex] !== this.tasks[event.currentIndex]) {
         let taskInfo: TTaskInfoExtended = {
           title: this.tasks[event.currentIndex].title,
@@ -81,6 +90,7 @@ export class BoardColumnComponent implements OnInit {
           users: this.tasks[event.currentIndex].users,
           columnId: this.tasks[event.currentIndex].columnId,
         };
+
         this.tasksService
           .updateTask(
             this.tasks[event.currentIndex].boardId,
@@ -88,7 +98,9 @@ export class BoardColumnComponent implements OnInit {
             this.tasks[event.currentIndex]._id,
             taskInfo
           )
+          .pipe(takeUntil(this.destroy$))
           .subscribe();
+
         taskInfo = {
           title: this.tasks[event.previousIndex].title,
           order: event.previousIndex,
@@ -97,6 +109,7 @@ export class BoardColumnComponent implements OnInit {
           users: this.tasks[event.previousIndex].users,
           columnId: this.tasks[event.previousIndex].columnId,
         };
+
         this.tasksService
           .updateTask(
             this.tasks[event.previousIndex].boardId,
@@ -104,6 +117,7 @@ export class BoardColumnComponent implements OnInit {
             this.tasks[event.previousIndex]._id,
             taskInfo
           )
+          .pipe(takeUntil(this.destroy$))
           .subscribe();
       }
     } else {
@@ -113,6 +127,7 @@ export class BoardColumnComponent implements OnInit {
         event.previousIndex,
         event.currentIndex
       );
+
       let taskInfo: TTaskInfoExtended = {
         title: this.tasks[event.currentIndex].title,
         order: event.currentIndex,
@@ -121,6 +136,7 @@ export class BoardColumnComponent implements OnInit {
         users: this.tasks[event.currentIndex].users,
         columnId: this.column._id,
       };
+
       this.tasksService
         .updateTask(
           this.tasks[event.currentIndex].boardId,
@@ -128,7 +144,9 @@ export class BoardColumnComponent implements OnInit {
           this.tasks[event.currentIndex]._id,
           taskInfo
         )
+        .pipe(takeUntil(this.destroy$))
         .subscribe();
+
       if (this.tasks[event.previousIndex] !== this.tasks[event.currentIndex]) {
         taskInfo = {
           title: this.tasks[event.previousIndex].title,
@@ -138,6 +156,7 @@ export class BoardColumnComponent implements OnInit {
           users: this.tasks[event.previousIndex].users,
           columnId: this.tasks[event.previousIndex].columnId,
         };
+
         this.tasksService
           .updateTask(
             this.tasks[event.previousIndex].boardId,
@@ -145,6 +164,7 @@ export class BoardColumnComponent implements OnInit {
             this.tasks[event.previousIndex]._id,
             taskInfo
           )
+          .pipe(takeUntil(this.destroy$))
           .subscribe();
       }
     }
@@ -155,11 +175,12 @@ export class BoardColumnComponent implements OnInit {
   }
 
   onCancel() {
-    this.titleEditMode = false;
     this.columnTitle = this.currentTitle;
+    this.titleEditMode = false;
   }
 
   updateColumn(columnTitle: string) {
+    this.currentTitle = columnTitle;
     this.titleEditMode = false;
     const columnInfo: TColumnInfo = {
       title: columnTitle,
@@ -167,13 +188,7 @@ export class BoardColumnComponent implements OnInit {
     };
     this.columnsService
       .updateColumn(this.column.boardId, this.column._id, columnInfo)
-      .pipe(
-        switchMap(() =>
-          this.columnsService
-            .getColumns(this.column.boardId)
-            .pipe(map((value) => value))
-        )
-      )
+      .pipe(takeUntil(this.destroy$))
       .subscribe();
   }
 
@@ -198,7 +213,8 @@ export class BoardColumnComponent implements OnInit {
               this.columnsService
                 .getColumns(this.column.boardId)
                 .pipe(map((value) => value))
-            )
+            ),
+            takeUntil(this.destroy$)
           )
           .subscribe();
       }
@@ -237,7 +253,8 @@ export class BoardColumnComponent implements OnInit {
               this.tasksService
                 .getTasks(this.column.boardId, this.column._id)
                 .pipe(map((value) => value))
-            )
+            ),
+            takeUntil(this.destroy$)
           )
           .subscribe((tasks) => {
             this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
@@ -248,5 +265,9 @@ export class BoardColumnComponent implements OnInit {
 
   refresh() {
     this.getList();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
   }
 }
