@@ -24,6 +24,10 @@ import { Observable } from 'rxjs';
 export class DatabaseService {
   constructor(private http: HttpClient) {}
 
+  /***
+      USER API
+  */
+
   public signUp(credentials: IUserCredentials): Observable<IError | IUser> {
     return this.http.post<IError | IUser>('api/auth/signup', credentials);
   }
@@ -43,15 +47,23 @@ export class DatabaseService {
     return this.http.get<IError | IUser>(`api/users/${id}`);
   }
 
-  public deleteUser(id: string): Observable<IError | null> {
-    return this.http.delete<IError | null>(`api/users/${id}`);
-  }
-
   public updateUser(
     id: string,
     credentials: IUserCredentials
   ): Observable<IError | IUser> {
     return this.http.put<IError | IUser>(`api/users/${id}`, credentials);
+  }
+
+  public deleteUser(id: string): Observable<IError | null> {
+    return this.http.delete<IError | null>(`api/users/${id}`);
+  }
+
+  /***
+      BOARD API
+  */
+
+  public getBoard(id: string): Observable<IError | IBoardComplete> {
+    return this.http.get<IError | IBoardComplete>(`api/boards/${id}`);
   }
 
   public getBoards(): Observable<IError | IBoard[]> {
@@ -64,19 +76,28 @@ export class DatabaseService {
     return this.http.post<IBoard | IError | null>('api/boards', boardInfo);
   }
 
-  public getBoard(id: string): Observable<IError | IBoardComplete> {
-    return this.http.get<IError | IBoardComplete>(`api/boards/${id}`);
+  public updateBoard(
+    id: string,
+    boardInfo: TBoardInfo
+  ): Observable<IError | IBoard> {
+    return this.http.put<IError | IBoard>(`api/boards/${id}`, boardInfo);
   }
 
   public deleteBoard(id: string): Observable<IError | null> {
     return this.http.delete<IError | null>(`api/boards/${id}`);
   }
 
-  public updateBoard(
-    id: string,
-    boardInfo: TBoardInfo
-  ): Observable<IError | IBoard> {
-    return this.http.put<IError | IBoard>(`api/boards/${id}`, boardInfo);
+  /***
+      COLUMN API
+  */
+
+  public getColumn(
+    boardId: string,
+    columnId: string
+  ): Observable<IError | IColumnComplete> {
+    return this.http.get<IError | IColumnComplete>(
+      `api/boards/${boardId}/columns/${columnId}`
+    );
   }
 
   public getColumns(boardId: string): Observable<IError | IColumn[]> {
@@ -93,12 +114,14 @@ export class DatabaseService {
     );
   }
 
-  public getColumn(
+  public updateColumn(
     boardId: string,
-    columnId: string
-  ): Observable<IError | IColumnComplete> {
-    return this.http.get<IError | IColumnComplete>(
-      `api/boards/${boardId}/columns/${columnId}`
+    columnId: string,
+    columnInfo: TColumnInfo
+  ): Observable<IError | IColumn> {
+    return this.http.put<IError | IColumn>(
+      `api/boards/${boardId}/columns/${columnId}`,
+      columnInfo
     );
   }
 
@@ -111,14 +134,17 @@ export class DatabaseService {
     );
   }
 
-  public updateColumn(
+  /***
+      TASK API
+  */
+
+  public getTask(
     boardId: string,
     columnId: string,
-    columnInfo: TColumnInfo
-  ): Observable<IError | IColumn> {
-    return this.http.put<IError | IColumn>(
-      `api/boards/${boardId}/columns/${columnId}`,
-      columnInfo
+    taskId: string
+  ): Observable<IError | ITask> {
+    return this.http.get<IError | ITask>(
+      `api/boards/${boardId}/columns/${columnId}/tasks/${taskId}`
     );
   }
 
@@ -142,13 +168,15 @@ export class DatabaseService {
     );
   }
 
-  public getTask(
+  public updateTask(
     boardId: string,
     columnId: string,
-    taskId: string
+    taskId: string,
+    taskInfo: TTaskInfoExtended
   ): Observable<IError | ITask> {
-    return this.http.get<IError | ITask>(
-      `api/boards/${boardId}/columns/${columnId}/tasks/${taskId}`
+    return this.http.put<IError | ITask>(
+      `api/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+      taskInfo
     );
   }
 
@@ -162,17 +190,25 @@ export class DatabaseService {
     );
   }
 
-  public updateTask(
-    boardId: string,
-    columnId: string,
-    taskId: string,
-    taskInfo: TTaskInfoExtended
-  ): Observable<IError | ITask> {
-    return this.http.put<IError | ITask>(
-      `api/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
-      taskInfo
-    );
+  public getTasksByUser(userId: string): Observable<ITask[]> {
+    return this.http.get<ITask[]>('api/tasksSet', {
+      params: { userId: userId },
+    });
   }
+
+  public getTasksByIds(ids: string[]): Observable<ITask[]> {
+    return this.http.get<ITask[]>('api/tasksSet', {
+      params: { ids: ids.join(', ') },
+    });
+  }
+
+  public updateSetOfTasks(tasks: ITask[]): Observable<ITask[]> {
+    return this.http.patch<ITask[]>('api/tasksSet', { tasks });
+  }
+
+  /***
+      POINT API
+  */
 
   public getPointsByUser(userId: string): Observable<IError | IPoint[]> {
     return this.http.get<IPoint[]>('api/points', {
@@ -201,7 +237,7 @@ export class DatabaseService {
     return this.http.patch<IPoint>(`api/points/${id}`, pointInfo);
   }
 
-  public updateSetOfPoint(points: IPoint[]): Observable<IError | IPoint[]> {
+  public updateSetOfPoints(points: IPoint[]): Observable<IError | IPoint[]> {
     return this.http.patch<IPoint[]>('api/points', { points });
   }
 
