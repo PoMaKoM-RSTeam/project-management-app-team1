@@ -2,30 +2,38 @@ import { CreateUpdateModalComponent } from './../../../shared/components/project
 import { switchMap, map } from 'rxjs';
 import { TasksDataService } from './../../../core/services/tasks-data.service';
 import { UserStatusService } from 'src/app/core/services/user-status.service';
-import { ActivatedRoute } from '@angular/router';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogModel, ICreateEditModel } from './../../../core/models/dialog.model';
+import {
+  ConfirmDialogModel,
+  ICreateEditModel,
+} from './../../../core/models/dialog.model';
 import { ITask, TTaskInfoExtended } from './../../../core/models/data.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
-  styleUrls: ['./task.component.scss']
+  styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent implements OnInit {
   @Input() public task!: ITask;
 
-  constructor(private projectModal: MatDialog,
-    private activatedRoute: ActivatedRoute,
+  @Output() public edited = new EventEmitter<any>();
+
+  @Output() public removed = new EventEmitter<any>();
+
+  constructor(
+    private projectModal: MatDialog,
     private userStatusService: UserStatusService,
     public tasksService: TasksDataService
   ) {}
 
   ngOnInit(): void {
-    this.tasksService.getTasks(this.task.boardId, this.task.columnId).subscribe();
-    this.tasksService.getTasksField().pipe(value => value);
+    this.tasksService
+      .getTasks(this.task.boardId, this.task.columnId)
+      .subscribe();
+    this.tasksService.getTasksField().pipe((value) => value);
   }
 
   updateTask() {
@@ -38,34 +46,39 @@ export class TaskComponent implements OnInit {
       titleField: this.task.title,
       descriptionField: this.task.description,
       user: this.task.users[0],
-      users: this.userStatusService.users.value
+      users: this.userStatusService.users.value,
     };
 
-    const dialogRef = this.projectModal.open(
-      CreateUpdateModalComponent,
-      {
-        maxWidth: '600px',
-        data: dialogData,
-      }
-    );
+    const dialogRef = this.projectModal.open(CreateUpdateModalComponent, {
+      maxWidth: '600px',
+      data: dialogData,
+    });
 
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
-        console.log(dialogResult);
         let taskInfo: TTaskInfoExtended = {
           title: dialogResult[0],
           order: this.task.order,
           description: dialogResult[1],
           userId: this.userStatusService.userId,
           users: dialogResult[2],
-          columnId: this.task.columnId
+          columnId: this.task.columnId,
         };
-        this.tasksService.updateTask(this.task.boardId, this.task.columnId, this.task._id, taskInfo).pipe(
-          switchMap(() =>
-            this.tasksService.getTasks(this.task.boardId, this.task.columnId).pipe(map((value) => value))
+        this.tasksService
+          .updateTask(
+            this.task.boardId,
+            this.task.columnId,
+            this.task._id,
+            taskInfo
           )
-        )
-          .subscribe();
+          .pipe(
+            switchMap(() =>
+              this.tasksService
+                .getTasks(this.task.boardId, this.task.columnId)
+                .pipe(map((value) => value))
+            )
+          )
+          .subscribe(() => this.edited.emit());
       }
     });
   }
@@ -88,14 +101,19 @@ export class TaskComponent implements OnInit {
           .deleteTask(this.task.boardId, this.task.columnId, this.task._id)
           .pipe(
             switchMap(() =>
-              this.tasksService.getTasks(this.task.boardId, this.task.columnId).pipe(map((value) => {
-                this.tasksService.tasks.next(value);
-              }))
+              this.tasksService
+                .getTasks(this.task.boardId, this.task.columnId)
+                .pipe(
+                  map((value) => {
+                    this.tasksService.tasks.next(value);
+                  })
+                )
             )
           )
-          .subscribe();
+          .subscribe(() => {
+            this.removed.emit();
+          });
       }
     });
   }
-
 }

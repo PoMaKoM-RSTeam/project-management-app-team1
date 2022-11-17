@@ -1,5 +1,3 @@
-
-
 <div class="column">
   <div class="column-settings">
     <mat-icon
@@ -28,7 +26,6 @@
       />
     </div>
     <div class="column-settings__icons">
-     
       <mat-icon
         class="column-settings__remove-icon"
         [title]="'Column-delete' | translate"
@@ -37,20 +34,25 @@
       >
     </div>
   </div>
-  
+
   <div
     cdkDropList
     #todoList="cdkDropList"
     [cdkDropListData]="tasks"
     class="tasks-list"
     (cdkDropListDropped)="drop($event)"
-    *ngIf="(tasks$|async) as task1"
-   >
-    <app-task  *ngFor="let task of tasks" cdkDrag [task]="task" ></app-task>
-
+    *ngIf="tasks$ | async"
+  >
+    <app-task
+      *ngFor="let task of tasks"
+      cdkDrag
+      [task]="task"
+      (edited)="refresh()"
+      (removed)="refresh()"
+    ></app-task>
   </div>
   <div class="column-new-task__btn" (click)="addNewTask()">
     <mat-icon>add</mat-icon>
-    <span>{{'Columns-task-add' | translate}}</span>
+    <span>{{ "Columns-task-add" | translate }}</span>
   </div>
 </div>

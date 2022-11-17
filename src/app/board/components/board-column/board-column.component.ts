@@ -6,15 +6,27 @@ import { ColumnsDataService } from './../../../core/services/columns-data.servic
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { CreateUpdateModalComponent } from '../../../shared/components/project-create-update-modal/create-update-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogModel, ICreateEditModel } from './../../../core/models/dialog.model';
-import { IColumn, ITask, TColumnInfo,  TTaskInfoExtended } from './../../../core/models/data.model';
+import {
+  ConfirmDialogModel,
+  ICreateEditModel,
+} from './../../../core/models/dialog.model';
+import {
+  IColumn,
+  ITask,
+  TColumnInfo,
+  TTaskInfoExtended,
+} from './../../../core/models/data.model';
 import { Component, Input, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board-column',
   templateUrl: './board-column.component.html',
-  styleUrls: ['./board-column.component.scss']
+  styleUrls: ['./board-column.component.scss'],
 })
 export class BoardColumnComponent implements OnInit {
   @Input() public column!: IColumn;
@@ -31,26 +43,35 @@ export class BoardColumnComponent implements OnInit {
 
   currentTitle: string = '';
 
-
   constructor(
-    private projectModal: MatDialog, 
+    private projectModal: MatDialog,
     private columnsService: ColumnsDataService,
     private userStatusService: UserStatusService,
     public tasksService: TasksDataService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.userStatusService.getAllUsers().subscribe();
-    this.users$ = this.userStatusService.getUsers().pipe(value => value);
-    this.tasksService.getTasks(this.column.boardId, this.column._id).subscribe(tasks => {
-      this.tasks = tasks.sort((a, b) => a.order > b.order ? 1 : -1);
-    });
-    this.tasks$ = this.tasksService.getTasksField().pipe(value => value);
+    this.users$ = this.userStatusService.getUsers().pipe((value) => value);
+    this.tasks$ = this.tasksService.getTasksField().pipe((value) => value);
+    this.getList();
+  }
+
+  getList() {
+    this.tasksService
+      .getTasks(this.column.boardId, this.column._id)
+      .subscribe((tasks) => {
+        this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
+      });
   }
 
   drop(event: CdkDragDrop<ITask[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
       if (this.tasks[event.previousIndex] !== this.tasks[event.currentIndex]) {
         let taskInfo: TTaskInfoExtended = {
           title: this.tasks[event.currentIndex].title,
@@ -58,26 +79,39 @@ export class BoardColumnComponent implements OnInit {
           description: this.tasks[event.currentIndex].description,
           userId: this.tasks[event.currentIndex].userId,
           users: this.tasks[event.currentIndex].users,
-          columnId: this.tasks[event.currentIndex].columnId
+          columnId: this.tasks[event.currentIndex].columnId,
         };
-        this.tasksService.updateTask(this.tasks[event.currentIndex].boardId, this.tasks[event.currentIndex].columnId, this.tasks[event.currentIndex]._id, taskInfo).subscribe();
+        this.tasksService
+          .updateTask(
+            this.tasks[event.currentIndex].boardId,
+            this.tasks[event.currentIndex].columnId,
+            this.tasks[event.currentIndex]._id,
+            taskInfo
+          )
+          .subscribe();
         taskInfo = {
           title: this.tasks[event.previousIndex].title,
           order: event.previousIndex,
           description: this.tasks[event.previousIndex].description,
           userId: this.tasks[event.previousIndex].userId,
           users: this.tasks[event.previousIndex].users,
-          columnId: this.tasks[event.previousIndex].columnId
+          columnId: this.tasks[event.previousIndex].columnId,
         };
-        this.tasksService.updateTask(this.tasks[event.previousIndex].boardId, this.tasks[event.previousIndex].columnId, this.tasks[event.previousIndex]._id, taskInfo).subscribe();
+        this.tasksService
+          .updateTask(
+            this.tasks[event.previousIndex].boardId,
+            this.tasks[event.previousIndex].columnId,
+            this.tasks[event.previousIndex]._id,
+            taskInfo
+          )
+          .subscribe();
       }
-     
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
       let taskInfo: TTaskInfoExtended = {
         title: this.tasks[event.currentIndex].title,
@@ -85,9 +119,16 @@ export class BoardColumnComponent implements OnInit {
         description: this.tasks[event.currentIndex].description,
         userId: this.tasks[event.currentIndex].userId,
         users: this.tasks[event.currentIndex].users,
-        columnId: this.column._id
+        columnId: this.column._id,
       };
-      this.tasksService.updateTask(this.tasks[event.currentIndex].boardId, this.column._id, this.tasks[event.currentIndex]._id, taskInfo).subscribe();
+      this.tasksService
+        .updateTask(
+          this.tasks[event.currentIndex].boardId,
+          this.column._id,
+          this.tasks[event.currentIndex]._id,
+          taskInfo
+        )
+        .subscribe();
       if (this.tasks[event.previousIndex] !== this.tasks[event.currentIndex]) {
         taskInfo = {
           title: this.tasks[event.previousIndex].title,
@@ -95,9 +136,16 @@ export class BoardColumnComponent implements OnInit {
           description: this.tasks[event.previousIndex].description,
           userId: this.tasks[event.previousIndex].userId,
           users: this.tasks[event.previousIndex].users,
-          columnId: this.tasks[event.previousIndex].columnId
+          columnId: this.tasks[event.previousIndex].columnId,
         };
-        this.tasksService.updateTask(this.tasks[event.previousIndex].boardId, this.tasks[event.previousIndex].columnId, this.tasks[event.previousIndex]._id, taskInfo).subscribe();
+        this.tasksService
+          .updateTask(
+            this.tasks[event.previousIndex].boardId,
+            this.tasks[event.previousIndex].columnId,
+            this.tasks[event.previousIndex]._id,
+            taskInfo
+          )
+          .subscribe();
       }
     }
   }
@@ -128,7 +176,7 @@ export class BoardColumnComponent implements OnInit {
       )
       .subscribe();
   }
-  
+
   deleteColumn(columnId: string) {
     const dialogData = new ConfirmDialogModel(
       'Columns-modal-delete-title',
@@ -147,7 +195,9 @@ export class BoardColumnComponent implements OnInit {
           .deleteColumn(this.column.boardId, columnId)
           .pipe(
             switchMap(() =>
-              this.columnsService.getColumns(this.column.boardId).pipe(map((value) => value))
+              this.columnsService
+                .getColumns(this.column.boardId)
+                .pipe(map((value) => value))
             )
           )
           .subscribe();
@@ -162,16 +212,13 @@ export class BoardColumnComponent implements OnInit {
       descriptionLabel: 'Task-modal-description',
       commandName: 'Task-modal-add',
       usersLabel: 'Task-modal-user-titel',
-      users: this.userStatusService.users.value
+      users: this.userStatusService.users.value,
     };
 
-    const dialogRef = this.projectModal.open(
-      CreateUpdateModalComponent,
-      {
-        maxWidth: '600px',
-        data: dialogData,
-      }
-    );
+    const dialogRef = this.projectModal.open(CreateUpdateModalComponent, {
+      maxWidth: '600px',
+      data: dialogData,
+    });
 
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
@@ -187,14 +234,19 @@ export class BoardColumnComponent implements OnInit {
           )
           .pipe(
             switchMap(() =>
-              this.tasksService.getTasks(this.column.boardId, this.column._id).pipe(map((value) => value))
+              this.tasksService
+                .getTasks(this.column.boardId, this.column._id)
+                .pipe(map((value) => value))
             )
           )
-          .subscribe(tasks => {
-            this.tasks = tasks.sort((a, b) => a.order > b.order ? 1 : -1);
+          .subscribe((tasks) => {
+            this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
           });
       }
     });
   }
 
+  refresh() {
+    this.getList();
+  }
 }
