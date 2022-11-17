@@ -57,4 +57,4 @@ export interface IPoint {
   boardId: string;
 }
 
-export type IPointInfo = Omit<IColumn, '_id'>;
+export type IPointInfo = Omit<IPoint, '_id'>;
