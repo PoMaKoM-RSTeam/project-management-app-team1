@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { switchMap, map, Observable } from 'rxjs';
+import { switchMap, map, Observable, fromEvent, throttleTime } from 'rxjs';
 import { ProjectsDataService } from './../../services/projects-data.service';
 import { ProjectCreateUpdateModalComponent } from './../../../shared/components/project-create-update-modal/project-create-update-modal.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,13 +7,15 @@ import { ICreateEditProject } from './../../models/dialog.model';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component,
+  Component, Inject,
   OnInit,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { UserStatusService } from '../../services/user-status.service';
 import { LoadingService } from '../../services/loading.service';
 import { delay } from 'rxjs/operators';
+import { DOCUMENT } from '@angular/common';
+
 
 @Component({
   selector: 'app-header',
@@ -22,11 +24,14 @@ import { delay } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
+
   currentLang = window.navigator.language.replace(/-.+/gis, '');
 
   public isLogged$!: Observable<boolean>;
 
   loading: boolean = true;
+
+  stickyHeader: boolean = false;
 
   constructor(
     private router: Router,
@@ -35,13 +40,18 @@ export class HeaderComponent implements OnInit {
     private projectsService: ProjectsDataService,
     private userStatusService: UserStatusService,
     private loadingService: LoadingService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private document: Document,
   ) {}
 
   ngOnInit() {
     this.translate.use(this.currentLang);
     this.isLogged$ = this.userStatusService.getLoginStatus();
     this.listenToLoading();
+    fromEvent(window, 'scroll').pipe(throttleTime(50)).subscribe(() => {
+      this.stickyHeader = this.document.defaultView!.scrollY > 80;
+      this.cdr.detectChanges();
+    });
   }
 
   listenToLoading(): void {
@@ -92,5 +102,10 @@ export class HeaderComponent implements OnInit {
           .subscribe();
       }
     });
+
+  }
+
+  changeDetection() {
+    this.cdr.detectChanges();
   }
 }

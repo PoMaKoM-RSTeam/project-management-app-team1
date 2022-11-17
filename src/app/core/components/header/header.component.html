@@ -1,44 +1,56 @@
-<header class="header">
+<header class="header" [ngClass]="{'sticky-header': stickyHeader}">
+
+  <input id="menu-toggle" type="checkbox" #menu (change)="changeDetection()" />
+  <label class="menu-btn" for="menu-toggle">
+    <span></span>
+  </label>
+
   <nav class="nav">
     <div class="header-element-container">
-      <span class="logo" routerLink="home">{{
+      <span class="logo" routerLink="home"
+      (click)="menu.checked = false">{{
         "Project-Title" | translate | uppercase
       }}</span>
     </div>
 
     <div *ngIf="isLogged$ | async" class="header-element-container">
-      <span class="edit-profile" routerLink="profile">{{
-        "Edit-Profile" | translate | uppercase
-      }}</span>
+      <span class="edit-profile"
+            routerLink="profile"
+            (click)="menu.checked = false"
+      >{{"Edit-Profile" | translate | uppercase}}
+      </span>
     </div>
 
     <div *ngIf="isLogged$ | async" class="header-element-container">
-      <span class="create-board" (click)="createProject()">{{ "Create-Board" | translate | uppercase }}</span>
+      <span class="create-board" (click)="createProject(); menu.checked = false" >{{ "Create-Board" | translate | uppercase }}</span>
     </div>
 
-    <app-user-status class="right"></app-user-status>
+    <app-user-status class="header-element-container" (click)="menu.checked = false"></app-user-status>
 
-    <div class="header-element-container" >
+  </nav>
+
+  <div *ngIf="menu.checked" class="blur" (click)="menu.checked = false"></div>
+  <div class="language-container" >
       <span class="language"
-            (click)="switchLang('ru')"
+            (click)="switchLang('ru'); menu.checked = false"
             [ngClass]="{
               active: currentLang === 'ru',
               disabled: currentLang === 'en'
             }"
       >RU</span>
-      |
-      <span
-        class="language"
-        (click)="switchLang('en')"
-        [ngClass]="{
+    |
+    <span
+      class="language"
+      (click)="switchLang('en'); menu.checked = false"
+      [ngClass]="{
           active: currentLang === 'en',
           disabled: currentLang === 'ru'
         }"
-      >EN</span
-      >
-    </div>
-  </nav>
-  <div *ngIf="loading">
+    >EN</span
+    >
+  </div>
+
+  <div *ngIf="loading" class="progress">
     <mat-progress-bar mode="query"></mat-progress-bar>
   </div>
 </header>
