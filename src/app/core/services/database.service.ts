@@ -7,6 +7,8 @@ import {
   IColumn,
   IColumnComplete,
   IError,
+  IPoint,
+  IPointInfo,
   ITask,
   ITokenResponse,
   TBoardInfo,
@@ -170,5 +172,40 @@ export class DatabaseService {
       `api/boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
       taskInfo
     );
+  }
+
+  public getPointsByUser(userId: string): Observable<IError | IPoint[]> {
+    return this.http.get<IPoint[]>('api/points', {
+      params: { userId: userId },
+    });
+  }
+
+  public getPointsByIds(pointIds: string[]): Observable<IError | IPoint[]> {
+    return this.http.get<IPoint[]>('api/points', {
+      params: { ids: pointIds.join(', ') },
+    });
+  }
+
+  public getPointsByTaskId(taskId: string): Observable<IError | IPoint[]> {
+    return this.http.get<IPoint[]>(`api/points/${taskId}`);
+  }
+
+  public createPoint(pointInfo: IPointInfo): Observable<IError | IPoint> {
+    return this.http.post<IPoint>('api/points', pointInfo);
+  }
+
+  public updatePoint(
+    id: string,
+    pointInfo: IPointInfo
+  ): Observable<IError | IPoint> {
+    return this.http.patch<IPoint>(`api/points/${id}`, pointInfo);
+  }
+
+  public updateSetOfPoint(points: IPoint[]): Observable<IError | IPoint[]> {
+    return this.http.patch<IPoint[]>('api/points', { points });
+  }
+
+  public deletePoint(id: string): Observable<IError | IPoint> {
+    return this.http.delete<IPoint>(`api/points/${id}`);
   }
 }

@@ -48,3 +48,13 @@ export interface IError {
 export interface ITokenResponse {
   token: string;
 }
+
+export interface IPoint {
+  _id: string;
+  title: string;
+  done: boolean;
+  taskId: string;
+  boardId: string;
+}
+
+export type IPointInfo = Omit<IColumn, '_id'>;
