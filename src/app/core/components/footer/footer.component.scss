@@ -14,6 +14,7 @@
 
 .gh-list {
   list-style-type: none;
+  padding: 0;
 }
 
 .gh-list * {
@@ -39,4 +40,10 @@
 .rs-logo:hover {
   scale: 105%;
   opacity: 1;
+}
+
+@media (max-width: 760px) {
+  .github-list {
+    order: 3;
+  }
 }
