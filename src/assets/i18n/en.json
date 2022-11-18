@@ -79,6 +79,10 @@
   "Task-modal-description": "Task Description",
   "Task-modal-add": "Create",
   "Task-modal-user-titel": "User",
+  "Task-modal-edit-title": "Edit Task",  
+  "Task-modal-edit": "Edit",
+  "Task-modal-delete-title": "Delete Task",
+  "Task-modal-delete-message": "Delete Current Task from Column",
 
   "Update": "Update",
   "Username": "User name",

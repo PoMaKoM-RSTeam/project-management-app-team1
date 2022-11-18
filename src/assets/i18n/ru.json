@@ -79,6 +79,10 @@
   "Task-modal-description": "Описание задачи",
   "Task-modal-add": "Создать",
   "Task-modal-user-titel": "Пользователь",
+  "Task-modal-edit-title": "Изменить задачу",  
+  "Task-modal-edit": "Изменить",  
+  "Task-modal-delete-title": "Удалить задачу",
+  "Task-modal-delete-message": "Удалить задачу из текущей колонки",
 
   "Update": "Обновить",
   "Username": "Логин: латинскиe строчныe буквы без пробелов",

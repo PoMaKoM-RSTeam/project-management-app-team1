@@ -1,5 +1,5 @@
 import { CreateUpdateModalComponent } from './../../../shared/components/project-create-update-modal/create-update-modal.component';
-import { switchMap, map } from 'rxjs';
+import { switchMap, map, Subject, takeUntil } from 'rxjs';
 import { TasksDataService } from './../../../core/services/tasks-data.service';
 import { UserStatusService } from 'src/app/core/services/user-status.service';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
@@ -9,19 +9,22 @@ import {
   ICreateEditModel,
 } from './../../../core/models/dialog.model';
 import { ITask, TTaskInfoExtended } from './../../../core/models/data.model';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TaskComponent implements OnInit {
+export class TaskComponent implements OnInit, OnDestroy {
   @Input() public task!: ITask;
 
   @Output() public edited = new EventEmitter<any>();
 
   @Output() public removed = new EventEmitter<any>();
+
+  private destroy$: Subject<boolean> = new Subject();
 
   constructor(
     private projectModal: MatDialog,
@@ -31,17 +34,16 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.tasksService
-      .getTasks(this.task.boardId, this.task.columnId)
-      .subscribe();
+      .getTasks(this.task.boardId, this.task.columnId).subscribe();
     this.tasksService.getTasksField().pipe((value) => value);
   }
 
   updateTask() {
     const dialogData: ICreateEditModel = {
-      title: 'Task-modal-add-title',
+      title: 'Task-modal-edit-title',
       titleLabel: 'Task-modal-title',
       descriptionLabel: 'Task-modal-description',
-      commandName: 'Task-modal-add',
+      commandName: 'Task-modal-edit',
       usersLabel: 'Task-modal-user-titel',
       titleField: this.task.title,
       descriptionField: this.task.description,
@@ -76,7 +78,8 @@ export class TaskComponent implements OnInit {
               this.tasksService
                 .getTasks(this.task.boardId, this.task.columnId)
                 .pipe(map((value) => value))
-            )
+            ),
+            takeUntil(this.destroy$)
           )
           .subscribe(() => this.edited.emit());
       }
@@ -85,8 +88,8 @@ export class TaskComponent implements OnInit {
 
   deleteTask() {
     const dialogData = new ConfirmDialogModel(
-      'Columns-modal-delete-title',
-      'Columns-modal-delete-message',
+      'Task-modal-delete-title',
+      'Task-modal-delete-message',
       'Delete'
     );
 
@@ -108,12 +111,18 @@ export class TaskComponent implements OnInit {
                     this.tasksService.tasks.next(value);
                   })
                 )
-            )
+            ),
+            takeUntil(this.destroy$)
           )
           .subscribe(() => {
             this.removed.emit();
           });
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

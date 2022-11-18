@@ -16,7 +16,7 @@ import {
   TColumnInfo,
   TTaskInfoExtended,
 } from './../../../core/models/data.model';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -27,6 +27,7 @@ import {
   selector: 'app-board-column',
   templateUrl: './board-column.component.html',
   styleUrls: ['./board-column.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardColumnComponent implements OnInit, OnDestroy {
   @Input() public column!: IColumn;
@@ -57,9 +58,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
     this.currentTitle = this.columnTitle;
     this.userStatusService
       .getAllUsers()
-      .pipe(takeUntil(this.destroy$))
       .subscribe();
-    this.users$ = this.userStatusService.getUsers().pipe((value) => value);
     this.tasks$ = this.tasksService.getTasksField().pipe((value) => value);
     this.getList();
   }
@@ -67,7 +66,6 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
   getList() {
     this.tasksService
       .getTasks(this.column.boardId, this.column._id)
-      .pipe(takeUntil(this.destroy$))
       .subscribe((tasks) => {
         this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
       });
@@ -269,5 +267,6 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

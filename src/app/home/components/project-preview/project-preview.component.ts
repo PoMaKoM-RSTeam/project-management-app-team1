@@ -6,18 +6,21 @@ import {
   ICreateEditModel,
   ConfirmDialogModel,
 } from './../../../core/models/dialog.model';
-import { switchMap, map } from 'rxjs';
+import { switchMap, map, Subject, takeUntil } from 'rxjs';
 import { IBoard } from './../../../core/models/data.model';
 import { ProjectsDataService } from './../../../core/services/projects-data.service';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-project-preview',
   templateUrl: './project-preview.component.html',
   styleUrls: ['./project-preview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectPreviewComponent {
+export class ProjectPreviewComponent implements OnDestroy {
   @Input() public project!: IBoard;
+
+  private destroy$: Subject<boolean> = new Subject();
 
   constructor(
     private projectsService: ProjectsDataService,
@@ -44,7 +47,8 @@ export class ProjectPreviewComponent {
           .pipe(
             switchMap(() =>
               this.projectsService.getProjects().pipe(map((value) => value))
-            )
+            ),
+            takeUntil(this.destroy$)
           )
           .subscribe();
       }
@@ -82,7 +86,8 @@ export class ProjectPreviewComponent {
           .pipe(
             switchMap(() =>
               this.projectsService.getProjects().pipe(map((value) => value))
-            )
+            ),
+            takeUntil(this.destroy$)
           )
           .subscribe();
       }
@@ -91,5 +96,10 @@ export class ProjectPreviewComponent {
 
   openBoard() {
     this.router.navigate(['board', this.project._id]);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

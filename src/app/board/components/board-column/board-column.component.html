@@ -1,25 +1,6 @@
 <div class="column">
   <div class="column-settings">
-    <span class="column-settings__icons">
-      <mat-icon
-        *ngIf="titleEditMode"
-        id="cancel"
-        class="column-settings__cancel-icon"
-        [title]="'Cancel' | translate"
-        (mousedown)="onCancel()"
-        >cancel</mat-icon
-      >
-    </span>
-    <span class="column-settings__icons">
-      <mat-icon
-        *ngIf="titleEditMode"
-        id="edit"
-        class="column-settings__save-icon"
-        [title]="'Save' | translate"
-        (mousedown)="updateColumn(colTitle.value)"
-        >save</mat-icon
-      >
-    </span>
+    
 
     <input
       type="text"
@@ -32,6 +13,26 @@
       (blur)="onCancel()"
     />
 
+    <!-- <span class="column-settings__icons">
+      <mat-icon
+        *ngIf="titleEditMode"
+        id="cancel"
+        class="column-settings__cancel-icon"
+        [title]="'Cancel' | translate"
+        (mousedown)="onCancel()"
+        >cancel</mat-icon
+      >
+    </span> -->
+    <span class="column-settings__icons">
+      <mat-icon
+        *ngIf="titleEditMode"
+        id="edit"
+        class="column-settings__save-icon"
+        [title]="'Save' | translate"
+        (mousedown)="updateColumn(colTitle.value)"
+        >save</mat-icon
+      >
+    </span>
     <div class="column-settings__icons">
       <mat-icon
         class="column-settings__remove-icon"
