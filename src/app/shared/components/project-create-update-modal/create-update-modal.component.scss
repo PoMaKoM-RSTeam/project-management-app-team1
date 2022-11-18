@@ -5,12 +5,12 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: #212121;
-  background: #efefef;
+  color: #fff;
+  background: #1C2128;
   width: 300px;
   height: 100%;
   padding: 10px 0;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .form__question {
@@ -58,26 +58,35 @@ span {
 input {
   text-indent: 5px;
   border: none;
-  background-color: #e5e5e5;
+  background-color: #161B22;
   height: 33px;
-  color: #929292;
+  color: #fff;
   width: 280px;
 }
 
 textarea {
   width: 280px;
-  background-color: #e5e5e5;
-  color: #929292;
+  background-color: #161B22;
+  color: #fff;
   text-indent: 5px;
   padding-top: 5px;
 }
 
 .cancel-btn {
-  color: red;
+  color: #fff;
+  background-color: #39424c;
+}
+
+.command-btn {
+  color: #fff;
+  background-color: #228EC4;
 }
 
 ::ng-deep .mat-select-panel {
   background: white;
+}
+::ng-deep .mat-dialog-actions {
+  margin-bottom: -10px;
 }
 ::ng-deep .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
   background: rgba(0,0,0,.12);
