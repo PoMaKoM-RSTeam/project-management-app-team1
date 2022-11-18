@@ -15,9 +15,7 @@ export class HomePageComponent implements OnInit {
 
   public userName$!: Observable<string>;
 
-  constructor(private userStatusService: UserStatusService) {
-    console.log(this.currentDate);
-  }
+  constructor(private userStatusService: UserStatusService) {}
 
   ngOnInit(): void {
     this.userName$ = this.userStatusService.getUserName();

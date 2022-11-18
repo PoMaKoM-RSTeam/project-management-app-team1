@@ -1,0 +1,66 @@
+<div class="column">
+  <div class="column-settings">
+    
+
+    <input
+      type="text"
+      class="column-settings__item-input"
+      id="colTitle"
+      name="colTitle"
+      [(ngModel)]="columnTitle"
+      #colTitle
+      (click)="editTitle()"
+      (blur)="onCancel()"
+    />
+
+    <span class="column-settings__icons">
+      <mat-icon
+        *ngIf="titleEditMode"
+        id="cancel"
+        class="column-settings__cancel-icon"
+        [title]="'Cancel' | translate"
+        (mousedown)="onCancel()"
+        >cancel</mat-icon
+      >
+    </span>
+    <span class="column-settings__icons">
+      <mat-icon
+        *ngIf="titleEditMode"
+        id="edit"
+        class="column-settings__save-icon"
+        [title]="'Save' | translate"
+        (mousedown)="updateColumn(colTitle.value)"
+        >save</mat-icon
+      >
+    </span>
+    <div class="column-settings__icons">
+      <mat-icon
+        class="column-settings__remove-icon"
+        [title]="'Column-delete' | translate"
+        (click)="deleteColumn(column._id)"
+        >highlight_off</mat-icon
+      >
+    </div>
+  </div>
+
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="tasks"
+    class="tasks-list"
+    (cdkDropListDropped)="drop($event)"
+    *ngIf="tasks$ | async"
+  >
+    <app-task
+      *ngFor="let task of tasks"
+      cdkDrag
+      [task]="task"
+      (edited)="refresh()"
+      (removed)="refresh()"
+    ></app-task>
+  </div>
+  <div class="column-new-task__btn" (click)="addNewTask()">
+    <mat-icon>add</mat-icon>
+    <span>{{ "Columns-task-add" | translate }}</span>
+  </div>
+</div>

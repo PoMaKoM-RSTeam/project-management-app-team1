@@ -7,9 +7,10 @@
 
 form {
   width: 350px;
-  height: 470px;
+  height: 440px;
   border-radius: 5px;
-  background: #efefef;
+  background: #1C2128;
+  color: #fff;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -48,19 +49,24 @@ form {
     margin: 10px 0 0 -10px;
     padding-left: 10px;
     border: none;
-    background-color: #e5e5e5;
+    background-color: #161B22;
+    color: #fff;
     height: 33px;
     width: 310px;
-    color: #929292;
   }
 
 
   button[type="button"] {
-    color: red;
+    color: #fff;
     width: 120px;
     margin: 20px 0;
   }
 
+  .cancel-btn {
+    color: #fff;
+    background-color: #39424c;
+  }
+  
   button[type="submit"] {
     width: 120px;
     float: right;
@@ -68,7 +74,7 @@ form {
   }
 
   button[type="submit"]:enabled {
-    color: white;
-    background-color: #2f80ed;
+    color: #fff;
+    background-color: #228EC4;
   }
 }

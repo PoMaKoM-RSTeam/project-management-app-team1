@@ -1,23 +1,26 @@
 import { Router } from '@angular/router';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { ProjectCreateUpdateModalComponent } from './../../../shared/components/project-create-update-modal/project-create-update-modal.component';
+import { CreateUpdateModalComponent } from '../../../shared/components/project-create-update-modal/create-update-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  ICreateEditProject,
+  ICreateEditModel,
   ConfirmDialogModel,
 } from './../../../core/models/dialog.model';
-import { switchMap, map } from 'rxjs';
+import { switchMap, map, Subject, takeUntil } from 'rxjs';
 import { IBoard } from './../../../core/models/data.model';
 import { ProjectsDataService } from './../../../core/services/projects-data.service';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-project-preview',
   templateUrl: './project-preview.component.html',
   styleUrls: ['./project-preview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectPreviewComponent {
+export class ProjectPreviewComponent implements OnDestroy {
   @Input() public project!: IBoard;
+
+  private destroy$: Subject<boolean> = new Subject();
 
   constructor(
     private projectsService: ProjectsDataService,
@@ -44,7 +47,8 @@ export class ProjectPreviewComponent {
           .pipe(
             switchMap(() =>
               this.projectsService.getProjects().pipe(map((value) => value))
-            )
+            ),
+            takeUntil(this.destroy$)
           )
           .subscribe();
       }
@@ -52,17 +56,17 @@ export class ProjectPreviewComponent {
   }
 
   updateProject(projectId: string) {
-    const dialogData: ICreateEditProject = {
+    const dialogData: ICreateEditModel = {
       title: 'Project-modal-edit-title',
-      projectTitleLabel: 'Project-modal-title',
-      projectDescriptionLabel: 'Project-modal-description',
+      titleLabel: 'Project-modal-title',
+      descriptionLabel: 'Project-modal-description',
       commandName: 'Project-modal-edit',
-      projectTitle: this.project.title,
-      projectDescription: this.project.description,
+      titleField: this.project.title,
+      descriptionField: this.project.description
     };
 
     const dialogRef = this.projectModal.open(
-      ProjectCreateUpdateModalComponent,
+      CreateUpdateModalComponent,
       {
         maxWidth: '600px',
         data: dialogData,
@@ -82,7 +86,8 @@ export class ProjectPreviewComponent {
           .pipe(
             switchMap(() =>
               this.projectsService.getProjects().pipe(map((value) => value))
-            )
+            ),
+            takeUntil(this.destroy$)
           )
           .subscribe();
       }
@@ -91,5 +96,10 @@ export class ProjectPreviewComponent {
 
   openBoard() {
     this.router.navigate(['board', this.project._id]);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

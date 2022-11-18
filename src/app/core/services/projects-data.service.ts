@@ -11,9 +11,17 @@ export class ProjectsDataService {
     []
   );
 
+  public project = new BehaviorSubject<IBoard>({
+    _id: '',
+    title: '',
+    description: '',
+    owner: '',
+    users: [''],
+  });
+
   constructor(private database: DatabaseService) {}
 
-  getProjectField(): Observable<IBoard[]> {
+  public getProjectField(): Observable<IBoard[]> {
     return this.projects.asObservable();
   }
 
@@ -48,6 +56,18 @@ export class ProjectsDataService {
           this.projects.next(boards);
         }
         return result as IBoard[];
+      })
+    );
+  }
+
+  public getProject(boardId: string): Observable<IBoard> {
+    return this.database.getBoard(boardId).pipe(
+      map((result) => {
+        if (result) {
+          const board: IBoard = result as IBoard;
+          this.project.next(board);
+        }
+        return result as IBoard;
       })
     );
   }

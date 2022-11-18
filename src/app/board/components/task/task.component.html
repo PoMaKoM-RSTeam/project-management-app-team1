@@ -1,1 +1,19 @@
-<p>task works!</p>
+<div class="task-box"  >
+  <div class="task-box__info" (click)="updateTask()">
+    <div class="task-box__title">{{ task.title }}</div>
+    <div class="task-box__description">{{ task.description }}</div>
+    <div class="task-box__info-user">{{ task.users[0] | firstLetter }}</div>
+  </div>
+
+  <div class="task-box__btns">
+    <div class="task-settings__icons">
+      <mat-icon
+        class="task-settings__remove-icon"
+        [title]="'Preview-delete' | translate"
+        (click)="deleteTask()"
+        >delete</mat-icon
+      >
+    </div>
+  </div>
+  
+</div>

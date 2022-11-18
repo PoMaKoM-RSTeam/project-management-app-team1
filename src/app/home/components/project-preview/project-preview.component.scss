@@ -1,7 +1,7 @@
 .board-item {
   display: flex;
   min-height: 64px;
-  background-color: #393840;
+  background-color: #0D1117;
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
@@ -20,12 +20,12 @@
     transition: 0.2s;
   }
   &__remove-icon {
-    color: #C25284;
+    color: #fff;
     opacity: 0;
     transition: 0.2s;
   }
   &__edit-icon {
-    color: #04761d;
+    color: #228EC4;
     font-size: 1.425rem;
     opacity: 0;
     transition: 0.2s;
@@ -37,7 +37,7 @@
 }
 .board-item:hover {
   cursor: pointer;
-  background-color: #1b1a20;
+  background-color: #212B3A;
 }
 .board-item:hover {
   cursor: pointer;

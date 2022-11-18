@@ -5,9 +5,19 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: #212121;
-  background: #efefef;
+  color: #fff;
+  background: #1C2128;
   width: 300px;
   height: 200px;
   border-radius: 10px;
+}
+
+.cancel-btn {
+  color: #fff;
+  background-color: #39424c;
+}
+
+.command-btn {
+  color: #fff;
+  background-color: #228EC4;
 }

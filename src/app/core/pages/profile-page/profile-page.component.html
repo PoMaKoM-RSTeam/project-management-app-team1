@@ -77,10 +77,10 @@
     </p></mat-error
   >
   <div>
-    <button type="button" mat-raised-button color="warn" (click)="deleteUser()">
+    <button class="cancel-btn" type="button" mat-raised-button color="warn" (click)="deleteUser()">
       {{ "Delete" | translate }}
     </button>
-    <button type="submit" mat-raised-button [disabled]="profileForm.invalid">
+    <button class="command-btn" type="submit" mat-raised-button [disabled]="profileForm.invalid">
       {{ "Update" | translate }}
     </button>
   </div>

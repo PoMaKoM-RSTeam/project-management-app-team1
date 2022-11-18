@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
 import { switchMap, map, Observable, fromEvent, throttleTime } from 'rxjs';
 import { ProjectsDataService } from './../../services/projects-data.service';
-import { ProjectCreateUpdateModalComponent } from './../../../shared/components/project-create-update-modal/project-create-update-modal.component';
+import { CreateUpdateModalComponent } from '../../../shared/components/project-create-update-modal/create-update-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ICreateEditProject } from './../../models/dialog.model';
+import { ICreateEditModel } from './../../models/dialog.model';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -71,15 +71,15 @@ export class HeaderComponent implements OnInit {
 
   createProject() {
     this.router.navigate(['home']);
-    const dialogData: ICreateEditProject = {
+    const dialogData: ICreateEditModel = {
       title: 'Project-modal-add-title',
-      projectTitleLabel: 'Project-modal-title',
-      projectDescriptionLabel: 'Project-modal-description',
-      commandName: 'Project-modal-add',
+      titleLabel: 'Project-modal-title',
+      descriptionLabel: 'Project-modal-description',
+      commandName: 'Project-modal-add'
     };
 
     const dialogRef = this.projectModal.open(
-      ProjectCreateUpdateModalComponent,
+      CreateUpdateModalComponent,
       {
         maxWidth: '600px',
         data: dialogData,

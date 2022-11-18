@@ -19,7 +19,7 @@ export interface IColumn {
   boardId: string;
 }
 
-export type TColumnInfo = Omit<IColumn, '_id'>;
+export type TColumnInfo = Omit<IColumn, '_id' | 'boardId'>;
 
 export interface IColumnComplete extends IColumn {
   tasks: ITask[];
@@ -36,9 +36,9 @@ export interface ITask {
   columnId: string;
 }
 
-export type TTaskInfoExtended = Omit<ITask, '_id'>;
+export type TTaskInfoExtended = Omit<ITask, '_id' | 'boardId'>;
 
-export type TTaskInfo = Omit<TTaskInfoExtended, 'boardId' | 'columnId'>;
+export type TTaskInfo = Omit<TTaskInfoExtended, '_id' | 'boardId' | 'columnId'>;
 
 export interface IError {
   statusCode: number;
@@ -48,3 +48,13 @@ export interface IError {
 export interface ITokenResponse {
   token: string;
 }
+
+export interface IPoint {
+  _id: string;
+  title: string;
+  done: boolean;
+  taskId: string;
+  boardId: string;
+}
+
+export type IPointInfo = Omit<IPoint, '_id'>;
