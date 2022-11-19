@@ -19,6 +19,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ToastrModule } from 'ngx-toastr';
 
 const routes: Routes = [];
 
@@ -37,6 +38,15 @@ const routes: Routes = [];
     }),
     RouterModule.forChild(routes),
     MatProgressBarModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      easing: 'ease-in',
+      progressBar: true,
+      maxOpened: 1,
+      autoDismiss: true,
+      positionClass: 'toast-bottom-right'
+    }),
+
   ],
   exports: [
     LocalizedDatePipe,

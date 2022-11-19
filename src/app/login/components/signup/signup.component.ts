@@ -12,6 +12,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { StringValidators } from 'src/app/core/validators/string.validators';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-signup',
@@ -26,7 +27,7 @@ export class SignupComponent {
 
   signupForm: FormGroup;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private notification: NotificationService) {
     this.signupForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       login: new FormControl('', [Validators.email, Validators.required]),
@@ -53,6 +54,7 @@ export class SignupComponent {
           this.signin();
         },
         error: (error: string) => {
+          this.notification.showError(`Error ${error}`);
           this.authErrorMessage =
             Number(error) === 409 ? 'User already registered' : error;
           subs.unsubscribe();

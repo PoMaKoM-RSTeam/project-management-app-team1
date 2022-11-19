@@ -8,6 +8,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StringValidators } from '../../../core/validators/string.validators';
 import { AuthService } from '../../services/auth.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private notification: NotificationService
   ) {
     this.authForm = this.fb.group({
       login: ['', [Validators.required, Validators.email]],
@@ -57,6 +59,7 @@ export class LoginComponent {
       })
       .subscribe({
         error: (error) => {
+          this.notification.showError(`Error ${error}`);
           this.isLoginError = Number(error) === 403;
           this.cdr.detectChanges();
           subs.unsubscribe();
