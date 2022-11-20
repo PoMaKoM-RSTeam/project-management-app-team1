@@ -79,7 +79,7 @@
   "Task-modal-description": "Task Description",
   "Task-modal-add": "Create",
   "Task-modal-user-titel": "User",
-  "Task-modal-edit-title": "Edit Task",  
+  "Task-modal-edit-title": "Edit Task",
   "Task-modal-edit": "Edit",
   "Task-modal-delete-title": "Delete Task",
   "Task-modal-delete-message": "Delete Current Task from Column",
@@ -133,6 +133,10 @@
 
   "wixhub-text": "With more than 6 years of experience developing software and 1 year with Angular and TypeScript I always advocate for the best available solutions and the cleanest code",
   "zhagun-text": "My interests are programming and computer science. I can attribute to my positive qualities: sociability, sense of humor, purposefulness. I also like to work in a team",
-  "nonebeer-text": "I am 25 years old. I've been interested in programming since school. I'm learn Front-End Development in RS School"
+  "nonebeer-text": "I am 25 years old. I've been interested in programming since school. I'm learn Front-End Development in RS School",
+
+  "SignInError": "Wrong login or password",
+  "SignUpError": "User already exist",
+  "SuccessSignUp": "User successfully created"
 
 }

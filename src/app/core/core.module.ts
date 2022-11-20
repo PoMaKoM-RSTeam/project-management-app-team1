@@ -44,7 +44,8 @@ const routes: Routes = [];
       progressBar: true,
       maxOpened: 1,
       autoDismiss: true,
-      positionClass: 'toast-bottom-right'
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
     }),
 
   ],
