@@ -13,6 +13,7 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { StringValidators } from 'src/app/core/validators/string.validators';
 import { NotificationService } from '../../../core/services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +28,11 @@ export class SignupComponent {
 
   signupForm: FormGroup;
 
-  constructor(private authService: AuthService, private notification: NotificationService) {
+  constructor(
+    private authService: AuthService,
+    private notification: NotificationService,
+    private translate: TranslateService,
+  ) {
     this.signupForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       login: new FormControl('', [Validators.email, Validators.required]),
@@ -52,9 +57,10 @@ export class SignupComponent {
       .subscribe({
         next: () => {
           this.signin();
+          this.notification.showSuccess(this.translate.instant('SuccessSignUp'));
         },
         error: (error: string) => {
-          this.notification.showError(`Error ${error}`);
+          this.notification.showError(this.translate.instant('SignUpError'));
           this.authErrorMessage =
             Number(error) === 409 ? 'User already registered' : error;
           subs.unsubscribe();

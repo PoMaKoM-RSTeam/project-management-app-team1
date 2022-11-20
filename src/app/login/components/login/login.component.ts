@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StringValidators } from '../../../core/validators/string.validators';
 import { AuthService } from '../../services/auth.service';
 import { NotificationService } from '../../../core/services/notification.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private translate: TranslateService,
   ) {
     this.authForm = this.fb.group({
       login: ['', [Validators.required, Validators.email]],
@@ -59,7 +61,7 @@ export class LoginComponent {
       })
       .subscribe({
         error: (error) => {
-          this.notification.showError(`Error ${error}`);
+          this.notification.showError(this.translate.instant('SignInError'));
           this.isLoginError = Number(error) === 403;
           this.cdr.detectChanges();
           subs.unsubscribe();
