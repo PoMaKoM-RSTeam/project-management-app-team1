@@ -1,15 +1,15 @@
 import { IUser } from './../../../core/models/user.model';
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ICreateEditModel } from '../../../core/models/dialog.model';
 
 @Component({
   selector: 'app-create-update-modal',
   templateUrl: './create-update-modal.component.html',
-  styleUrls: ['./create-update-modal.component.scss']
+  styleUrls: ['./create-update-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateUpdateModalComponent {
-
   title: string;
 
   titleLabel!: string;
@@ -21,7 +21,7 @@ export class CreateUpdateModalComponent {
   usersLabel: string;
 
   descriptionField: string = '';
-  
+
   commandName: string;
 
   users!: IUser[];
@@ -46,11 +46,14 @@ export class CreateUpdateModalComponent {
   }
 
   onCommand(): void {
-    this.dialogRef.close([this.titleField, this.descriptionField, this.userName]);
+    this.dialogRef.close([
+      this.titleField,
+      this.descriptionField,
+      this.userName,
+    ]);
   }
 
   onCancel(): void {
     this.dialogRef.close(false);
   }
-
 }

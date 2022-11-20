@@ -81,12 +81,13 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
   updateProfile(): void {
     this.updateErrorMessage = '';
-    const subs = this.userStatusService
+    this.userStatusService
       .updateUser({
         name: this.name?.value,
         login: this.login?.value,
         password: this.password?.value,
       })
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
           this.updateErrorMessage = 'User updated';
@@ -94,7 +95,6 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
         error: (error: string) => {
           this.updateErrorMessage =
             Number(error) === 409 ? 'User already updated' : error;
-          subs.unsubscribe();
         },
       });
   }
@@ -111,15 +111,21 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((dialogResult) => {
-      if (dialogResult) {
-        this.userStatusService.deleteUser().subscribe({
-          next: () => {
-            this.router.navigate(['login']);
-          },
-        });
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.userStatusService
+            .deleteUser()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe({
+              next: () => {
+                this.router.navigate(['login']);
+              },
+            });
+        }
+      });
   }
 
   get name(): AbstractControl | null {

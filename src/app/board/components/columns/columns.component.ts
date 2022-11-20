@@ -38,6 +38,7 @@ export class ColumnsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.columnsService
       .getColumns(this.activatedRoute.snapshot.params['id'])
+      .pipe(takeUntil(this.destroy$))
       .subscribe((columns) => {
         this.columns = columns.sort((a, b) => (a.order > b.order ? 1 : -1));
       });
@@ -61,7 +62,8 @@ export class ColumnsComponent implements OnInit, OnDestroy {
           this.columns[event.currentIndex].boardId,
           this.columns[event.currentIndex]._id,
           columnInfo
-        ).pipe(takeUntil(this.destroy$))
+        )
+        .pipe(takeUntil(this.destroy$))
         .subscribe();
       columnInfo = {
         title: this.columns[event.previousIndex].title,
@@ -72,7 +74,8 @@ export class ColumnsComponent implements OnInit, OnDestroy {
           this.columns[event.previousIndex].boardId,
           this.columns[event.previousIndex]._id,
           columnInfo
-        ).pipe(takeUntil(this.destroy$))
+        )
+        .pipe(takeUntil(this.destroy$))
         .subscribe();
     }
   }

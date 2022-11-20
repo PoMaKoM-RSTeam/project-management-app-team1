@@ -2,10 +2,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { UserStatusService } from '../../services/user-status.service';
 
 @Component({
@@ -14,12 +15,14 @@ import { UserStatusService } from '../../services/user-status.service';
   styleUrls: ['./user-status.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UserStatusComponent implements OnInit {
+export class UserStatusComponent implements OnInit, OnDestroy {
   public isLogged$!: Observable<boolean>;
 
   public isLoginPage!: boolean;
 
   public userName$!: Observable<string>;
+
+  private destroy$: Subject<boolean> = new Subject();
 
   constructor(
     private router: Router,
@@ -32,7 +35,7 @@ export class UserStatusComponent implements OnInit {
 
     this.isLoginPage = this.router.url === '/login';
 
-    this.router.events.subscribe((e) => {
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe((e) => {
       if (e instanceof NavigationEnd) {
         this.isLoginPage = e.url === '/login';
         this.cdr.detectChanges();
@@ -49,5 +52,10 @@ export class UserStatusComponent implements OnInit {
 
   public logout(): void {
     this.userStatusService.logOut();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

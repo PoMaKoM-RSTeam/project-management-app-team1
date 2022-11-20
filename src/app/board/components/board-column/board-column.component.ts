@@ -1,7 +1,7 @@
 import { TasksDataService } from './../../../core/services/tasks-data.service';
 import { UserStatusService } from './../../../core/services/user-status.service';
 import { IUser } from './../../../core/models/user.model';
-import { switchMap, map, Observable, Subject, takeUntil } from 'rxjs';
+import { switchMap, map, Observable, Subject, takeUntil, take } from 'rxjs';
 import { ColumnsDataService } from './../../../core/services/columns-data.service';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { CreateUpdateModalComponent } from '../../../shared/components/project-create-update-modal/create-update-modal.component';
@@ -16,7 +16,13 @@ import {
   TColumnInfo,
   TTaskInfoExtended,
 } from './../../../core/models/data.model';
-import { Component, Input, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -58,6 +64,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
     this.currentTitle = this.columnTitle;
     this.userStatusService
       .getAllUsers()
+      .pipe(takeUntil(this.destroy$))
       .subscribe();
     this.tasks$ = this.tasksService.getTasksField().pipe((value) => value);
     this.getList();
@@ -66,6 +73,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
   getList() {
     this.tasksService
       .getTasks(this.column.boardId, this.column._id)
+      .pipe(take(1))
       .subscribe((tasks) => {
         this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
       });
