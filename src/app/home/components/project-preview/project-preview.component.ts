@@ -6,10 +6,15 @@ import {
   ICreateEditModel,
   ConfirmDialogModel,
 } from './../../../core/models/dialog.model';
-import { switchMap, map, Subject, takeUntil } from 'rxjs';
+import { switchMap, map, Subject, takeUntil, take } from 'rxjs';
 import { IBoard } from './../../../core/models/data.model';
 import { ProjectsDataService } from './../../../core/services/projects-data.service';
-import { Component, Input, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  OnDestroy,
+} from '@angular/core';
 
 @Component({
   selector: 'app-project-preview',
@@ -40,19 +45,22 @@ export class ProjectPreviewComponent implements OnDestroy {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((dialogResult) => {
-      if (dialogResult) {
-        this.projectsService
-          .deleteProject(projectId)
-          .pipe(
-            switchMap(() =>
-              this.projectsService.getProjects().pipe(map((value) => value))
-            ),
-            takeUntil(this.destroy$)
-          )
-          .subscribe();
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.projectsService
+            .deleteProject(projectId)
+            .pipe(
+              switchMap(() =>
+                this.projectsService.getProjects().pipe(map((value) => value))
+              ),
+              takeUntil(this.destroy$)
+            )
+            .subscribe();
+        }
+      });
   }
 
   updateProject(projectId: string) {
@@ -62,36 +70,36 @@ export class ProjectPreviewComponent implements OnDestroy {
       descriptionLabel: 'Project-modal-description',
       commandName: 'Project-modal-edit',
       titleField: this.project.title,
-      descriptionField: this.project.description
+      descriptionField: this.project.description,
     };
 
-    const dialogRef = this.projectModal.open(
-      CreateUpdateModalComponent,
-      {
-        maxWidth: '600px',
-        data: dialogData,
-      }
-    );
-
-    dialogRef.afterClosed().subscribe((dialogResult) => {
-      if (dialogResult) {
-        this.projectsService
-          .updateProject(
-            projectId,
-            dialogResult[0],
-            dialogResult[1],
-            dialogResult[2],
-            dialogResult[3]
-          )
-          .pipe(
-            switchMap(() =>
-              this.projectsService.getProjects().pipe(map((value) => value))
-            ),
-            takeUntil(this.destroy$)
-          )
-          .subscribe();
-      }
+    const dialogRef = this.projectModal.open(CreateUpdateModalComponent, {
+      maxWidth: '600px',
+      data: dialogData,
     });
+
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.projectsService
+            .updateProject(
+              projectId,
+              dialogResult[0],
+              dialogResult[1],
+              dialogResult[2],
+              dialogResult[3]
+            )
+            .pipe(
+              switchMap(() =>
+                this.projectsService.getProjects().pipe(map((value) => value))
+              ),
+              take(1)
+            )
+            .subscribe();
+        }
+      });
   }
 
   openBoard() {

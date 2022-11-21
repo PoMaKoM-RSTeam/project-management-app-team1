@@ -1,7 +1,7 @@
 import { TasksDataService } from './../../../core/services/tasks-data.service';
 import { UserStatusService } from './../../../core/services/user-status.service';
 import { IUser } from './../../../core/models/user.model';
-import { switchMap, map, Observable, Subject, takeUntil, take } from 'rxjs';
+import { switchMap, map, Observable, Subject, take } from 'rxjs';
 import { ColumnsDataService } from './../../../core/services/columns-data.service';
 import { ConfirmDialogComponent } from './../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { CreateUpdateModalComponent } from '../../../shared/components/project-create-update-modal/create-update-modal.component';
@@ -62,10 +62,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.columnTitle = this.column.title;
     this.currentTitle = this.columnTitle;
-    this.userStatusService
-      .getAllUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe();
+    this.userStatusService.getAllUsers().pipe(take(1)).subscribe();
     this.tasks$ = this.tasksService.getTasksField().pipe((value) => value);
     this.getList();
   }
@@ -75,7 +72,8 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
       .getTasks(this.column.boardId, this.column._id)
       .pipe(take(1))
       .subscribe((tasks) => {
-        this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
+        if (tasks && tasks.length > 0)
+          this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
       });
   }
 
@@ -104,7 +102,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
             this.tasks[event.currentIndex]._id,
             taskInfo
           )
-          .pipe(takeUntil(this.destroy$))
+          .pipe(take(1))
           .subscribe();
 
         taskInfo = {
@@ -123,7 +121,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
             this.tasks[event.previousIndex]._id,
             taskInfo
           )
-          .pipe(takeUntil(this.destroy$))
+          .pipe(take(1))
           .subscribe();
       }
     } else {
@@ -150,7 +148,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
           this.tasks[event.currentIndex]._id,
           taskInfo
         )
-        .pipe(takeUntil(this.destroy$))
+        .pipe(take(1))
         .subscribe();
 
       if (this.tasks[event.previousIndex] !== this.tasks[event.currentIndex]) {
@@ -170,7 +168,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
             this.tasks[event.previousIndex]._id,
             taskInfo
           )
-          .pipe(takeUntil(this.destroy$))
+          .pipe(take(1))
           .subscribe();
       }
     }
@@ -194,7 +192,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
     };
     this.columnsService
       .updateColumn(this.column.boardId, this.column._id, columnInfo)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(take(1))
       .subscribe();
   }
 
@@ -210,21 +208,24 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((dialogResult) => {
-      if (dialogResult) {
-        this.columnsService
-          .deleteColumn(this.column.boardId, columnId)
-          .pipe(
-            switchMap(() =>
-              this.columnsService
-                .getColumns(this.column.boardId)
-                .pipe(map((value) => value))
-            ),
-            takeUntil(this.destroy$)
-          )
-          .subscribe();
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.columnsService
+            .deleteColumn(this.column.boardId, columnId)
+            .pipe(
+              switchMap(() =>
+                this.columnsService
+                  .getColumns(this.column.boardId)
+                  .pipe(map((value) => value))
+              ),
+              take(1)
+            )
+            .subscribe();
+        }
+      });
   }
 
   addNewTask() {
@@ -242,31 +243,34 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((dialogResult) => {
-      if (dialogResult) {
-        this.tasksService
-          .createTask(
-            dialogResult[0],
-            dialogResult[1],
-            this.tasks.length,
-            this.column._id,
-            this.column.boardId,
-            this.userStatusService.userId,
-            dialogResult[2]
-          )
-          .pipe(
-            switchMap(() =>
-              this.tasksService
-                .getTasks(this.column.boardId, this.column._id)
-                .pipe(map((value) => value))
-            ),
-            takeUntil(this.destroy$)
-          )
-          .subscribe((tasks) => {
-            this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
-          });
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.tasksService
+            .createTask(
+              dialogResult[0],
+              dialogResult[1],
+              this.tasks.length,
+              this.column._id,
+              this.column.boardId,
+              this.userStatusService.userId,
+              dialogResult[2]
+            )
+            .pipe(
+              switchMap(() =>
+                this.tasksService
+                  .getTasks(this.column.boardId, this.column._id)
+                  .pipe(map((value) => value))
+              ),
+              take(1)
+            )
+            .subscribe((tasks) => {
+              this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
+            });
+        }
+      });
   }
 
   refresh() {

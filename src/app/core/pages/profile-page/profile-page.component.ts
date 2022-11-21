@@ -13,7 +13,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogModel } from '../../models/dialog.model';
 import { UserStatusService } from '../../services/user-status.service';
@@ -113,12 +113,12 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
     dialogRef
       .afterClosed()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(take(1))
       .subscribe((dialogResult) => {
         if (dialogResult) {
           this.userStatusService
             .deleteUser()
-            .pipe(takeUntil(this.destroy$))
+            .pipe(take(1))
             .subscribe({
               next: () => {
                 this.router.navigate(['login']);

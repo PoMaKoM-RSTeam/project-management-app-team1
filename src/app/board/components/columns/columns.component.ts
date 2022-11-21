@@ -1,6 +1,6 @@
 import { BoardColumnComponent } from './../board-column/board-column.component';
 import { IColumn, TColumnInfo } from './../../../core/models/data.model';
-import { switchMap, map, Observable, Subject, takeUntil } from 'rxjs';
+import { switchMap, map, Observable, Subject, takeUntil, take } from 'rxjs';
 import { ColumnsDataService } from './../../../core/services/columns-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ICreateEditModel } from './../../../core/models/dialog.model';
@@ -40,7 +40,8 @@ export class ColumnsComponent implements OnInit, OnDestroy {
       .getColumns(this.activatedRoute.snapshot.params['id'])
       .pipe(takeUntil(this.destroy$))
       .subscribe((columns) => {
-        this.columns = columns.sort((a, b) => (a.order > b.order ? 1 : -1));
+        if (columns && columns.length > 0)
+          this.columns = columns.sort((a, b) => (a.order > b.order ? 1 : -1));
       });
     this.columns$ = this.columnsService
       .getColumnsField()
@@ -92,27 +93,32 @@ export class ColumnsComponent implements OnInit, OnDestroy {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((dialogResult) => {
-      if (dialogResult) {
-        this.columnsService
-          .createColumn(
-            dialogResult[0],
-            this.columnsService.columns.value.length,
-            this.activatedRoute.snapshot.params['id']
-          )
-          .pipe(
-            switchMap(() =>
-              this.columnsService
-                .getColumns(this.activatedRoute.snapshot.params['id'])
-                .pipe(map((value) => value))
-            ),
-            takeUntil(this.destroy$)
-          )
-          .subscribe((columns) => {
-            this.columns = columns.sort((a, b) => (a.order > b.order ? 1 : -1));
-          });
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(take(1))
+      .subscribe((dialogResult) => {
+        if (dialogResult) {
+          this.columnsService
+            .createColumn(
+              dialogResult[0],
+              this.columnsService.columns.value.length,
+              this.activatedRoute.snapshot.params['id']
+            )
+            .pipe(
+              switchMap(() =>
+                this.columnsService
+                  .getColumns(this.activatedRoute.snapshot.params['id'])
+                  .pipe(map((value) => value))
+              ),
+              take(1)
+            )
+            .subscribe((columns) => {
+              this.columns = columns.sort((a, b) =>
+                a.order > b.order ? 1 : -1
+              );
+            });
+        }
+      });
   }
 
   ngOnDestroy() {

@@ -40,7 +40,8 @@
         "@typescript-eslint/comma-dangle": "off",
         "@typescript-eslint/import/namespace": "off",
         "@typescript-eslint/default-param-last": "off",
-        "@typescript-eslint/no-use-before-define": "off"
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/indent": "off"
       },
       "settings": {
         "import/resolver": {
