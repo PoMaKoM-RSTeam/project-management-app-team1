@@ -1,11 +1,29 @@
-<div class="task-box"  >
+<div class="task-box">
   <div class="task-box__info" (click)="updateTask()">
     <div class="task-box__title">{{ task.title }}</div>
     <div class="task-box__description">{{ task.description }}</div>
     <div class="task-box__info-user">{{ task.users[0] | firstLetter }}</div>
   </div>
-
+  <div *ngIf="img$ | async as img">
+    <img *ngIf="img !== null" [src]="img" />
+  </div>
   <div class="task-box__btns">
+    <div class="task-settings__icons">
+      <input
+        id="input-file-id"
+        (change)="onChange($event)"
+        hidden
+        type="file"
+        accept=".jpeg,.png"
+      />
+      <label for="input-file-id">
+        <mat-icon
+          class="task-settings__attach-icon"
+          [title]="'Preview-attach' | translate"
+          >attachment</mat-icon
+        >
+      </label>
+    </div>
     <div class="task-settings__icons">
       <mat-icon
         class="task-settings__remove-icon"
@@ -15,5 +33,4 @@
       >
     </div>
   </div>
-  
 </div>

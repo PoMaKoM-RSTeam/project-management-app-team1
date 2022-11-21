@@ -7,6 +7,7 @@ import {
   IColumn,
   IColumnComplete,
   IError,
+  IFile,
   IPoint,
   IPointInfo,
   ITask,
@@ -243,5 +244,37 @@ export class DatabaseService {
 
   public deletePoint(id: string): Observable<IError | IPoint> {
     return this.http.delete<IPoint>(`api/points/${id}`);
+  }
+
+  /***
+      FILE API
+  */
+
+  public getFilesByIds(ids: string[]): Observable<IFile[] | null> {
+    return this.http.get<IFile[]>('api/file', {
+      params: { ids: ids.join(', ') },
+    });
+  }
+
+  public getFilesByUserId(userId: string): Observable<IFile[] | null> {
+    return this.http.get<IFile[]>('api/file', { params: { userId: userId } });
+  }
+
+  public getFilesByBoardId(boardId: string): Observable<IFile[] | null> {
+    return this.http.get<IFile[]>(`api/file/${boardId}`);
+  }
+
+  public getFilesByTaskId(taskId: string): Observable<IFile[] | null> {
+    return this.http.get<IFile[]>('api/file', { params: { taskId: taskId } });
+  }
+
+  public uploadFile(data: FormData): Observable<IFile | IError> {
+    return this.http.post<IFile | IError>('api/file', data, {
+      headers: { Accept: 'multipart/form-data' },
+    });
+  }
+
+  public deleteFile(id: string): Observable<IError | IFile> {
+    return this.http.delete<IFile>(`api/file/${id}`);
   }
 }

@@ -46,6 +46,7 @@
   "Profile-user-delete-title": "Удаление профиля",
   "Profile-user-delete-message": "Профиль пользователя будет удален",
 
+  "Preview-attach": "Прикрепить файл",
   "Preview-edit": "Изменить Проект",
   "Preview-delete": "Удалить проект",
 
@@ -79,8 +80,8 @@
   "Task-modal-description": "Описание задачи",
   "Task-modal-add": "Создать",
   "Task-modal-user-titel": "Пользователь",
-  "Task-modal-edit-title": "Изменить задачу",  
-  "Task-modal-edit": "Изменить",  
+  "Task-modal-edit-title": "Изменить задачу",
+  "Task-modal-edit": "Изменить",
   "Task-modal-delete-title": "Удалить задачу",
   "Task-modal-delete-message": "Удалить задачу из текущей колонки",
 

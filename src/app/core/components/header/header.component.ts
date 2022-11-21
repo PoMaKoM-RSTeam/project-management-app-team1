@@ -22,7 +22,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import { UserStatusService } from '../../services/user-status.service';
 import { LoadingService } from '../../services/loading.service';
-import { delay, takeUntil } from 'rxjs/operators';
+import { delay, take, takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -98,7 +98,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     dialogRef
       .afterClosed()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(take(1))
       .subscribe((dialogResult) => {
         if (dialogResult) {
           this.projectsService
@@ -112,7 +112,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
                 this.projectsService.getProjects().pipe(map((value) => value))
               )
             )
-            .pipe(takeUntil(this.destroy$))
+            .pipe(take(1))
             .subscribe();
         }
       });

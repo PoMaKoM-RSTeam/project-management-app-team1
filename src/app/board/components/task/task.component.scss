@@ -43,6 +43,18 @@
   display: flex;
   align-items: center;
 }
+.task-settings__attach-icon {
+  font-size: 1.45rem;
+  color: #b36bd4;
+  cursor: pointer;
+  width: 21px;
+  height: 21px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.task-settings__attach-icon:hover {
+  transform: scale(1.1);
+}
 .task-settings__remove-icon {
   font-size: 1.45rem;
   color: #228EC4;
@@ -61,4 +73,12 @@
 }
 .task-box:hover .task-settings__remove-icon {
   opacity: 1;
+}
+
+.task-box:hover .task-settings__attach-icon {
+  opacity: 1;
+}
+
+img {
+  width: 50%;
 }

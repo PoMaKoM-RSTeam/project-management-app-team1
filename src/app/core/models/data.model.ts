@@ -58,3 +58,11 @@ export interface IPoint {
 }
 
 export type IPointInfo = Omit<IPoint, '_id'>;
+
+export interface IFile {
+  _id: string;
+  name: string;
+  taskId: string;
+  boardId: string;
+  path: string;
+}
