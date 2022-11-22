@@ -17,6 +17,8 @@
 
   "Delete": "Удалить",
 
+  "Email-title": "Ваш E-Mail",
+
   "Edit-Profile": "Редактировать профиль",
   "Email": "Email адрес",
   "Email-required": "Email обязателен",
@@ -30,7 +32,7 @@
   "Lastname": "Фамилия",
   "Loading": "Загрузка . . . Подождите, пожалуйста",
   "Login": "Войти",
-  "Login-name": "Логин",
+  "Login-name": "Ваш E-Mail",
   "Login-error": "Не можете войти? Напишите администратору",
   "Login-pass-err": "Неправильный логин или пароль",
   "Login-question": "Уже есть аккаунт?",

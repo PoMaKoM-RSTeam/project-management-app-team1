@@ -17,6 +17,8 @@
 
   "Delete": "Delete",
 
+  "Email-title": "Ваш E-Mail",
+
   "Edit-Profile": "Edit profile",
   "Email": "Email address",
   "Email-required": "Email is required",
@@ -31,7 +33,7 @@
   "Loading": "Loading . . . Please Wait",
   "Login": "Login",
   "Login-error": "Can't login? Write to the administrator",
-  "Login-name": "Login",
+  "Login-name": "Ваш E-Mail",
   "Login-pass-err": "Incorrect login or password",
   "Login-question": "Already have an account?",
   "Logout": "Logout",

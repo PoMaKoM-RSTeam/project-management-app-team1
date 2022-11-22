@@ -1,4 +1,4 @@
-<form >
+<form>
   <h1 class="dialog-title" mat-dialog-title>
     {{ title | translate }}
   </h1>
@@ -6,7 +6,13 @@
   <div class="modal-wrap" mat-dialog-content>
     <mat-form-field class="title-field" appearance="fill">
       <div class="project-title__label">{{ titleLabel | translate }}</div>
-      <input matInput [(ngModel)]="titleField" #titleInp="ngModel" name="title"  required />
+      <input
+        matInput
+        [(ngModel)]="titleField"
+        #titleInp="ngModel"
+        name="title"
+        required
+      />
       <mat-error [hidden]="titleInp.valid || titleInp.untouched">
         {{ "Validation-create-update-modal-title" | translate }}
       </mat-error>
@@ -40,7 +46,12 @@
       *ngIf="users.length > 0"
     >
       <div class="project-user__label">{{ usersLabel | translate }}</div>
-      <mat-select [(ngModel)]="userName" #userInp="ngModel" name="user" required>
+      <mat-select
+        [(ngModel)]="userName"
+        #userInp="ngModel"
+        name="user"
+        required
+      >
         <mat-option *ngFor="let user of users" [value]="user.name">
           {{ user.name }}
         </mat-option>
@@ -52,7 +63,7 @@
   </div>
 
   <div mat-dialog-actions>
-    <button class="cancel-btn" mat-button (click)="onCancel()"  >
+    <button class="cancel-btn" mat-button (click)="onCancel()">
       {{ "Cancel" | translate }}
     </button>
     <button
@@ -60,7 +71,11 @@
       mat-raised-button
       type="submit"
       (click)="onCommand()"
-      [disabled]="(titleField === '' || (descriptionLabel.length === 0 || descriptionField === '') || (users.length === 0 || userName === ''))"
+      [disabled]="
+        titleField === '' ||
+        descriptionLabel.length === 0 || descriptionField === '' ||
+        users.length === 0 || userName === ''
+      "
     >
       {{ commandName | translate }}
     </button>
