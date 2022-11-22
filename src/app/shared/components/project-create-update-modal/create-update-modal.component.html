@@ -1,36 +1,68 @@
-<h1 mat-dialog-title>
-  {{ title | translate }}
-</h1>
+<form >
+  <h1 class="dialog-title" mat-dialog-title>
+    {{ title | translate }}
+  </h1>
 
-  
   <div class="modal-wrap" mat-dialog-content>
     <mat-form-field class="title-field" appearance="fill">
       <div class="project-title__label">{{ titleLabel | translate }}</div>
-      <input matInput [(ngModel)]="titleField">
+      <input matInput [(ngModel)]="titleField" #titleInp="ngModel" name="title"  required />
+      <mat-error [hidden]="titleInp.valid || titleInp.untouched">
+        {{ "Validation-create-update-modal-title" | translate }}
+      </mat-error>
     </mat-form-field>
-  
-    <mat-form-field class="description-field" appearance="fill" *ngIf="descriptionLabel.length > 0">
-      <div class="project-description__label">{{ descriptionLabel | translate }}</div>
-      <textarea matInput
+
+    <mat-form-field
+      class="description-field"
+      appearance="fill"
+      *ngIf="descriptionLabel.length > 0"
+    >
+      <div class="project-description__label">
+        {{ descriptionLabel | translate }}
+      </div>
+      <textarea
+        matInput
         cdkTextareaAutosize
         cdkAutosizeMinRows="5"
         [(ngModel)]="descriptionField"
+        #desriptionInp="ngModel"
+        required
+        name="description1"
       ></textarea>
+      <mat-error>
+        {{ "Validation-create-update-modal-description" | translate }}
+      </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="users-field" appearance="fill" *ngIf="users.length > 0">
+    <mat-form-field
+      class="users-field"
+      appearance="fill"
+      *ngIf="users.length > 0"
+    >
       <div class="project-user__label">{{ usersLabel | translate }}</div>
-      <mat-select [(ngModel)]="userName">
+      <mat-select [(ngModel)]="userName" #userInp="ngModel" name="user" required>
         <mat-option *ngFor="let user of users" [value]="user.name">
-          {{user.name}}
+          {{ user.name }}
         </mat-option>
       </mat-select>
+      <mat-error>
+        {{ "Validation-create-update-modal-user" | translate }}
+      </mat-error>
     </mat-form-field>
   </div>
 
-<div mat-dialog-actions>
-  <button class="cancel-btn" mat-button (click)="onCancel()">{{ "Cancel" | translate }}</button>
-  <button class="command-btn" mat-raised-button (click)="onCommand()">
-    {{ commandName | translate }}
-  </button>
-</div>
+  <div mat-dialog-actions>
+    <button class="cancel-btn" mat-button (click)="onCancel()"  >
+      {{ "Cancel" | translate }}
+    </button>
+    <button
+      class="command-btn"
+      mat-raised-button
+      type="submit"
+      (click)="onCommand()"
+      [disabled]="(titleField === '' || (descriptionLabel.length === 0 || descriptionField === '') || (users.length === 0 || userName === ''))"
+    >
+      {{ commandName | translate }}
+    </button>
+  </div>
+</form>

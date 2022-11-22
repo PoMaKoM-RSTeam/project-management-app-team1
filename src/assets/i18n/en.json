@@ -100,6 +100,10 @@
   "Validation-password-special": "- include special characters (?!#@)",
   "Validation-password-upper": "- combine both uppercase and lowercase letters",
 
+  "Validation-create-update-modal-title": "Enter title",
+  "Validation-create-update-modal-description": "Enter description",
+  "Validation-create-update-modal-user": "Select user",
+
   "Go-Home": "go home",
   "Not-found-message": "Page not found",
 

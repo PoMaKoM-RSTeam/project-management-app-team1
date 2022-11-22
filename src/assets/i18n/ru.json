@@ -100,6 +100,10 @@
   "Validation-password-special": "- специальные символы (?!#@)",
   "Validation-password-upper": "- буквы верхнего и нижнего регистра",
 
+  "Validation-create-update-modal-title": "Заполните заголовок",
+  "Validation-create-update-modal-description": "Заполните описание",
+  "Validation-create-update-modal-user": "Выберите пользователя",
+
   "Go-Home": "На главную",
   "Not-found-message": "Страница не найдена",
 

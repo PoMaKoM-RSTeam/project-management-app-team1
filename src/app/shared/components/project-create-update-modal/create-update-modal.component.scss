@@ -38,6 +38,10 @@ h2 {
   margin-top: 18px;
 }
 
+.dialog-title {
+  text-align: center;
+}
+
 mat-form-field {
   width: 300px;
   padding-bottom: 0;
@@ -77,10 +81,7 @@ textarea {
   background-color: #39424c;
 }
 
-.command-btn {
-  color: #fff;
-  background-color: #228EC4;
-}
+
 
 ::ng-deep .mat-select-panel {
   background: white;
@@ -99,4 +100,13 @@ textarea {
 }
 ::ng-deep .users-field.mat-form-field-appearance-fill .mat-form-field-infix {
   border-bottom: 1px solid #000;
+}
+::ng-deep .mat-dialog-actions {
+  justify-content: center;
+}
+
+
+button[type="submit"]:enabled {
+  color: #fff;
+  background-color: #228EC4;
 }
