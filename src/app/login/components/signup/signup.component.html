@@ -7,7 +7,7 @@
     }}<a class="form__link" (click)="signin()">{{ "Login" | translate }}</a>
   </p>
   <mat-form-field appearance="fill">
-    <mat-label>{{ "Name" | translate }}</mat-label>
+    <div>{{ "Name" | translate }}</div>
     <input
       matInput
       type="name"
@@ -20,29 +20,41 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field appearance="fill">
-    <mat-label>{{ "Login-name" | translate }}</mat-label>
+    <div>{{ "Login-name" | translate }}</div>
     <input
       matInput
       type="email"
       formControlName="login"
       autocomplete="email"
-      placeholder="Login"
+      placeholder="E-mail"
     />
     <mat-error *ngIf="login?.hasError('required')">
       {{ "Validation-login" | translate }}
     </mat-error>
-    <mat-error *ngIf="login?.hasError('emailError')">
+    <mat-error *ngIf="login?.hasError('email')">
       {{ "Validation-login-error" | translate }}
     </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>{{ "Password" | translate }}</mat-label>
+  <mat-form-field appearance="fill" class="password-field">
+    <div>{{ "Password" | translate }}</div>
     <input
       matInput
       formControlName="password"
       autocomplete="current-password"
       placeholder="Password"
+      [type]="hide ? 'password' : 'text'"
     />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+      type="button"
+      class="visibility-btn"
+    >
+      <mat-icon class="visibility-icon">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
     <mat-error
       *ngIf="
         signupForm.get('password')?.hasError('minlength') ||

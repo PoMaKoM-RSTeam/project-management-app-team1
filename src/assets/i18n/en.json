@@ -17,6 +17,8 @@
 
   "Delete": "Delete",
 
+  "Email-title": "Ваш E-Mail",
+
   "Edit-Profile": "Edit profile",
   "Email": "Email address",
   "Email-required": "Email is required",
@@ -31,7 +33,7 @@
   "Loading": "Loading . . . Please Wait",
   "Login": "Login",
   "Login-error": "Can't login? Write to the administrator",
-  "Login-name": "Login",
+  "Login-name": "Ваш E-Mail",
   "Login-pass-err": "Incorrect login or password",
   "Login-question": "Already have an account?",
   "Logout": "Logout",
@@ -101,6 +103,10 @@
   "Validation-password-short": "- should be at least 8 characters long",
   "Validation-password-special": "- include special characters (?!#@)",
   "Validation-password-upper": "- combine both uppercase and lowercase letters",
+
+  "Validation-create-update-modal-title": "Enter title",
+  "Validation-create-update-modal-description": "Enter description",
+  "Validation-create-update-modal-user": "Select user",
 
   "Go-Home": "go home",
   "Not-found-message": "Page not found",

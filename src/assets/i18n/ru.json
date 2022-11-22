@@ -17,6 +17,8 @@
 
   "Delete": "Удалить",
 
+  "Email-title": "Ваш E-Mail",
+
   "Edit-Profile": "Редактировать профиль",
   "Email": "Email адрес",
   "Email-required": "Email обязателен",
@@ -30,7 +32,7 @@
   "Lastname": "Фамилия",
   "Loading": "Загрузка . . . Подождите, пожалуйста",
   "Login": "Войти",
-  "Login-name": "Логин",
+  "Login-name": "Ваш E-Mail",
   "Login-error": "Не можете войти? Напишите администратору",
   "Login-pass-err": "Неправильный логин или пароль",
   "Login-question": "Уже есть аккаунт?",
@@ -101,6 +103,10 @@
   "Validation-password-short": "- минимум 8 символов",
   "Validation-password-special": "- специальные символы (?!#@)",
   "Validation-password-upper": "- буквы верхнего и нижнего регистра",
+
+  "Validation-create-update-modal-title": "Заполните заголовок",
+  "Validation-create-update-modal-description": "Заполните описание",
+  "Validation-create-update-modal-user": "Выберите пользователя",
 
   "Go-Home": "На главную",
   "Not-found-message": "Страница не найдена",

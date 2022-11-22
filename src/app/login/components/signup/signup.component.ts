@@ -26,6 +26,8 @@ export class SignupComponent {
 
   public authErrorMessage: string = '';
 
+  public hide: boolean = true;
+
   signupForm: FormGroup;
 
   constructor(
