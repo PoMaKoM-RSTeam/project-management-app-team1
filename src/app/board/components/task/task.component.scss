@@ -68,6 +68,19 @@
   transform: scale(1.1);
 }
 
+.task-settings__removeImg-icon {
+  font-size: 1.45rem;
+  color: #fff;
+  cursor: pointer;
+  width: 21px;
+  height: 21px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.task-settings__removeImg-icon:hover {
+  transform: scale(1.1);
+}
+
 .task-box:hover {
   background-color: #212B3A;
 }
@@ -79,6 +92,28 @@
   opacity: 1;
 }
 
+.task-box:hover .task-settings__removeImg-icon {
+  opacity: 1;
+}
+
 img {
+  width: 100%;
+  overflow: hidden;
+}
+#hover {
   width: 50%;
+  position: relative;
+  overflow: hidden;
+}
+#image img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in;
+}
+#hover:hover img {
+  border: 1px #fff dotted;
+  opacity: .7;
+  width: 90%;
 }

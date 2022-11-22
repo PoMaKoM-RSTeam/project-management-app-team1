@@ -46,7 +46,6 @@
   "Profile-user-delete-title": "Удаление профиля",
   "Profile-user-delete-message": "Профиль пользователя будет удален",
 
-  "Preview-attach": "Прикрепить файл",
   "Preview-edit": "Изменить Проект",
   "Preview-delete": "Удалить проект",
 
@@ -74,6 +73,9 @@
   "SiteTitle": "Система управления проектами",
   "SiteSubTitle": "Курсовой проект Rolling Scopes School",
   "Submit": "Отправить",
+
+  "task-img-attach": "Загрузить картинку",
+  "task-img-delete": "Удалить картинку",
 
   "Task-modal-add-title": "Создать задачу",
   "Task-modal-title": "Название задачи",

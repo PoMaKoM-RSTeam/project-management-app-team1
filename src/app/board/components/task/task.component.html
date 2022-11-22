@@ -4,22 +4,31 @@
     <div class="task-box__description">{{ task.description }}</div>
     <div class="task-box__info-user">{{ task.users[0] | firstLetter }}</div>
   </div>
-  <div *ngIf="img$ | async as img">
-    <img *ngIf="img !== null" [src]="img" />
-  </div>
+  <ng-container *ngIf="img$ | async as img">
+    <div id="hover" (click)="deleteImg(img._id)">
+      <div id="image">
+        <img [src]="baseUrl + img.path" />
+      </div>
+      <mat-icon
+        class="task-settings__removeImg-icon"
+        [title]="'task-img-delete' | translate"
+        >delete_forever</mat-icon
+      >
+    </div>
+  </ng-container>
   <div class="task-box__btns">
     <div class="task-settings__icons">
       <input
         id="input-file-id"
-        (change)="onChange($event)"
+        (change)="setImg($event)"
         hidden
         type="file"
-        accept=".jpeg,.png"
+        accept=".img,.jpeg,.png"
       />
-      <label for="input-file-id">
+      <label for="input-file-id" (click)="uploadImg()">
         <mat-icon
           class="task-settings__attach-icon"
-          [title]="'Preview-attach' | translate"
+          [title]="'task-img-attach' | translate"
           >attachment</mat-icon
         >
       </label>
@@ -27,7 +36,7 @@
     <div class="task-settings__icons">
       <mat-icon
         class="task-settings__remove-icon"
-        [title]="'Preview-delete' | translate"
+        [title]="'Task-modal-delete-title' | translate"
         (click)="deleteTask()"
         >delete</mat-icon
       >

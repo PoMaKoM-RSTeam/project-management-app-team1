@@ -8,7 +8,11 @@ import {
   ConfirmDialogModel,
   ICreateEditModel,
 } from './../../../core/models/dialog.model';
-import { ITask, TTaskInfoExtended } from './../../../core/models/data.model';
+import {
+  IFile,
+  ITask,
+  TTaskInfoExtended,
+} from './../../../core/models/data.model';
 import {
   Component,
   EventEmitter,
@@ -17,8 +21,8 @@ import {
   Output,
   ChangeDetectionStrategy,
   OnDestroy,
+  ChangeDetectorRef,
 } from '@angular/core';
-import { DatabaseService } from 'src/app/core/services/database.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -36,9 +40,13 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   public file!: File;
 
-  public img$!: Observable<string | null>;
+  public img$!: Observable<IFile | null>;
 
   public baseUrl = environment.baseUrl;
+
+  private currentTaskId: string = '';
+
+  public setImage!: File;
 
   private destroy$: Subject<boolean> = new Subject();
 
@@ -46,21 +54,11 @@ export class TaskComponent implements OnInit, OnDestroy {
     private projectModal: MatDialog,
     private userStatusService: UserStatusService,
     public tasksService: TasksDataService,
-    private databaseService: DatabaseService
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.tasksService
-      .getTasks(this.task.boardId, this.task.columnId)
-      .pipe(take(1))
-      .subscribe();
-    this.tasksService.getTasksField().pipe((value) => value);
-    this.img$ = this.databaseService.getFilesByTaskId(this.task._id).pipe(
-      map((result) => {
-        if (result && result[0]) return this.baseUrl + result[0].path;
-        return null;
-      })
-    );
+    this.img$ = this.tasksService.getImg(this.task._id).pipe((value) => value);
   }
 
   updateTask() {
@@ -152,24 +150,31 @@ export class TaskComponent implements OnInit, OnDestroy {
       });
   }
 
-  onChange(event: Event) {
-    const input = event.target as HTMLInputElement;
+  setImg(event: Event) {
+    const input = event.currentTarget as HTMLInputElement;
     if (!input.files) return;
     this.file = input.files[0];
-    this.uploadFile();
+    this.uploadImg();
   }
 
-  uploadFile() {
+  uploadImg() {
     if (this.file) {
+      const taskID = localStorage.getItem('currentTaskId') ?? '';
       const formData = new FormData();
       formData.append('boardId', this.task.boardId);
-      formData.append('taskId', this.task._id);
+      formData.append('taskId', taskID);
       formData.append('file', this.file);
-      this.databaseService
-        .uploadFile(formData)
-        .pipe(take(1))
-        .subscribe((response) => response);
+      this.tasksService.uploadImg(formData).subscribe(() => {
+        localStorage.removeItem('currentTaskId');
+        this.edited.emit();
+      });
+    } else {
+      localStorage.setItem('currentTaskId', this.task._id);
     }
+  }
+
+  deleteImg(imgId: string) {
+    this.tasksService.deleteImg(imgId).subscribe(() => this.edited.emit());
   }
 
   ngOnDestroy() {

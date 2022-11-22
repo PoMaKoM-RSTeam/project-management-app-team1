@@ -1,16 +1,18 @@
-import { ITask, IError, TTaskInfoExtended } from './../models/data.model';
+import {
+  ITask,
+  IError,
+  TTaskInfoExtended,
+  IFile,
+} from './../models/data.model';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { DatabaseService } from 'src/app/core/services/database.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TasksDataService {
-
-  public tasks: BehaviorSubject<ITask[]> = new BehaviorSubject<ITask[]>(
-    []
-  );
+  public tasks: BehaviorSubject<ITask[]> = new BehaviorSubject<ITask[]>([]);
 
   public task!: BehaviorSubject<ITask>;
 
@@ -18,7 +20,7 @@ export class TasksDataService {
     return this.tasks.asObservable();
   }
 
-  constructor(private database: DatabaseService) { }
+  constructor(private database: DatabaseService) {}
 
   public createTask(
     title: string,
@@ -29,22 +31,30 @@ export class TasksDataService {
     userId: string,
     users: string[]
   ): Observable<ITask | IError | null> {
-    return this.database.createTask(boardId, columnId, { title, description, order, userId, users }).pipe(
-      map((result) => {
-        if (result === null) {
-          this.database.getTasks(boardId, columnId).pipe(
-            map((task) => {
-              if (task) {
-                const tasks: ITask[] = task as ITask[];
-                this.tasks.next(tasks);
-              }
-              return task as ITask[];
-            })
-          );
-        }
-        return result;
+    return this.database
+      .createTask(boardId, columnId, {
+        title,
+        description,
+        order,
+        userId,
+        users,
       })
-    );
+      .pipe(
+        map((result) => {
+          if (result === null) {
+            this.database.getTasks(boardId, columnId).pipe(
+              map((task) => {
+                if (task) {
+                  const tasks: ITask[] = task as ITask[];
+                  this.tasks.next(tasks);
+                }
+                return task as ITask[];
+              })
+            );
+          }
+          return result;
+        })
+      );
   }
 
   public getTasks(boardId: string, columnId: string): Observable<ITask[]> {
@@ -83,7 +93,11 @@ export class TasksDataService {
     );
   }
 
-  public getTask(boardId: string, columnId: string, taskId: string): Observable<ITask> {
+  public getTask(
+    boardId: string,
+    columnId: string,
+    taskId: string
+  ): Observable<ITask> {
     return this.database.getTask(boardId, columnId, taskId).pipe(
       map((result) => {
         if (result) {
@@ -95,7 +109,11 @@ export class TasksDataService {
     );
   }
 
-  public deleteTask(boardId: string, columnId: string, taskId: string): Observable<IError | null> {
+  public deleteTask(
+    boardId: string,
+    columnId: string,
+    taskId: string
+  ): Observable<IError | null> {
     return this.database.deleteTask(boardId, columnId, taskId).pipe(
       map((result) => {
         if (result === null) {
@@ -114,4 +132,22 @@ export class TasksDataService {
     );
   }
 
+  public getImg(taskId: string): Observable<IFile | null> {
+    return this.database.getFilesByTaskId(taskId).pipe(
+      map((result) => {
+        if (result && result[0]) {
+          return result[0];
+        }
+        return null;
+      })
+    );
+  }
+
+  public uploadImg(formData: FormData): Observable<IFile | IError | null> {
+    return this.database.uploadFile(formData).pipe((result) => result);
+  }
+
+  public deleteImg(imgId: string): Observable<IError | IFile> {
+    return this.database.deleteFile(imgId).pipe((result) => result);
+  }
 }
