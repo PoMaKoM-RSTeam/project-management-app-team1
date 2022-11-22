@@ -46,7 +46,6 @@
   "Profile-user-delete-title": "Delete Profile",
   "Profile-user-delete-message": "Delete Current User Profile from App",
 
-  "Preview-attach": "Attach file",
   "Preview-edit": "Edite Project",
   "Preview-delete": "Delete Project",
 
@@ -74,6 +73,9 @@
   "SiteTitle": "Project Management System",
   "SiteSubTitle": "The Task of The Rolling Scopes School",
   "Submit": "Submit",
+
+  "task-img-attach": "Attach Img",
+  "task-img-delete": "Delete Img",
 
   "Task-modal-add-title": "Add Task",
   "Task-modal-title": "Task Title",
