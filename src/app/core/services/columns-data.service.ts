@@ -1,10 +1,10 @@
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { IColumn, IError, TColumnInfo } from './../models/data.model';
-import { DatabaseService } from './database.service';
 import { Injectable } from '@angular/core';
+import { ColumnApi } from './api/column.api';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ColumnsDataService {
   public columns: BehaviorSubject<IColumn[]> = new BehaviorSubject<IColumn[]>(
@@ -15,17 +15,17 @@ export class ColumnsDataService {
     return this.columns.asObservable();
   }
 
-  constructor(private database: DatabaseService) {}
+  constructor(private columnApi: ColumnApi) {}
 
   public updateColumn(
     boardId: string,
     columnId: string,
     columnInfo: TColumnInfo
   ): Observable<IColumn | IError | null> {
-    return this.database.updateColumn(boardId, columnId, columnInfo).pipe(
+    return this.columnApi.updateColumn(boardId, columnId, columnInfo).pipe(
       map((result) => {
         if (result === null) {
-          this.database.getColumns(boardId).pipe(
+          this.columnApi.getColumns(boardId).pipe(
             map((column) => {
               if (column) {
                 const columns: IColumn[] = column as IColumn[];
@@ -45,10 +45,10 @@ export class ColumnsDataService {
     order: number,
     boardId: string
   ): Observable<IColumn | IError | null> {
-    return this.database.createColumn(boardId, { title, order }).pipe(
+    return this.columnApi.createColumn(boardId, { title, order }).pipe(
       map((result) => {
         if (result === null) {
-          this.database.getColumns(boardId).pipe(
+          this.columnApi.getColumns(boardId).pipe(
             map((column) => {
               if (column) {
                 const columns: IColumn[] = column as IColumn[];
@@ -64,7 +64,7 @@ export class ColumnsDataService {
   }
 
   public getColumns(boardId: string): Observable<IColumn[]> {
-    return this.database.getColumns(boardId).pipe(
+    return this.columnApi.getColumns(boardId).pipe(
       map((result) => {
         if (result) {
           const columns: IColumn[] = result as IColumn[];
@@ -75,11 +75,14 @@ export class ColumnsDataService {
     );
   }
 
-  public deleteColumn(boardId: string, columnId: string): Observable<IError | null> {
-    return this.database.deleteColumn(boardId, columnId).pipe(
+  public deleteColumn(
+    boardId: string,
+    columnId: string
+  ): Observable<IError | null> {
+    return this.columnApi.deleteColumn(boardId, columnId).pipe(
       map((result) => {
         if (result === null) {
-          this.database.getColumns(boardId).pipe(
+          this.columnApi.getColumns(boardId).pipe(
             map((column) => {
               if (column) {
                 const columns: IColumn[] = column as IColumn[];

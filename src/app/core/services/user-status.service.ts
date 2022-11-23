@@ -8,7 +8,7 @@ import {
   IUserCredentials,
   LocalStorageKeys,
 } from '../models/user.model';
-import { DatabaseService } from './database.service';
+import { UserApi } from './api/user.api';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +32,7 @@ export class UserStatusService {
 
   public Users: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
 
-  constructor(private database: DatabaseService, private router: Router) {
+  constructor(private userApi: UserApi, private router: Router) {
     this.isLogged.next(this.isAuthenticated());
     this.getAllUsers().pipe((value) => value);
   }
@@ -87,7 +87,7 @@ export class UserStatusService {
   }
 
   public updateUser(userInfo: IUserCredentials): Observable<IError | IUser> {
-    return this.database.updateUser(this.userId, userInfo).pipe(
+    return this.userApi.updateUser(this.userId, userInfo).pipe(
       map((result) => {
         if (result) {
           const user: IUser = result as IUser;
@@ -100,7 +100,7 @@ export class UserStatusService {
   }
 
   public getAllUsers(): Observable<IError | IUser[]> {
-    return this.database.getUsers().pipe(
+    return this.userApi.getUsers().pipe(
       map((result) => {
         if (result) {
           const users: IUser[] = result as IUser[];
@@ -112,7 +112,7 @@ export class UserStatusService {
   }
 
   public deleteUser(): Observable<IError | null> {
-    return this.database.deleteUser(this.userId).pipe(
+    return this.userApi.deleteUser(this.userId).pipe(
       map((result) => {
         if (null) {
           this.logOut();

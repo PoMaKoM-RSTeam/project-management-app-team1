@@ -9,21 +9,21 @@ import {
   IUser,
 } from '../../core/models/user.model';
 import { IError, ITokenResponse } from '../../core/models/data.model';
-import { DatabaseService } from 'src/app/core/services/database.service';
 import { UserStatusService } from 'src/app/core/services/user-status.service';
+import { UserApi } from 'src/app/core/services/api/user.api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   constructor(
-    private database: DatabaseService,
+    private userApi: UserApi,
     private router: Router,
     private userStatusService: UserStatusService
   ) {}
 
   public logIn(userData: TUserSignIn) {
-    return this.database.signIn(userData).pipe(
+    return this.userApi.signIn(userData).pipe(
       map<IError | ITokenResponse, string>((data) => {
         let userId = '';
         if ('token' in data) {
@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   private getUserNameFromDB(userId: string): Observable<string> {
-    return this.database.getUser(userId).pipe(
+    return this.userApi.getUser(userId).pipe(
       map((data) => {
         let currentUser = '';
         if (data) {
@@ -64,7 +64,7 @@ export class AuthService {
   }
 
   public signUp(credentials: IUserCredentials) {
-    return this.database.signUp(credentials).pipe(
+    return this.userApi.signUp(credentials).pipe(
       map<IError | IUser, void>((data) => {
         if ('_id' in data) {
           this.router.navigate(['login']);
