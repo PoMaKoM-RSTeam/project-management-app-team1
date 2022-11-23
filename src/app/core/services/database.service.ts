@@ -203,6 +203,10 @@ export class DatabaseService {
     });
   }
 
+  public getTasksByBoardId(boardId: string): Observable<ITask[]> {
+    return this.http.get<ITask[]>(`api/tasksSet/${boardId}`);
+  }
+
   public updateSetOfTasks(tasks: ITask[]): Observable<ITask[]> {
     return this.http.patch<ITask[]>('api/tasksSet', { tasks });
   }

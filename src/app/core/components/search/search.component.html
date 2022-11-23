@@ -1,0 +1,22 @@
+<div class="search__container">
+  <input
+    type="search"
+    placeholder="{{ 'Search' | translate }}"
+    class="search__input"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (search)="onSearch()"
+    #searchInput
+  />
+  <div
+    (pointerover)="onHover()"
+    (pointerleave)="onLeave()"
+    class="search__results"
+    *ngIf="isFocused || isHovered"
+  >
+    <app-search-result
+      [result]="result"
+      *ngFor="let result of results | sortSearchResults"
+    ></app-search-result>
+  </div>
+</div>
