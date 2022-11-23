@@ -10,13 +10,13 @@
   </p>
 
   <mat-form-field appearance="fill">
-    <mat-label>{{ "Login" | translate }}</mat-label>
+    <div>{{ "Email-title" | translate }}</div>
     <input
       matInput
       type="email"
       formControlName="login"
       autocomplete="email"
-      placeholder="Login"
+      placeholder="E-mail"
     />
     <mat-error *ngIf="authForm.get('login')?.hasError('required')">
       {{ "Validation-login" | translate }}
@@ -25,8 +25,8 @@
       {{ "Validation-login-error" | translate }}
     </mat-error>
   </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>{{ "Password" | translate }}</mat-label>
+  <mat-form-field appearance="fill" class="password-field">
+    <div>{{ "Password" | translate }}</div>
     <input
       matInput
       formControlName="password"
@@ -41,31 +41,11 @@
       [attr.aria-label]="'Hide password'"
       [attr.aria-pressed]="hide"
       type="button"
+      class="visibility-btn"
     >
-      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      <mat-icon class="visibility-icon">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
-    <mat-error
-      *ngIf="
-        authForm.get('password')?.hasError('minlength') ||
-        authForm.get('password')?.hasError('lowerAndUpperCase') ||
-        authForm.get('password')?.hasError('lettersAndNumbers') ||
-        authForm.get('password')?.hasError('leastOneSpecChar')
-      "
-    >
-      {{ "Validation-password-general" | translate }}
-    </mat-error>
-    <mat-error *ngIf="authForm.get('password')?.hasError('leastOneSpecChar')">
-      {{ "Validation-password-special" | translate }}
-    </mat-error>
-    <mat-error *ngIf="authForm.get('password')?.hasError('lowerAndUpperCase')">
-      {{ "Validation-password-upper" | translate }}
-    </mat-error>
-    <mat-error *ngIf="authForm.get('password')?.hasError('minlength')">
-      {{ "Validation-password-short" | translate }}
-    </mat-error>
-    <mat-error *ngIf="authForm.get('password')?.hasError('lettersAndNumbers')">
-      {{ "Validation-password-numbers" | translate }}
-    </mat-error>
+    
     <mat-error *ngIf="authForm.get('password')?.hasError('required')">
       {{ "Validation-password" | translate }}
     </mat-error>
@@ -74,7 +54,7 @@
     <mat-error *ngIf="isLoginError">
       {{ "Login-pass-err" | translate }}
     </mat-error>
-    <button type="submit" mat-raised-button [disabled]="authForm.invalid">
+    <button type="submit" mat-raised-button >
       {{ "Login" | translate }}
     </button>
   </div>

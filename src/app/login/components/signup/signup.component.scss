@@ -9,7 +9,8 @@ form {
   width: 350px;
   height: 470px;
   border-radius: 5px;
-  background: #efefef;
+  background: #1C2128;
+  color: #fff;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -44,14 +45,29 @@ form {
     margin-bottom: 10px;
   }
 
+  .password-field {
+    position: relative;
+  }
+
+  .visibility-btn {
+    position: absolute;
+    top: 8px;
+    left: -20px;
+  }
+
   input {
-    margin: 10px 0 0 -10px;
+    margin: 5px 0 0 -10px;
     padding-left: 10px;
     border: none;
-    background-color: #e5e5e5;
+    background-color: #161B22;
+    color: #fff;
     height: 33px;
     width: 310px;
-    color: #929292;
+  }
+
+  button[type="button"] {
+    color: #fff;
+    background-color: #1C2128;
   }
 
   button[type="submit"] {
@@ -63,5 +79,15 @@ form {
   button[type="submit"]:enabled {
     color: white;
     background-color: #2f80ed;
+  }
+}
+
+::ng-deep {
+  .mat-form-field-appearance-fill .mat-form-field-infix {
+    padding: 0;
+  }
+
+  .mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 0.30em 0.75em 0 0.75em;
   }
 }

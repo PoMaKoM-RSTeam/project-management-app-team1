@@ -10,6 +10,8 @@ import { ICreateEditModel } from '../../../core/models/dialog.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateUpdateModalComponent {
+
+
   title: string;
 
   titleLabel!: string;
@@ -43,6 +45,7 @@ export class CreateUpdateModalComponent {
     this.usersLabel = dialog.usersLabel ?? '';
     this.userName = dialog.user ?? '';
     this.users = dialog.users ?? [];
+    
   }
 
   onCommand(): void {
