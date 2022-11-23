@@ -4,16 +4,18 @@ import { map, mergeMap, reduce, switchMap } from 'rxjs/operators';
 
 import { from, Observable, of } from 'rxjs';
 import { IBoard, IError, ISearchResults, ITask } from '../models/data.model';
-import { DatabaseService } from './database.service';
 import { UserStatusService } from './user-status.service';
 import { IUser } from '../models/user.model';
+import { BoardApi } from './api/board.api';
+import { TaskApi } from './api/task.api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
   constructor(
-    private database: DatabaseService,
+    private boardApi: BoardApi,
+    private taskApi: TaskApi,
     private userStatusService: UserStatusService
   ) {}
 
@@ -30,10 +32,8 @@ export class SearchService {
         map((userTasks: ITask[]) => {
           if (userTasks && userTasks.length > 0) {
             const userTasksResults = this.getUsersTasks(users, userTasks);
-
             return results.concat(userTasksResults);
           }
-
           return results;
         })
       );
@@ -42,7 +42,7 @@ export class SearchService {
   }
 
   public getCompleteBoardsData(): Observable<ITask[]> {
-    return this.database.getBoards().pipe(
+    return this.boardApi.getBoards().pipe(
       map<IError | IBoard[], string[]>((boardsArray: IError | IBoard[]) => {
         return Array.isArray(boardsArray)
           ? boardsArray.reduce(
@@ -55,7 +55,7 @@ export class SearchService {
         return from(boardsIds);
       }),
       mergeMap<string, Observable<ITask[]>>((id: string) => {
-        return this.database.getTasksByBoardId(id);
+        return this.taskApi.getTasksByBoardId(id);
       }),
       reduce<ITask[], ITask[]>((acc: ITask[], tasks: ITask[]) => {
         return acc.concat(tasks);
@@ -81,7 +81,7 @@ export class SearchService {
         return from(uIds);
       }),
       mergeMap<string, Observable<ITask[]>>((id: string) => {
-        return this.database.getTasksByUser(id);
+        return this.taskApi.getTasksByUser(id);
       }),
       reduce<ITask[], ITask[]>((acc: ITask[], tasks: ITask[]) => {
         return acc.concat(tasks);

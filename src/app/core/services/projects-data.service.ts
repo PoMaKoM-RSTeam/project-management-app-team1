@@ -1,7 +1,7 @@
-import { DatabaseService } from './database.service';
 import { IBoard, IError } from './../models/data.model';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { BoardApi } from './api/board.api';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class ProjectsDataService {
     users: [''],
   });
 
-  constructor(private database: DatabaseService) {}
+  constructor(private boardApi: BoardApi) {}
 
   public getProjectField(): Observable<IBoard[]> {
     return this.projects.asObservable();
@@ -30,10 +30,10 @@ export class ProjectsDataService {
     description: string,
     owner: string
   ): Observable<IBoard | IError | null> {
-    return this.database.createBoard({ title, description, owner }).pipe(
+    return this.boardApi.createBoard({ title, description, owner }).pipe(
       map((result) => {
         if (result === null) {
-          this.database.getBoards().pipe(
+          this.boardApi.getBoards().pipe(
             map((project) => {
               if (project) {
                 const boards: IBoard[] = project as IBoard[];
@@ -49,7 +49,7 @@ export class ProjectsDataService {
   }
 
   public getProjects(): Observable<IBoard[]> {
-    return this.database.getBoards().pipe(
+    return this.boardApi.getBoards().pipe(
       map((result) => {
         if (result) {
           const boards: IBoard[] = result as IBoard[];
@@ -61,7 +61,7 @@ export class ProjectsDataService {
   }
 
   public getProject(boardId: string): Observable<IBoard> {
-    return this.database.getBoard(boardId).pipe(
+    return this.boardApi.getBoard(boardId).pipe(
       map((result) => {
         if (result) {
           const board: IBoard = result as IBoard;
@@ -73,10 +73,10 @@ export class ProjectsDataService {
   }
 
   public deleteProject(projectId: string): Observable<IError | null> {
-    return this.database.deleteBoard(projectId).pipe(
+    return this.boardApi.deleteBoard(projectId).pipe(
       map((result) => {
         if (result === null) {
-          this.database.getBoards().pipe(
+          this.boardApi.getBoards().pipe(
             map((project) => {
               if (project) {
                 const boards: IBoard[] = project as IBoard[];
@@ -98,7 +98,7 @@ export class ProjectsDataService {
     owner: string,
     users: string[]
   ): Observable<IBoard> {
-    return this.database
+    return this.boardApi
       .updateBoard(projectId, { title, description, owner, users })
       .pipe(
         map((result) => {
