@@ -1,0 +1,45 @@
+@import "src/assets/styles/variables";
+
+.result__item {
+  display: flex;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 5px 10px;
+  gap: 10px;
+
+  .result__row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: $whiteColor;
+  }
+}
+
+mat-icon {
+  padding: 0;
+  margin: 0;
+}
+
+.result__link {
+  display: block;
+  color: #228EC4;
+  transition: all .25s;
+
+  &:hover {
+    cursor: pointer;
+    color: $whiteColor;
+  }
+}
+
+.result__container {
+  display: flex;
+  gap: 5px;
+}
+
+.result__important {
+  font-style: italic;
+  color: $whiteColor;
+}

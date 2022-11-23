@@ -235,7 +235,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
       descriptionLabel: 'Task-modal-description',
       commandName: 'Task-modal-add',
       usersLabel: 'Task-modal-user-titel',
-      users: this.userStatusService.users.value,
+      users: this.userStatusService.Users.value,
     };
 
     const dialogRef = this.projectModal.open(CreateUpdateModalComponent, {

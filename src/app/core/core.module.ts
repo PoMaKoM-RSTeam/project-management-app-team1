@@ -20,6 +20,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ToastrModule } from 'ngx-toastr';
+import { SearchComponent } from './components/search/search.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { SortSearchResultsPipe } from './pipes/sort-search-results';
 
 const routes: Routes = [];
 
@@ -47,10 +50,10 @@ const routes: Routes = [];
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
-
   ],
   exports: [
     LocalizedDatePipe,
+    SortSearchResultsPipe,
     RouterModule,
     TranslateModule,
     UserStatusComponent,
@@ -63,10 +66,13 @@ const routes: Routes = [];
     ProfilePageComponent,
     UserStatusComponent,
     LocalizedDatePipe,
+    SortSearchResultsPipe,
     WelcomePageComponent,
     FooterComponent,
     HeaderComponent,
     NotFoundPageComponent,
+    SearchComponent,
+    SearchResultComponent,
   ],
 })
 export class CoreModule {

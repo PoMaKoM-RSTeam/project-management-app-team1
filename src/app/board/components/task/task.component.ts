@@ -71,7 +71,7 @@ export class TaskComponent implements OnInit, OnDestroy {
       titleField: this.task.title,
       descriptionField: this.task.description,
       user: this.task.users[0],
-      users: this.userStatusService.users.value,
+      users: this.userStatusService.Users.value,
     };
 
     const dialogRef = this.projectModal.open(CreateUpdateModalComponent, {

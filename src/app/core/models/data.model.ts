@@ -2,8 +2,8 @@ export interface IBoard {
   _id: string;
   title: string;
   description: string;
-  owner: string; // "userId of owner",
-  users?: string[]; // [ "userId of invited user #1", "userId of invited user #2" ]
+  owner: string;
+  users?: string[];
 }
 
 export type TBoardInfo = Omit<IBoard, '_id'>;
@@ -30,8 +30,8 @@ export interface ITask {
   title: string;
   order: number;
   description: string;
-  userId: string; // "userId of task owner"
-  users: string[]; // [ "userId of responsible user #1", "userId of responsible user #2" ]
+  userId: string;
+  users: string[];
   boardId: string;
   columnId: string;
 }
@@ -65,4 +65,13 @@ export interface IFile {
   taskId: string;
   boardId: string;
   path: string;
+}
+
+export interface ISearchResults {
+  boardId: string;
+  columnId?: string;
+  taskId?: string;
+  taskTitle: string;
+  userName?: string;
+  message: string;
 }
