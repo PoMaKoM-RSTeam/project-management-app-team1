@@ -30,12 +30,11 @@ export class UserStatusService {
     this.userLogin
   );
 
-  public users: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>(
-    []
-  );
+  public Users: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
 
   constructor(private database: DatabaseService, private router: Router) {
     this.isLogged.next(this.isAuthenticated());
+    this.getAllUsers().pipe((value) => value);
   }
 
   getLoginStatus(): Observable<boolean> {
@@ -55,7 +54,7 @@ export class UserStatusService {
   }
 
   getUsers(): Observable<IUser[]> {
-    return this.users.asObservable();
+    return this.Users.asObservable();
   }
 
   get token(): string {
@@ -105,7 +104,7 @@ export class UserStatusService {
       map((result) => {
         if (result) {
           const users: IUser[] = result as IUser[];
-          this.users.next(users);
+          this.Users.next(users);
         }
         return result as IUser[];
       })

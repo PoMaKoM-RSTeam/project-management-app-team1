@@ -13,9 +13,11 @@ import {
   map,
   Observable,
   switchMap,
+  take,
 } from 'rxjs';
 import { ISearchResults, ITask } from '../../models/data.model';
 import { SearchService } from '../../services/search.service';
+import { UserStatusService } from '../../services/user-status.service';
 
 @Component({
   selector: 'app-search',
@@ -34,13 +36,18 @@ export class SearchComponent implements AfterViewInit {
 
   results: ISearchResults[];
 
-  constructor(private search: SearchService, private cdr: ChangeDetectorRef) {
+  constructor(
+    private search: SearchService,
+    private cdr: ChangeDetectorRef,
+    private userStatusService: UserStatusService
+  ) {
     this.defaultValue = {
       boardId: '',
       taskTitle: '',
       message: 'Search by tasks and users',
     };
     this.results = [this.defaultValue];
+    this.userStatusService.getAllUsers().pipe(take(1)).subscribe();
   }
 
   ngAfterViewInit(): void {

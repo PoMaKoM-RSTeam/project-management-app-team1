@@ -22,20 +22,18 @@ export class SearchService {
     tasks: ITask[]
   ): Observable<ISearchResults[]> {
     const results = this.searchInBoards(search, tasks);
+
     const users = this.searchInUsers(search);
+
     if (users && users.length > 0) {
       return this.getUsersData(users).pipe(
         map((userTasks: ITask[]) => {
           if (userTasks && userTasks.length > 0) {
             const userTasksResults = this.getUsersTasks(users, userTasks);
-            if (
-              results &&
-              results.length > 0 &&
-              userTasksResults &&
-              userTasksResults.length > 0
-            )
-              results.concat(userTasksResults);
+
+            return results.concat(userTasksResults);
           }
+
           return results;
         })
       );
@@ -107,6 +105,7 @@ export class SearchService {
           columnId: task.columnId,
           taskId: task._id,
           taskTitle: task.title,
+          userName: '',
           message: foundIn,
         });
       });
@@ -115,7 +114,7 @@ export class SearchService {
   }
 
   public searchInUsers(search: string): IUser[] {
-    return this.userStatusService.users.value.filter((user: IUser) =>
+    return this.userStatusService.Users.value.filter((user: IUser) =>
       user?.name?.includes(search)
     );
   }
@@ -123,7 +122,6 @@ export class SearchService {
   public getUsersTasks(users: IUser[], tasks: ITask[]): ISearchResults[] {
     const results: ISearchResults[] = [];
     tasks.forEach((task: ITask) => {
-      const foundIn = 'userName';
       results.push({
         boardId: task.boardId,
         columnId: task.columnId,
@@ -131,10 +129,11 @@ export class SearchService {
         taskTitle: task.title,
         userName:
           users.filter((user: IUser) => user._id === task.userId)[0]?.name ??
-          'User N A M E',
-        message: foundIn,
+          'assigned',
+        message: 'userName',
       });
     });
+
     return results;
   }
 }
