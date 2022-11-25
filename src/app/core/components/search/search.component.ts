@@ -28,13 +28,13 @@ import { UserStatusService } from '../../services/user-status.service';
 export class SearchComponent implements AfterViewInit {
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
-  isFocused: boolean = false;
+  public results: ISearchResults[];
 
-  isHovered: boolean = false;
+  public isFocused: boolean = false;
+
+  public isHovered: boolean = false;
 
   private readonly defaultValue: ISearchResults;
-
-  results: ISearchResults[];
 
   constructor(
     private search: SearchService,
