@@ -117,28 +117,6 @@
 
   "project-title": "Project management application",
 
-  "About-curse": "About angular course",
-
-  "FREE-OF-CHARGE LEARNING-title": "FREE LEARNING",
-  "FREE-OF-CHARGE LEARNING-text": "The RS School is working by the principle of \"Pay it forward\". Members of our community share their knowledge and check students' tasks for free. And we hope that our students will continue this work as our mentors in the future",
-
-  "ABOUT-COURSE-title": "About the course",
-  "ABOUT-COURSE-text": "The course is intended for front-end developers who would like to get acquainted with Angular, learn the basics of RXJS, as well as NGRX. The duration of the course is 9 weeks, during which it will be necessary to create two applications",
-  "CERTIFICATE-title": "CERTIFICATE",
-  "CERTIFICATE-text": "After accomplishing all three stages of education, students will receive an electronic certificate of completion",
-
-  "SCHEDULE-title": "SCHEDULE",
-  "SCHEDULE-text1": "Twice a week in the evenings",
-  "SCHEDULE-text2": "Duration: 9 weeks",
-  "SCHEDULE-text3": "Types of training: webinars",
-
-  "OPEN TO EVERYONE-title": "OPEN TO EVERYONE",
-  "OPEN TO EVERYONE-text": "Everyone can study at RS School, regardless of age, professional employment, or place of residence. However, you should have sufficient base knowledge before the program begins",
-
-  "Enroll": "enroll",
-
-  "motto": "THE PERFECT SOLUTION TO MANAGE YOUR TASKS IN ONE PLACE FOR EVERYONE",
-
   "quote": "Project management can be defined as a way of developing structure in a complex project, where the independent variables of time, cost, resources and human behavior come together",
   "quote-author": "Rory Burke",
 
@@ -150,6 +128,24 @@
 
   "SignInError": "Wrong login or password",
   "SignUpError": "User already exist",
-  "SuccessSignUp": "User successfully created"
+  "SuccessSignUp": "User successfully created",
 
+  "About-project": "application features",
+  "About-localization-title": "Localization",
+  "About-localization-text": "Support for Russian and English languages",
+  "About-interactivity-title": "Interactivity",
+  "About-interactivity-text": "The ability to attach an image to a task",
+  "About-search-title": "Search",
+  "About-search-text": "The ability to search for tasks by key",
+  "About-free-title": "Free",
+  "About-free-text": "Absolutely free to use application",
+  "About-projects-title": "Projects",
+  "About-projects-text": "Support for an exceptional number of projects",
+  "About-interface-title": "Interface",
+  "About-interface-text": "Intuitive and pleasant interface",
+  "About-angular-title": "Course Angular",
+  "About-angular-text": "Developed as part of the course ",
+  "About-accessibility-title": "Accessibility",
+  "About-accessibility-text": "Multi-User issue editing",
+  "Try": "Try it now"
 }

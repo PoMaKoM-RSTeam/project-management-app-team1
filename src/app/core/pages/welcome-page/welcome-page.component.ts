@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { UserStatusService } from '../../services/user-status.service';
 
 @Component({
   selector: 'app-welcome-page',
@@ -6,4 +7,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./welcome-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WelcomePageComponent {}
+export class WelcomePageComponent implements OnInit {
+  link: string = '/login';
+
+  constructor(private userStatusService: UserStatusService) {
+  }
+
+  ngOnInit() {
+    this.link =  this.userStatusService.isAuthenticated() ? '/home' : '/login';
+  }
+}

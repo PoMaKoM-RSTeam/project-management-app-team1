@@ -11,73 +11,96 @@
       <img src="./assets/images/logo.jpg" alt="logo" class="quote-image" />
     </div>
   </div>
+
   <div class="about">
-    <h2 class="about-title">{{ "About-curse" | translate | uppercase }}</h2>
+    <h2 class="about-title">{{ "About-project" | translate | uppercase }}</h2>
     <div class="about-cards">
       <div class="about-card">
         <div class="title-container">
-          <img src="./assets/icons/free.svg" alt="free" />
+          <img src="./assets/icons/language.svg" alt="free" />
           <h3 class="about-card-title">
-            {{ "FREE-OF-CHARGE LEARNING-title" | translate }}
+            {{ "About-localization-title" | translate }}
           </h3>
         </div>
         <p class="about-text">
-          {{ "FREE-OF-CHARGE LEARNING-text" | translate }}
+          {{ "About-localization-text" | translate }}
         </p>
       </div>
 
       <div class="about-card">
         <div class="title-container">
-          <img src="./assets/icons/angular.svg" alt="angular" />
+          <img src="./assets/icons/interactivity.svg" alt="angular" />
           <h3 class="about-card-title">
-            {{ "ABOUT-COURSE-title" | translate }}
+            {{ "About-interactivity-title" | translate }}
           </h3>
         </div>
-        <p class="about-text">{{ "ABOUT-COURSE-text" | translate }}</p>
+        <p class="about-text">{{ "About-interactivity-text" | translate }}</p>
       </div>
 
       <div class="about-card">
         <div class="title-container">
-          <img src="./assets/icons/people.svg" alt="people" />
+          <img src="./assets/icons/search.svg" alt="people" />
           <h3 class="about-card-title">
-            {{ "OPEN TO EVERYONE-title" | translate }}
+            {{ "About-search-title" | translate }}
           </h3>
         </div>
-        <p class="about-text">{{ "OPEN TO EVERYONE-text" | translate }}</p>
+        <p class="about-text">{{ "About-search-text" | translate }}</p>
       </div>
 
       <div class="about-card">
         <div class="title-container">
-          <img
-            src="./assets/icons/schedule.svg"
-            alt="schedule"
-            class="about-icon"
-          />
-          <h3 class="about-card-title">{{ "SCHEDULE-title" | translate }}</h3>
+          <img src="./assets/icons/free.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-free-title" | translate }}
+          </h3>
         </div>
-        <ul class="about-list">
-          <li>{{ "SCHEDULE-text1" | translate }}</li>
-          <li>{{ "SCHEDULE-text2" | translate }}</li>
-          <li>{{ "SCHEDULE-text3" | translate }}</li>
-        </ul>
+        <p class="about-text">{{ "About-free-text" | translate }}</p>
       </div>
 
       <div class="about-card">
         <div class="title-container">
-          <img src="./assets/icons/certificate.svg" alt="certificate" />
+          <img src="./assets/icons/people.svg" alt="certificate" />
           <h3 class="about-card-title">
-            {{ "CERTIFICATE-title" | translate }}
+            {{ "About-accessibility-title" | translate }}
           </h3>
         </div>
-        <p class="about-text">{{ "CERTIFICATE-text" | translate }}</p>
+        <p class="about-text">{{ "About-accessibility-text" | translate }}</p>
       </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/plan.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-projects-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">{{ "About-projects-text" | translate }}</p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/interface.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-interface-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">{{ "About-interface-text" | translate }}</p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/angular.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-angular-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">{{ "About-angular-text" | translate }} <a href="https://rs.school/angular/" class="link">RS School</a></p>
+      </div>
+
     </div>
-    <a
-      href="https://wearecommunity.io/events/angular-rss-2022q3"
-      target="_blank"
-    >
+    <a [routerLink]="link">
       <button class="about-button">
-        {{ "enroll" | translate | uppercase }}
+        {{ "Try" | translate | uppercase }}
       </button>
     </a>
   </div>
@@ -96,7 +119,7 @@
             ><h3 class="team-name">{{ "wixhub" | uppercase }}</h3></a
           >
         </div>
-        <p class="about-text">{{ "wixhub-text" | translate }}</p>
+        <p class="about-team-text">{{ "wixhub-text" | translate }}</p>
       </div>
 
       <div class="about-card">
@@ -108,7 +131,7 @@
           />
           <h3 class="team-name">{{ "zhagun" | uppercase }}</h3>
         </div>
-        <p class="about-text">{{ "zhagun-text" | translate }}</p>
+        <p class="about-team-text">{{ "zhagun-text" | translate }}</p>
       </div>
 
       <div class="about-card">
@@ -120,7 +143,7 @@
           />
           <h3 class="team-name">{{ "nonebeer" | uppercase }}</h3>
         </div>
-        <p class="about-text">{{ "nonebeer-text" | translate }}</p>
+        <p class="about-team-text">{{ "nonebeer-text" | translate }}</p>
       </div>
     </div>
   </div>
