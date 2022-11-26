@@ -89,6 +89,9 @@
   "Task-modal-edit": "Edit",
   "Task-modal-delete-title": "Delete Task",
   "Task-modal-delete-message": "Delete Current Task from Column",
+  "Task-modal-image-title": "Image",
+  "Task-modal-point-title": "Task Done",
+  "Task-status-complete": "Complete",
 
   "Update": "Update",
   "Username": "User name",

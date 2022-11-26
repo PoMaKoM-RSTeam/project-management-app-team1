@@ -32,9 +32,9 @@ export class PointApi {
 
   public updatePoint(
     id: string,
-    pointInfo: IPointInfo
+    pointStatus: boolean
   ): Observable<IError | IPoint> {
-    return this.http.patch<IPoint>(`api/points/${id}`, pointInfo);
+    return this.http.patch<IPoint>(`api/points/${id}`, { title:'Point', done: pointStatus });
   }
 
   public updateSetOfPoints(points: IPoint[]): Observable<IError | IPoint[]> {

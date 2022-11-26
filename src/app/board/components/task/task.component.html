@@ -2,37 +2,28 @@
   <div class="task-box__info" (click)="updateTask()">
     <div class="task-box__title">{{ task.title }}</div>
     <div class="task-box__description">{{ task.description }}</div>
-    <div class="task-box__info-user">{{ task.users[0] | firstLetter }}</div>
+    <div class="task-box__info-settings">
+       <div class="task-box__info-user">{{ task.users[0] | firstLetter }}</div>
+       <ng-container *ngIf="point$ | async  as point">
+          <div class="task-box__info-status" *ngIf="point[0].done">
+            <mat-icon class="task-box__info-status-icon">check_circle</mat-icon>
+            <div class="task-box__info-status-label">{{ "Task-status-complete" |  translate}}</div>
+        </div>
+       </ng-container>
+       
+    </div>
+   
   </div>
   <ng-container *ngIf="img$ | async as img">
-    <div id="hover" (click)="deleteImg(img._id)">
+    <div id="hover" >
       <div id="image">
         <img [src]="baseUrl + img.path" />
       </div>
-      <mat-icon
-        class="task-settings__removeImg-icon"
-        [title]="'task-img-delete' | translate"
-        >delete_forever</mat-icon
-      >
+      
     </div>
   </ng-container>
   <div class="task-box__btns">
-    <div class="task-settings__icons">
-      <input
-        id="input-file-id"
-        (change)="setImg($event)"
-        hidden
-        type="file"
-        accept=".img,.jpeg,.png"
-      />
-      <label for="input-file-id" (click)="uploadImg()">
-        <mat-icon
-          class="task-settings__attach-icon"
-          [title]="'task-img-attach' | translate"
-          >attachment</mat-icon
-        >
-      </label>
-    </div>
+ 
     <div class="task-settings__icons">
       <mat-icon
         class="task-settings__remove-icon"

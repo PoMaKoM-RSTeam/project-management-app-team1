@@ -1,3 +1,4 @@
+import { ITask } from './data.model';
 import { IUser } from './user.model';
 export class ConfirmDialogModel {
   constructor(
@@ -16,5 +17,8 @@ export interface ICreateEditModel {
   usersLabel?: string;
   user?: string;
   users?: IUser[];
+  task?: ITask;
+  pointLabel?: string;
+  pointStatus?: boolean;
 }
 
