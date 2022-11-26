@@ -44,7 +44,7 @@ export class SearchComponent implements AfterViewInit {
     this.defaultValue = {
       boardId: '',
       taskTitle: '',
-      message: 'Search by tasks and users',
+      message: 'Search-start',
     };
     this.results = [this.defaultValue];
     this.userStatusService.getAllUsers().pipe(take(1)).subscribe();
@@ -79,7 +79,7 @@ export class SearchComponent implements AfterViewInit {
             {
               boardId: '',
               taskTitle: '',
-              message: 'No Data Found',
+              message: 'Search-no-data',
             },
           ];
         this.cdr.detectChanges();

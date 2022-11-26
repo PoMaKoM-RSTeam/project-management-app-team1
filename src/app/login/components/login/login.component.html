@@ -10,13 +10,13 @@
   </p>
 
   <mat-form-field appearance="fill">
-    <div>{{ "Email-title" | translate }}</div>
+    <div>{{ "Login-name" | translate }}</div>
     <input
       matInput
       type="email"
       formControlName="login"
       autocomplete="email"
-      placeholder="E-mail"
+      placeholder="Email"
     />
     <mat-error *ngIf="authForm.get('login')?.hasError('required')">
       {{ "Validation-login" | translate }}
