@@ -16,5 +16,5 @@
     <span>{{ result.userName }}&nbsp;</span>
     <a class="result__link">{{ result.taskTitle }}</a>
   </div>
-  <div *ngIf="result.boardId === ''">{{ result.message }}</div>
+  <div *ngIf="result.boardId === ''">{{ result.message | translate }}</div>
 </div>

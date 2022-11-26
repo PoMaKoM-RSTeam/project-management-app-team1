@@ -10,13 +10,13 @@
   </p>
 
   <mat-form-field appearance="fill">
-    <div>{{ "Email-title" | translate }}</div>
+    <div>{{ "Login-name" | translate }}</div>
     <input
       matInput
       type="email"
       formControlName="login"
       autocomplete="email"
-      placeholder="E-mail"
+      placeholder="Email"
     />
     <mat-error *ngIf="authForm.get('login')?.hasError('required')">
       {{ "Validation-login" | translate }}
@@ -43,9 +43,11 @@
       type="button"
       class="visibility-btn"
     >
-      <mat-icon class="visibility-icon">{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      <mat-icon class="visibility-icon">{{
+        hide ? "visibility_off" : "visibility"
+      }}</mat-icon>
     </button>
-    
+
     <mat-error *ngIf="authForm.get('password')?.hasError('required')">
       {{ "Validation-password" | translate }}
     </mat-error>
@@ -54,7 +56,7 @@
     <mat-error *ngIf="isLoginError">
       {{ "Login-pass-err" | translate }}
     </mat-error>
-    <button type="submit" mat-raised-button >
+    <button type="submit" mat-raised-button>
       {{ "Login" | translate }}
     </button>
   </div>
