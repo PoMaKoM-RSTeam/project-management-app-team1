@@ -30,11 +30,8 @@ export class UserStatusService {
     this.userLogin
   );
 
-  public Users: BehaviorSubject<IUser[]> = new BehaviorSubject<IUser[]>([]);
-
   constructor(private userApi: UserApi, private router: Router) {
     this.isLogged.next(this.isAuthenticated());
-    this.getAllUsers().pipe((value) => value);
   }
 
   getLoginStatus(): Observable<boolean> {
@@ -51,10 +48,6 @@ export class UserStatusService {
 
   getUserLogin(): Observable<string> {
     return this.Login.asObservable();
-  }
-
-  getUsers(): Observable<IUser[]> {
-    return this.Users.asObservable();
   }
 
   get token(): string {
@@ -99,18 +92,6 @@ export class UserStatusService {
     );
   }
 
-  public getAllUsers(): Observable<IError | IUser[]> {
-    return this.userApi.getUsers().pipe(
-      map((result) => {
-        if (result) {
-          const users: IUser[] = result as IUser[];
-          this.Users.next(users);
-        }
-        return result as IUser[];
-      })
-    );
-  }
-
   public deleteUser(): Observable<IError | null> {
     return this.userApi.deleteUser(this.userId).pipe(
       map((result) => {
@@ -123,10 +104,9 @@ export class UserStatusService {
   }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem(LocalStorageKeys.authToken);
-    if (token) {
+    if (this.token) {
       try {
-        const { exp } = this.parseJwt(token) as ITokenInfo;
+        const { exp } = this.parseJwt(this.token) as ITokenInfo;
         return Date.now() <= exp * 1000;
       } catch (err) {
         return false;

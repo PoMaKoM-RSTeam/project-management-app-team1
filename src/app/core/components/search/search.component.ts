@@ -16,8 +16,8 @@ import {
   take,
 } from 'rxjs';
 import { ISearchResults, ITask } from '../../models/data.model';
+import { AppStatusService } from '../../services/app-status.service';
 import { SearchService } from '../../services/search.service';
-import { UserStatusService } from '../../services/user-status.service';
 
 @Component({
   selector: 'app-search',
@@ -39,7 +39,7 @@ export class SearchComponent implements AfterViewInit {
   constructor(
     private search: SearchService,
     private cdr: ChangeDetectorRef,
-    private userStatusService: UserStatusService
+    private appStatusService: AppStatusService
   ) {
     this.defaultValue = {
       boardId: '',
@@ -47,7 +47,7 @@ export class SearchComponent implements AfterViewInit {
       message: 'Search-start',
     };
     this.results = [this.defaultValue];
-    this.userStatusService.getAllUsers().pipe(take(1)).subscribe();
+    this.appStatusService.getAllUsers().pipe(take(1)).subscribe();
   }
 
   ngAfterViewInit(): void {

@@ -21,9 +21,9 @@ import {
   Output,
   ChangeDetectionStrategy,
   OnDestroy,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { AppStatusService } from 'src/app/core/services/app-status.service';
 
 @Component({
   selector: 'app-task',
@@ -44,17 +44,15 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   public baseUrl = environment.baseUrl;
 
-  private currentTaskId: string = '';
-
   public setImage!: File;
 
   private destroy$: Subject<boolean> = new Subject();
 
   constructor(
     private projectModal: MatDialog,
+    private appStatusService: AppStatusService,
     private userStatusService: UserStatusService,
-    public tasksService: TasksDataService,
-    private cdr: ChangeDetectorRef
+    public tasksService: TasksDataService
   ) {}
 
   ngOnInit(): void {
@@ -71,7 +69,7 @@ export class TaskComponent implements OnInit, OnDestroy {
       titleField: this.task.title,
       descriptionField: this.task.description,
       user: this.task.users[0],
-      users: this.userStatusService.Users.value,
+      users: this.appStatusService.Users.value,
     };
 
     const dialogRef = this.projectModal.open(CreateUpdateModalComponent, {
