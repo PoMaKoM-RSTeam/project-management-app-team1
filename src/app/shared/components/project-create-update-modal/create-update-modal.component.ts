@@ -74,7 +74,6 @@ export class CreateUpdateModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.task);
     if (this.task && this.task._id) {
       this.img$ = this.tasksService
         .getImg(this.task._id)
