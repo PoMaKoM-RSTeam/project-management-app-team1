@@ -60,6 +60,43 @@
         {{ "Validation-create-update-modal-user" | translate }}
       </mat-error>
     </mat-form-field>
+    
+
+    <ng-container *ngIf="users.length > 0 && {image:img$ | async} as img ">
+      <div class="task-image__label">{{ "Task-modal-image-title" | translate }}</div>
+      <div id="hover" class="task-img__container">
+        <div id="image" *ngIf="img.image">
+          <img class="task-img" [src]="baseUrl + img.image.path" />
+        </div>
+        <div class="task-settings__icons">
+          <div *ngIf="img.image">
+            <mat-icon
+            class="task-settings__removeImg-icon"
+            [title]="'task-img-delete' | translate"
+            (click)="deleteImg(img.image._id)"
+            >delete_forever</mat-icon
+          >
+          </div>
+        </div>
+        <div *ngIf="!img.image">
+          <input
+            id="input-file-id"
+            (change)="setImg($event)"
+            hidden
+            type="file"
+            accept=".img,.jpeg,.png"
+          />
+          <label for="input-file-id" (click)="uploadImg()">
+            <mat-icon
+              class="task-settings__attach-icon"
+              [title]="'task-img-attach' | translate"
+              >attachment</mat-icon
+            >
+          </label>
+        </div>
+      </div>
+    </ng-container>
+   
   </div>
 
   <div mat-dialog-actions>
@@ -73,8 +110,8 @@
       (click)="onCommand()"
       [disabled]="
         titleField === '' ||
-        descriptionLabel.length === 0 || descriptionField === '' ||
-        users.length === 0 || userName === ''
+        (descriptionLabel.length !== 0 && descriptionField === '') ||
+        (users.length !== 0 && userName === '')
       "
     >
       {{ commandName | translate }}

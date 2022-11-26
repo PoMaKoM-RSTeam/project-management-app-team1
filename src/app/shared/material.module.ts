@@ -27,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     DragDropModule,
     MatSelectModule,
+    MatIconModule,
     CommonModule
   ],
   exports: [

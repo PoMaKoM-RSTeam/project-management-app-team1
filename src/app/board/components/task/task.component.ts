@@ -72,6 +72,7 @@ export class TaskComponent implements OnInit, OnDestroy {
       descriptionField: this.task.description,
       user: this.task.users[0],
       users: this.userStatusService.Users.value,
+      task: this.task
     };
 
     const dialogRef = this.projectModal.open(CreateUpdateModalComponent, {
@@ -148,33 +149,6 @@ export class TaskComponent implements OnInit, OnDestroy {
             });
         }
       });
-  }
-
-  setImg(event: Event) {
-    const input = event.currentTarget as HTMLInputElement;
-    if (!input.files) return;
-    this.file = input.files[0];
-    this.uploadImg();
-  }
-
-  uploadImg() {
-    if (this.file) {
-      const taskID = localStorage.getItem('currentTaskId') ?? '';
-      const formData = new FormData();
-      formData.append('boardId', this.task.boardId);
-      formData.append('taskId', taskID);
-      formData.append('file', this.file);
-      this.tasksService.uploadImg(formData).subscribe(() => {
-        localStorage.removeItem('currentTaskId');
-        this.edited.emit();
-      });
-    } else {
-      localStorage.setItem('currentTaskId', this.task._id);
-    }
-  }
-
-  deleteImg(imgId: string) {
-    this.tasksService.deleteImg(imgId).subscribe(() => this.edited.emit());
   }
 
   ngOnDestroy() {

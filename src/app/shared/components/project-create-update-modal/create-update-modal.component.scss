@@ -113,6 +113,42 @@ textarea {
   }
 }
 
+.task-img__container {
+  display: flex;
+  justify-content: center;
+  .task-img{
+    width: 70px;
+  }
+}
+
+.task-image__label {
+  padding: 18px 0px 10px 12px;
+}
+
+.task-settings__attach-icon {
+  font-size: 1.45rem;
+  color: #b36bd4;
+  cursor: pointer;
+  width: 21px;
+  height: 21px;
+  transition: 0.2s;
+}
+.task-settings__attach-icon:hover {
+  transform: scale(1.1);
+}
+
+.task-settings__removeImg-icon {
+  font-size: 1.45rem;
+  color: #2f80ed;
+  cursor: pointer;
+  width: 21px;
+  height: 21px;
+  transition: 0.2s;
+}
+.task-settings__removeImg-icon:hover {
+  transform: scale(1.1);
+}
+
 button[type="submit"]:enabled {
   color: #fff;
   background-color: #228EC4;
