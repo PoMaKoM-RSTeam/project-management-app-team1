@@ -48,7 +48,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   public setImage!: File;
 
-  public point$!:  Observable<IPoint[]>;
+  public point$!: Observable<IPoint[]>;
 
   public point!: IPoint[];
 
@@ -58,16 +58,18 @@ export class TaskComponent implements OnInit, OnDestroy {
     private projectModal: MatDialog,
     private appStatusService: AppStatusService,
     private userStatusService: UserStatusService,
-    public tasksService: TasksDataService,
+    private tasksService: TasksDataService,
     private pointService: PointService
   ) {}
 
   ngOnInit(): void {
     this.img$ = this.tasksService.getImg(this.task._id).pipe((value) => value);
-    this.point$ = this.pointService.getPointByTaskId(this.task._id).pipe(map((result) => {
-      this.point = result as IPoint[];
-      return result as IPoint[];
-    }));
+    this.point$ = this.pointService.getPointByTaskId(this.task._id).pipe(
+      map((result) => {
+        this.point = result as IPoint[];
+        return result as IPoint[];
+      })
+    );
   }
 
   updateTask() {
@@ -83,7 +85,7 @@ export class TaskComponent implements OnInit, OnDestroy {
       users: this.appStatusService.Users.value,
       task: this.task,
       pointLabel: 'Task-modal-point-title',
-      pointStatus: this.point[0].done
+      pointStatus: this.point[0].done,
     };
 
     const dialogRef = this.projectModal.open(CreateUpdateModalComponent, {
@@ -121,10 +123,14 @@ export class TaskComponent implements OnInit, OnDestroy {
               take(1)
             )
             .subscribe(() => this.edited.emit());
-            this.pointService.updatePoint(this.point[0]._id, dialogResult[3]).pipe(map((result) => {
-              return result as IPoint;
-            })).subscribe(() => this.edited.emit());
-
+          this.pointService
+            .updatePoint(this.point[0]._id, dialogResult[3])
+            .pipe(
+              map((result) => {
+                return result as IPoint;
+              })
+            )
+            .subscribe(() => this.edited.emit());
         }
       });
   }

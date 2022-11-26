@@ -3,7 +3,13 @@ import { Observable, Subscription } from 'rxjs';
 import { IFile, ITask } from './../../../core/models/data.model';
 import { environment } from 'src/environments/environment';
 import { IUser } from './../../../core/models/user.model';
-import { ChangeDetectionStrategy, Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ICreateEditModel } from '../../../core/models/dialog.model';
 
@@ -14,11 +20,10 @@ import { ICreateEditModel } from '../../../core/models/dialog.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateUpdateModalComponent implements OnInit, OnDestroy {
-
   public baseUrl = environment.baseUrl;
 
   public img$!: Observable<IFile | null>;
-  
+
   public file!: File;
 
   title: string;
@@ -69,11 +74,13 @@ export class CreateUpdateModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (this.task) {
-      this.img$ = this.tasksService.getImg(this.task._id).pipe((value) => value);
+    console.log(this.task);
+    if (this.task && this.task._id) {
+      this.img$ = this.tasksService
+        .getImg(this.task._id)
+        .pipe((value) => value);
       this.sub = this.img$.subscribe((value) => value);
     }
-    
   }
 
   onCommand(): void {
@@ -81,7 +88,7 @@ export class CreateUpdateModalComponent implements OnInit, OnDestroy {
       this.titleField,
       this.descriptionField,
       this.userName,
-      this.pointStatus
+      this.pointStatus,
     ]);
   }
 
@@ -89,12 +96,11 @@ export class CreateUpdateModalComponent implements OnInit, OnDestroy {
     this.dialogRef.close(false);
   }
 
-
   setImg(event: Event) {
     const input = event.currentTarget as HTMLInputElement;
     if (!input.files) return;
     this.file = input.files[0];
-   
+
     this.uploadImg();
   }
 
@@ -108,13 +114,16 @@ export class CreateUpdateModalComponent implements OnInit, OnDestroy {
       this.tasksService.uploadImg(formData).subscribe(() => {
         localStorage.removeItem('currentTaskId');
       });
-      this.img$ = this.tasksService.getImg(this.task._id).pipe((value) => value);
+      this.img$ = this.tasksService
+        .getImg(this.task._id)
+        .pipe((value) => value);
       this.sub = this.img$.subscribe();
     } else {
       localStorage.setItem('currentTaskId', this.task._id);
-      this.img$ = this.tasksService.getImg(this.task._id).pipe((value) => value);
+      this.img$ = this.tasksService
+        .getImg(this.task._id)
+        .pipe((value) => value);
       this.sub = this.img$.subscribe();
-      
     }
   }
 
