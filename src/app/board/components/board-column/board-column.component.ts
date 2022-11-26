@@ -74,8 +74,11 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
       .getTasks(this.column.boardId, this.column._id)
       .pipe(take(1))
       .subscribe((tasks) => {
-        if (tasks && tasks.length > 0)
+        if (tasks && tasks.length > 0) {
           this.tasks = tasks.sort((a, b) => (a.order > b.order ? 1 : -1));
+        } else {
+          this.tasks = [];
+        }
       });
   }
 
