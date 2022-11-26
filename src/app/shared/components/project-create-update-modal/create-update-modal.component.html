@@ -4,6 +4,11 @@
   </h1>
 
   <div class="modal-wrap" mat-dialog-content>
+    <div class="task-status__wrap" *ngIf="pointLabel.length > 0">
+      <div class="task-point__label">{{ pointLabel | translate }}</div>
+      <mat-checkbox class="example-margin" name="pointCheck" [(ngModel)]="pointStatus"></mat-checkbox>
+    </div>
+    
     <mat-form-field class="title-field" appearance="fill">
       <div class="project-title__label">{{ titleLabel | translate }}</div>
       <input

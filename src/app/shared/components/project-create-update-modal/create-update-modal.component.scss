@@ -26,6 +26,12 @@
 
 .modal-wrap {
   width: 100%;
+  .task-status__wrap {
+    display: flex ;
+    padding-left: 12px;
+    gap: 8px;
+    align-items: center;
+  }
 }
 
 .project-title__label,

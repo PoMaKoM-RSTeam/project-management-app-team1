@@ -43,6 +43,10 @@ export class CreateUpdateModalComponent implements OnInit, OnDestroy {
 
   task!: ITask;
 
+  pointStatus: boolean = false;
+
+  pointLabel: string;
+
   sub!: Subscription;
 
   constructor(
@@ -60,11 +64,14 @@ export class CreateUpdateModalComponent implements OnInit, OnDestroy {
     this.userName = dialog.user ?? '';
     this.users = dialog.users ?? [];
     this.task = dialog.task!;
+    this.pointLabel = dialog.pointLabel ?? '';
+    this.pointStatus = dialog.pointStatus ?? false;
   }
 
   ngOnInit(): void {
     if (this.task) {
       this.img$ = this.tasksService.getImg(this.task._id).pipe((value) => value);
+      this.sub = this.img$.subscribe((value) => value);
     }
     
   }
@@ -74,6 +81,7 @@ export class CreateUpdateModalComponent implements OnInit, OnDestroy {
       this.titleField,
       this.descriptionField,
       this.userName,
+      this.pointStatus
     ]);
   }
 
@@ -101,11 +109,11 @@ export class CreateUpdateModalComponent implements OnInit, OnDestroy {
         localStorage.removeItem('currentTaskId');
       });
       this.img$ = this.tasksService.getImg(this.task._id).pipe((value) => value);
-      this.sub = this.img$.subscribe((value) => {console.log(value);});
+      this.sub = this.img$.subscribe();
     } else {
       localStorage.setItem('currentTaskId', this.task._id);
       this.img$ = this.tasksService.getImg(this.task._id).pipe((value) => value);
-      this.sub = this.img$.subscribe((value) => {console.log(value);});
+      this.sub = this.img$.subscribe();
       
     }
   }

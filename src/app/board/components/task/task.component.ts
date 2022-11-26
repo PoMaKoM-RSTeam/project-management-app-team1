@@ -1,3 +1,4 @@
+import { PointService } from './../../../core/services/point.service';
 import { CreateUpdateModalComponent } from './../../../shared/components/project-create-update-modal/create-update-modal.component';
 import { switchMap, map, Subject, take, Observable } from 'rxjs';
 import { TasksDataService } from './../../../core/services/tasks-data.service';
@@ -10,6 +11,7 @@ import {
 } from './../../../core/models/dialog.model';
 import {
   IFile,
+  IPoint,
   ITask,
   TTaskInfoExtended,
 } from './../../../core/models/data.model';
@@ -46,17 +48,26 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   public setImage!: File;
 
+  public point$!:  Observable<IPoint[]>;
+
+  public point!: IPoint[];
+
   private destroy$: Subject<boolean> = new Subject();
 
   constructor(
     private projectModal: MatDialog,
     private appStatusService: AppStatusService,
     private userStatusService: UserStatusService,
-    public tasksService: TasksDataService
+    public tasksService: TasksDataService,
+    private pointService: PointService
   ) {}
 
   ngOnInit(): void {
     this.img$ = this.tasksService.getImg(this.task._id).pipe((value) => value);
+    this.point$ = this.pointService.getPointByTaskId(this.task._id).pipe(map((result) => {
+      this.point = result as IPoint[];
+      return result as IPoint[];
+    }));
   }
 
   updateTask() {
@@ -70,7 +81,9 @@ export class TaskComponent implements OnInit, OnDestroy {
       descriptionField: this.task.description,
       user: this.task.users[0],
       users: this.appStatusService.Users.value,
-      task: this.task
+      task: this.task,
+      pointLabel: 'Task-modal-point-title',
+      pointStatus: this.point[0].done
     };
 
     const dialogRef = this.projectModal.open(CreateUpdateModalComponent, {
@@ -91,6 +104,7 @@ export class TaskComponent implements OnInit, OnDestroy {
             users: dialogResult[2],
             columnId: this.task.columnId,
           };
+
           this.tasksService
             .updateTask(
               this.task.boardId,
@@ -107,6 +121,10 @@ export class TaskComponent implements OnInit, OnDestroy {
               take(1)
             )
             .subscribe(() => this.edited.emit());
+            this.pointService.updatePoint(this.point[0]._id, dialogResult[3]).pipe(map((result) => {
+              return result as IPoint;
+            })).subscribe(() => this.edited.emit());
+
         }
       });
   }

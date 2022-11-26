@@ -18,5 +18,7 @@ export interface ICreateEditModel {
   user?: string;
   users?: IUser[];
   task?: ITask;
+  pointLabel?: string;
+  pointStatus?: boolean;
 }
 

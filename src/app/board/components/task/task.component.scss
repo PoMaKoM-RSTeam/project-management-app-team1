@@ -21,10 +21,34 @@
     justify-content: space-between;
   }
   &__info {
-    width: 255px;
+    
     display: flex;
     flex-direction: column;
     gap: 5px;
+    &-settings {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 160px;
+    }
+    &-status {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      &-icon {
+        font-size: 1.1rem;
+        color: #04761d;
+        display: flex;
+        align-items: center;
+        width: 18px;
+        height: 18px;
+      }
+      &-label {
+        padding-right: 8px;
+        font-size: 0.925rem;
+        color: #797589;
+      }
+    }
     &-user {
       border-radius: 50%;
       background-color: #b36bd4;

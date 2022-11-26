@@ -1,3 +1,4 @@
+import { PointService } from './../../../core/services/point.service';
 import { TasksDataService } from './../../../core/services/tasks-data.service';
 import { IUser } from './../../../core/models/user.model';
 import { switchMap, map, Observable, Subject, take } from 'rxjs';
@@ -58,7 +59,8 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
     private columnsService: ColumnsDataService,
     private appStatusService: AppStatusService,
     private userStatusService: UserStatusService,
-    public tasksService: TasksDataService
+    public tasksService: TasksDataService,
+    private pointService: PointService
   ) {}
 
   ngOnInit(): void {
@@ -261,6 +263,16 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
               dialogResult[2]
             )
             .pipe(
+              map((task) => {
+                if (task) {
+                  const CurrentTask = task as ITask;
+                  this.pointService.createPoint({ title: 'Point',
+                    done: false,
+                    taskId: CurrentTask._id,
+                    boardId: CurrentTask.boardId }).subscribe();
+                }
+                return task as ITask;
+              }),
               switchMap(() =>
                 this.tasksService
                   .getTasks(this.column.boardId, this.column._id)
