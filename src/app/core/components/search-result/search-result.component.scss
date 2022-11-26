@@ -4,17 +4,32 @@
   display: flex;
   font-size: 14px;
   line-height: 20px;
-  margin: 5px 10px;
+  padding: 5px 10px;
   gap: 10px;
-
+  transition: all .25s;
   .result__row {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .result-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      &__icon {
+        color: #797589;
+        transition: 0.2s;
+      }
+    }
   }
-
   &:hover {
     cursor: pointer;
     color: $whiteColor;
+    background-color: #212B3A;
+  }
+  &:hover .result-info__icon {
+    color: #b36bd4 !important;
   }
 }
 
@@ -25,13 +40,13 @@ mat-icon {
 
 .result__link {
   display: block;
-  color: #228EC4;
+  color: #fff;
   transition: all .25s;
+  opacity: 0.8;
+}
 
-  &:hover {
-    cursor: pointer;
-    color: $whiteColor;
-  }
+.result__item:hover .result__link {
+  opacity: 1;
 }
 
 .result__container {
@@ -43,3 +58,5 @@ mat-icon {
   font-style: italic;
   color: $whiteColor;
 }
+
+
