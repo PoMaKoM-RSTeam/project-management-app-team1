@@ -24,6 +24,7 @@ import { UserStatusService } from '../../services/user-status.service';
 import { LoadingService } from '../../services/loading.service';
 import { delay, take, takeUntil } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
+import { AppStatusService } from '../../services/app-status.service';
 
 @Component({
   selector: 'app-header',
@@ -32,13 +33,13 @@ import { DOCUMENT } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  currentLang = window.navigator.language.replace(/-.+/gis, '');
+  public currentLang$!: Observable<string>;
 
   public isLogged$!: Observable<boolean>;
 
-  loading: boolean = true;
+  public loading: boolean = true;
 
-  stickyHeader: boolean = false;
+  public stickyHeader: boolean = false;
 
   private destroy$: Subject<boolean> = new Subject();
 
@@ -47,6 +48,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     private projectModal: MatDialog,
     private projectsService: ProjectsDataService,
+    private appStatusService: AppStatusService,
     private userStatusService: UserStatusService,
     private loadingService: LoadingService,
     private cdr: ChangeDetectorRef,
@@ -54,7 +56,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.translate.use(this.currentLang);
+    this.currentLang$ = this.appStatusService.getCurrentLang().pipe(
+      map((currentLang: string) => {
+        this.translate.use(currentLang);
+        this.cdr.detectChanges();
+        return currentLang;
+      })
+    );
     this.isLogged$ = this.userStatusService.getLoginStatus();
     this.listenToLoading();
     fromEvent(window, 'scroll')
@@ -75,11 +83,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   switchLang(lang: string) {
-    if (this.currentLang === lang) {
+    if (this.appStatusService.currentLang.value === lang) {
       return;
     }
-    this.currentLang = lang;
-    this.translate.use(this.currentLang);
+    this.appStatusService.currentLang.next(lang);
   }
 
   createProject() {

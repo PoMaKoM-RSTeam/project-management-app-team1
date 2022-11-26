@@ -17,8 +17,6 @@
 
   "Delete": "Delete",
 
-  "Email-title": "Ваш E-Mail",
-
   "Edit-Profile": "Edit profile",
   "Email": "Email address",
   "Email-required": "Email is required",
@@ -33,7 +31,7 @@
   "Loading": "Loading . . . Please Wait",
   "Login": "Login",
   "Login-error": "Can't login? Write to the administrator",
-  "Login-name": "Ваш E-Mail",
+  "Login-name": "Login (email)",
   "Login-pass-err": "Incorrect login or password",
   "Login-question": "Already have an account?",
   "Logout": "Logout",
@@ -69,6 +67,9 @@
   "Remember": "Remember me",
 
   "Save": "Save",
+  "Search": "Search",
+  "Search-no-data": "No Data Found",
+  "Search-start": "Search by tasks and users",
   "Signup": "Registration",
   "Signup-question": "Don't have an account?",
   "Signup-welcome": "Sign up",

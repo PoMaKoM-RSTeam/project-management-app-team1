@@ -42,8 +42,8 @@
       class="language"
       (click)="switchLang('ru'); menu.checked = false"
       [ngClass]="{
-        active: currentLang === 'ru',
-        disabled: currentLang === 'en'
+        active: (currentLang$ | async) === 'ru',
+        disabled: (currentLang$ | async) === 'en'
       }"
       >RU</span
     >
@@ -52,8 +52,8 @@
       class="language"
       (click)="switchLang('en'); menu.checked = false"
       [ngClass]="{
-        active: currentLang === 'en',
-        disabled: currentLang === 'ru'
+        active: (currentLang$ | async) === 'en',
+        disabled: (currentLang$ | async) === 'ru'
       }"
       >EN</span
     >

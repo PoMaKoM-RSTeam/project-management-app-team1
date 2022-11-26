@@ -4,10 +4,11 @@ import { map, mergeMap, reduce, switchMap } from 'rxjs/operators';
 
 import { from, Observable, of } from 'rxjs';
 import { IBoard, IError, ISearchResults, ITask } from '../models/data.model';
-import { UserStatusService } from './user-status.service';
+
 import { IUser } from '../models/user.model';
 import { BoardApi } from './api/board.api';
 import { TaskApi } from './api/task.api';
+import { AppStatusService } from './app-status.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class SearchService {
   constructor(
     private boardApi: BoardApi,
     private taskApi: TaskApi,
-    private userStatusService: UserStatusService
+    private appStatusService: AppStatusService
   ) {}
 
   public getSearchInTasks(
@@ -114,7 +115,7 @@ export class SearchService {
   }
 
   public searchInUsers(search: string): IUser[] {
-    return this.userStatusService.Users.value.filter((user: IUser) =>
+    return this.appStatusService.Users.value.filter((user: IUser) =>
       user?.name?.includes(search)
     );
   }

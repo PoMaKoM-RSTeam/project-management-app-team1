@@ -1,5 +1,4 @@
 import { TasksDataService } from './../../../core/services/tasks-data.service';
-import { UserStatusService } from './../../../core/services/user-status.service';
 import { IUser } from './../../../core/models/user.model';
 import { switchMap, map, Observable, Subject, take } from 'rxjs';
 import { ColumnsDataService } from './../../../core/services/columns-data.service';
@@ -28,6 +27,8 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { AppStatusService } from 'src/app/core/services/app-status.service';
+import { UserStatusService } from 'src/app/core/services/user-status.service';
 
 @Component({
   selector: 'app-board-column',
@@ -55,6 +56,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
   constructor(
     private projectModal: MatDialog,
     private columnsService: ColumnsDataService,
+    private appStatusService: AppStatusService,
     private userStatusService: UserStatusService,
     public tasksService: TasksDataService
   ) {}
@@ -62,7 +64,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.columnTitle = this.column.title;
     this.currentTitle = this.columnTitle;
-    this.userStatusService.getAllUsers().pipe(take(1)).subscribe();
+    this.appStatusService.getAllUsers().pipe(take(1)).subscribe();
     this.tasks$ = this.tasksService.getTasksField().pipe((value) => value);
     this.getList();
   }
@@ -235,7 +237,7 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
       descriptionLabel: 'Task-modal-description',
       commandName: 'Task-modal-add',
       usersLabel: 'Task-modal-user-titel',
-      users: this.userStatusService.Users.value,
+      users: this.appStatusService.Users.value,
     };
 
     const dialogRef = this.projectModal.open(CreateUpdateModalComponent, {
