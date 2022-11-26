@@ -80,7 +80,7 @@
 .about-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
   width: 250px;
   padding: 20px;
   border-radius: 5px;
@@ -99,20 +99,22 @@
   gap: 15px;
   align-items: center;
   line-height: 5em;
-  align-self: center;
 }
 
 .about-card-title {
   font-weight: bold;
   color: $color14;
   text-shadow: 2px 2px black;
-  font-size: 18px;
+  font-size: 24px;
   margin: 0;
 }
 
 .about-text {
-  font-size: 16px;
+  font-size: 20px;
+  line-height: 1.2;
 }
+
+
 
 .about-list {
   list-style-type: "\2705";
@@ -146,6 +148,10 @@
   font-size: 28px;
 }
 
+.about-team-text {
+  font-size: 18px;
+}
+
 .team {
   display: grid;
   wrap-option: wrap;
@@ -177,6 +183,15 @@
   text-shadow: 2px 2px black;
   font-size: 24px;
   margin: 0;
+}
+
+.link {
+  color: #228EC4;
+  transition: .3s;
+}
+
+.link:hover {
+  color: $color14;
 }
 
 a:link { text-decoration: none; }
