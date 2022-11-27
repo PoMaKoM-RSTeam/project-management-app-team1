@@ -99,7 +99,6 @@ export class CreateUpdateModalComponent implements OnInit, OnDestroy {
     const input = event.currentTarget as HTMLInputElement;
     if (!input.files) return;
     this.file = input.files[0];
-
     this.uploadImg();
   }
 

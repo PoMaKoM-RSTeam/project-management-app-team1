@@ -70,7 +70,7 @@
       </mat-error>
     </mat-form-field>
 
-    <ng-template *ngIf="(img$ | async) !== undefined">
+    <ng-container *ngIf="task">
       <div class="task-image__label">
         {{ "Task-modal-image-title" | translate }}
       </div>
@@ -107,7 +107,7 @@
           >
         </label>
       </ng-template>
-    </ng-template>
+    </ng-container>
   </div>
 
   <div mat-dialog-actions>
