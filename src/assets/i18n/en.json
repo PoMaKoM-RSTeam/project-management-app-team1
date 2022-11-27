@@ -122,7 +122,7 @@
 
   "About-team": "About team",
 
-  "wixhub-text": "Jana Semenova, M.Sc. 👩‍🎓⚕️ Fullstack Software Engineer 🎨 Angular | Typescript | RXJs | NgXS | NgRx | Node.js | Java | Spring | SAP Fiori | SQL | MySQL | PostgreSQL ☮️ 🔭 🚴‍♀️🎬 ☯️ 🎧 🎹 🎷 💻 ©",
+  "wixhub-text": "Jana Semenova, M.Sc. 👩‍🎓⚕️ Fullstack Software Engineer 🎨 Angular | Typescript | Javascript | RxJS | NgXS | NgRx | Node.js | Java | Spring | SAP Fiori | AWS | SQL | PostgreSQL | NoSQL JSON ☮️ 🔭 🚴‍♀️🎬 ☯️ 🎧 🎹 🎷💻",
   "zhagun-text": "My interests are programming and computer science. I can attribute to my positive qualities: sociability, sense of humor, purposefulness. I also like to work in a team",
   "nonebeer-text": "I am 25 years old. I've been interested in programming since school. I'm learn Front-End Development in RS School",
 
@@ -143,8 +143,10 @@
   "About-projects-text": "Support for an exceptional number of projects",
   "About-interface-title": "Interface",
   "About-interface-text": "Intuitive and pleasant interface",
-  "About-angular-title": "Course Angular",
-  "About-angular-text": "Developed as part of the course ",
+  "About-backend-title": "Backend",
+  "About-backend-text": "MongoDB connection with service on ",
+  "About-angular-title": "Course Angular ",
+  "About-angular-text": "Developed as part of the course",
   "About-accessibility-title": "Accessibility",
   "About-accessibility-text": "Multi-User issue editing",
   "Try": "Try it now"

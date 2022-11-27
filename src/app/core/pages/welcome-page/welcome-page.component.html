@@ -89,14 +89,35 @@
 
       <div class="about-card">
         <div class="title-container">
+          <img src="./assets/icons/schedule.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-backend-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">
+          {{ "About-backend-text" | translate }}
+          <a
+            href="https://pma-backend-production.up.railway.app/api-docs/"
+            class="link"
+            >Railway</a
+          >
+        </p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
           <img src="./assets/icons/angular.svg" alt="certificate" />
           <h3 class="about-card-title">
             {{ "About-angular-title" | translate }}
           </h3>
         </div>
-        <p class="about-text">{{ "About-angular-text" | translate }} <a href="https://rs.school/angular/" class="link">RS School</a></p>
+        <p class="about-text">
+          {{ "About-angular-text" | translate }}
+          <a href="https://rs.school/angular/" target="_blank" class="link"
+            >RS School</a
+          >
+        </p>
       </div>
-
     </div>
     <a [routerLink]="link">
       <button class="about-button">
@@ -119,7 +140,7 @@
             ><h3 class="team-name">{{ "wixhub" | uppercase }}</h3></a
           >
         </div>
-        <p class="about-team-text">{{ "wixhub-text" | translate }}</p>
+        <p class="about-team-text s">{{ "wixhub-text" | translate }}</p>
       </div>
 
       <div class="about-card">

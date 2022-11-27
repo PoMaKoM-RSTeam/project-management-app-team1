@@ -122,7 +122,7 @@
 
   "About-team": "О команде",
 
-  "wixhub-text": "Яна Семенова, M.Sc. 👩‍🎓⚕️ Fullstack Software Engineer 🎨 Angular | Typescript | RXJs | NgXS | NgRx | Node.js | Java | Spring | SAP Fiori | SQL | MySQL | PostgreSQL ☮️ 🔭 🚴‍♀️🎬 ☯️ 🎧 🎹 🎷 💻 ©",
+  "wixhub-text": "Яна Семенова, M.Sc. 👩‍🎓⚕️ Fullstack Software Engineer 🎨 Angular | Typescript | Javascript | RxJS | NgXS | NgRx | Node.js | Java | Spring | SAP Fiori | AWS | SQL | PostgreSQL | NoSQL JSON ☮️ 🔭 🚴‍♀️🎬 ☯️ 🎧 🎹 🎷💻",
   "zhagun-text": "Мои интересы - программирование и информатика. К своим положительным качествам могу отнести: коммуникабельность, чувство юмора, целеустремленность. Я тоже люблю работать в команде",
   "nonebeer-text": "Мне 25 лет. Я интересовался программированием со школы. Я изучаю Front-End разработку в RS School",
 
@@ -145,11 +145,11 @@
   "About-interface-text": "Интуитивно понятный и приятный интерфейс",
   "About-executor-title": "Интерфейс",
   "About-executor-text": "The ability to appoint an executor",
+  "About-backend-title": "Сервис",
+  "About-backend-text": "Использованы MongoDB и сервис на ",
   "About-angular-title": "Курс Angular",
   "About-angular-text": "Разработано в рамках курса ",
   "About-accessibility-title": "Доступность",
   "About-accessibility-text": "Многопользовательское редактирование задач",
   "Try": "Попробовать"
-
-
 }
