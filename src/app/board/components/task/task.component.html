@@ -1,0 +1,34 @@
+<div class="task-box">
+  <div class="task-box__info" (click)="updateTask()">
+    <div class="task-box__title">{{ task.title }}</div>
+    <div class="task-box__description">{{ task.description }}</div>
+    <div class="task-box__info-settings">
+      <div class="task-box__info-user">{{ task.users[0] | firstLetter }}</div>
+      <ng-container *ngIf="point$ | async as point">
+        <div class="task-box__info-status" *ngIf="point[0].done">
+          <mat-icon class="task-box__info-status-icon">check_circle</mat-icon>
+          <div class="task-box__info-status-label">
+            {{ "Task-status-complete" | translate }}
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <ng-container *ngIf="img$ | async as img">
+    <div id="hover" (click)="updateTask()">
+      <div id="image">
+        <img [src]="baseUrl + img.path" />
+      </div>
+    </div>
+  </ng-container>
+  <div class="task-box__btns">
+    <div class="task-settings__icons">
+      <mat-icon
+        class="task-settings__remove-icon"
+        [title]="'Task-modal-delete-title' | translate"
+        (click)="deleteTask()"
+        >delete</mat-icon
+      >
+    </div>
+  </div>
+</div>

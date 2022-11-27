@@ -1,0 +1,121 @@
+.column {
+  color: aliceblue;
+  min-height: 450px;
+  &-settings {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #0D1117;
+    justify-content: space-between;
+    padding: 14px;
+    border-bottom: 1px solid #23272f;
+    border-radius: 8px 8px 0 0;
+    height: 54px;
+    box-sizing: border-box;
+    cursor: pointer;
+    &__icons {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+    &__remove-icon {
+      color: #fff;
+      transition: 0.2s;
+      opacity: 0.7;
+    }
+    &__save-icon {
+      color: #04761d;
+      font-size: 1.425rem;
+      transition: 0.2s;
+    }
+    &__cancel-icon {
+      color: #228EC4;
+      font-size: 1.425rem;
+      transition: 0.2s;
+    }
+    &__item {
+      height: 56vh;
+      overflow-y: hidden;
+      font-size: 1.2rem;
+      letter-spacing: -.5px;
+      padding: .4rem 1rem;
+
+      transition: all .25s;
+
+      &:hover {
+        cursor: pointer;
+        background-color: transparent;
+      }
+
+      &-descr {
+        margin-right: .5rem;
+      }
+
+      &-input {
+        font-size: 1.2rem;
+        color: #fff;;
+        padding: 0 5px;
+        font-weight: 500;
+        outline: none;
+        border: 1px solid transparent;
+        border-radius: 3px;
+        background-color: transparent;
+        border-radius: 8px;
+        transition: all .25s;
+        font-family: inherit;
+
+        &:focus {
+          font-size: 0.9rem;
+          color: #fff;
+          border: 1px solid #228EC4;
+          background-color: transparent;
+        }
+      }
+    }
+  }
+}
+
+.column-settings__edit-icon:hover {
+  opacity: 1;
+}
+.column-settings__remove-icon:hover {
+  opacity: 1;
+}
+
+.column-new-task__btn {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #228EC4;
+  font-size: 0.94rem;
+  line-height: 20pt;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.column-new-task__btn:hover {
+  color: #32a9e4;
+}
+
+.tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 375px;
+  width: 100%;
+  padding: 12px 0 5px 0;
+  overflow-y: auto;
+}
+.tasks-list::-webkit-scrollbar {
+  width: 8px;
+  background-color: #161B22;
+}
+.tasks-list::-webkit-scrollbar-thumb {
+  background-color: #212B3A;
+}
+
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+

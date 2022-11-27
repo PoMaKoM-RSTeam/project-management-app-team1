@@ -1,0 +1,62 @@
+@import "src/assets/styles/variables";
+
+.result__item {
+  display: flex;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 5px 10px;
+  gap: 10px;
+  transition: all .25s;
+  .result__row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .result-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      &__icon {
+        color: #797589;
+        transition: 0.2s;
+      }
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    color: $whiteColor;
+    background-color: #212B3A;
+  }
+  &:hover .result-info__icon {
+    color: #b36bd4 !important;
+  }
+}
+
+mat-icon {
+  padding: 0;
+  margin: 0;
+}
+
+.result__link {
+  display: block;
+  color: #fff;
+  transition: all .25s;
+  opacity: 0.8;
+}
+
+.result__item:hover .result__link {
+  opacity: 1;
+}
+
+.result__container {
+  display: flex;
+  gap: 5px;
+}
+
+.result__important {
+  font-style: italic;
+  color: $whiteColor;
+}
+
+

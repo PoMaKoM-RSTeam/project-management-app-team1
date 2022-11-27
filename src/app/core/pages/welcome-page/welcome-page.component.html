@@ -1,0 +1,172 @@
+<div class="container">
+  <div class="main">
+    <h1 class="about-title">{{ "project-title" | translate | uppercase }}</h1>
+    <div class="main-content">
+      <div class="quote">
+        <q class="quote-text">{{ "quote" | translate | uppercase }}</q>
+        <span class="quote-author">{{
+          "quote-author" | translate | uppercase
+        }}</span>
+      </div>
+      <img src="./assets/images/logo.jpg" alt="logo" class="quote-image" />
+    </div>
+  </div>
+
+  <div class="about">
+    <h2 class="about-title">{{ "About-project" | translate | uppercase }}</h2>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/language.svg" alt="free" />
+          <h3 class="about-card-title">
+            {{ "About-localization-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">
+          {{ "About-localization-text" | translate }}
+        </p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/interactivity.svg" alt="angular" />
+          <h3 class="about-card-title">
+            {{ "About-interactivity-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">{{ "About-interactivity-text" | translate }}</p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/search.svg" alt="people" />
+          <h3 class="about-card-title">
+            {{ "About-search-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">{{ "About-search-text" | translate }}</p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/free.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-free-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">{{ "About-free-text" | translate }}</p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/people.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-accessibility-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">{{ "About-accessibility-text" | translate }}</p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/plan.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-projects-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">{{ "About-projects-text" | translate }}</p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/interface.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-interface-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">{{ "About-interface-text" | translate }}</p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/schedule.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-backend-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">
+          {{ "About-backend-text" | translate }}
+          <a
+            href="https://pma-backend-production.up.railway.app/api-docs/"
+            target="_blank"
+            class="link"
+            >Railway</a
+          >
+        </p>
+      </div>
+
+      <div class="about-card">
+        <div class="title-container">
+          <img src="./assets/icons/angular.svg" alt="certificate" />
+          <h3 class="about-card-title">
+            {{ "About-angular-title" | translate }}
+          </h3>
+        </div>
+        <p class="about-text">
+          {{ "About-angular-text" | translate }}
+          <a href="https://rs.school/angular/" target="_blank" class="link"
+            >RS School</a
+          >
+        </p>
+      </div>
+    </div>
+    <a [routerLink]="link">
+      <button class="about-button">
+        {{ "Try" | translate | uppercase }}
+      </button>
+    </a>
+  </div>
+
+  <div class="about">
+    <h2 class="about-title">{{ "About-team" | translate | uppercase }}</h2>
+    <div class="about-cards">
+      <div class="about-card">
+        <div class="team-name-container">
+          <img
+            src="https://avatars.githubusercontent.com/u/66686321?v=4"
+            alt="wixhub"
+            class="team-image"
+          />
+          <a href="https://github.com/wixhub" target="_blank"
+            ><h3 class="team-name">{{ "wixhub" | uppercase }}</h3></a
+          >
+        </div>
+        <p class="about-team-text s">{{ "wixhub-text" | translate }}</p>
+      </div>
+
+      <div class="about-card">
+        <div class="team-name-container">
+          <img
+            src="https://avatars.githubusercontent.com/u/6612642?v=4"
+            alt="zhagun"
+            class="team-image"
+          />
+          <h3 class="team-name">{{ "zhagun" | uppercase }}</h3>
+        </div>
+        <p class="about-team-text">{{ "zhagun-text" | translate }}</p>
+      </div>
+
+      <div class="about-card">
+        <div class="team-name-container">
+          <img
+            src="https://avatars.githubusercontent.com/u/30367113?v=4"
+            alt="nonebeer"
+            class="team-image"
+          />
+          <h3 class="team-name">{{ "nonebeer" | uppercase }}</h3>
+        </div>
+        <p class="about-team-text">{{ "nonebeer-text" | translate }}</p>
+      </div>
+    </div>
+  </div>
+</div>

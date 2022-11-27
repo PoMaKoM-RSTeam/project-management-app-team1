@@ -1,0 +1,18 @@
+@mixin NormalText ($color) {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  color: $color;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+@mixin LargeText ($color) {
+  font-family: 'Roboto', sans-serif;
+  font-size: 36px;
+  color: $color;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.2;
+}
+

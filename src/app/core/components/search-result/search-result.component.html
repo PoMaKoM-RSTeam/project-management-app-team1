@@ -1,0 +1,27 @@
+<div class="result__item">
+  <div
+    *ngIf="result.taskTitle && result.message !== 'userName'"
+    (click)="goTo()"
+    class="result__row"
+  >
+  <div class="result-info">
+    <mat-icon class="result-info__icon">turned_in_not</mat-icon>
+    <a class="result__link"> {{ result.taskTitle }}</a>
+  </div>
+  </div>
+  <div
+    *ngIf="result.message === 'userName'"
+    (click)="goTo()"
+    class="result__row"
+  >
+    <div class="result-info">
+      <mat-icon class="result-info__icon">accessibility_new</mat-icon>
+      <span>{{ result.userName }}&nbsp;</span>
+    </div>
+    <div class="result-link__wrap">
+      <a class="result__link">{{ result.taskTitle }}</a>
+    </div>
+
+  </div>
+  <div *ngIf="result.boardId === ''">{{ result.message | translate }}</div>
+</div>

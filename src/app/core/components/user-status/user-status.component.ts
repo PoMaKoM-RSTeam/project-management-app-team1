@@ -1,0 +1,61 @@
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { UserStatusService } from '../../services/user-status.service';
+
+@Component({
+  selector: 'app-user-status',
+  templateUrl: './user-status.component.html',
+  styleUrls: ['./user-status.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class UserStatusComponent implements OnInit, OnDestroy {
+  public isLogged$!: Observable<boolean>;
+
+  public isLoginPage!: boolean;
+
+  public userName$!: Observable<string>;
+
+  private destroy$: Subject<boolean> = new Subject();
+
+  constructor(
+    private router: Router,
+    private userStatusService: UserStatusService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    this.isLogged$ = this.userStatusService.getLoginStatus();
+
+    this.isLoginPage = this.router.url === '/login';
+
+    this.router.events.pipe(takeUntil(this.destroy$)).subscribe((e) => {
+      if (e instanceof NavigationEnd) {
+        this.isLoginPage = e.url === '/login';
+        this.cdr.detectChanges();
+      }
+    });
+
+    this.userName$ = this.userStatusService.getUserName();
+  }
+
+  public signup(): void {
+    this.userStatusService.setSignup(true);
+    this.router.navigate(['login']);
+  }
+
+  public logout(): void {
+    this.userStatusService.logOut();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
+}

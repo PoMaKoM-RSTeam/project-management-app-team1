@@ -1,0 +1,87 @@
+<form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+  <div>
+    <h2>{{ "Profile" | translate }}</h2>
+  </div>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "Name" | translate }}</mat-label>
+    <input
+      matInput
+      type="name"
+      formControlName="name"
+      autocomplete="name"
+      placeholder="Name"
+    />
+    <mat-error *ngIf="name?.hasError('required')">
+      {{ "Validation-name" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "Login-name" | translate }}</mat-label>
+    <input
+      matInput
+      type="email"
+      formControlName="login"
+      autocomplete="email"
+      placeholder="Login"
+    />
+    <mat-error *ngIf="login?.hasError('required')">
+      {{ "Validation-login" | translate }}
+    </mat-error>
+    <mat-error *ngIf="login?.hasError('emailError')">
+      {{ "Validation-login-error" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>{{ "Password" | translate }}</mat-label>
+    <input
+      matInput
+      formControlName="password"
+      autocomplete="current-password"
+      placeholder="Password"
+    />
+    <mat-error
+      *ngIf="
+        profileForm.get('password')?.hasError('minlength') ||
+        profileForm.get('password')?.hasError('lowerAndUpperCase') ||
+        profileForm.get('password')?.hasError('lettersAndNumbers') ||
+        profileForm.get('password')?.hasError('leastOneSpecChar')
+      "
+    >
+      {{ "Validation-password-general" | translate }}
+    </mat-error>
+    <mat-error
+      *ngIf="profileForm.get('password')?.hasError('leastOneSpecChar')"
+    >
+      {{ "Validation-password-special" | translate }}
+    </mat-error>
+    <mat-error
+      *ngIf="profileForm.get('password')?.hasError('lowerAndUpperCase')"
+    >
+      {{ "Validation-password-upper" | translate }}
+    </mat-error>
+    <mat-error *ngIf="profileForm.get('password')?.hasError('minlength')">
+      {{ "Validation-password-short" | translate }}
+    </mat-error>
+    <mat-error
+      *ngIf="profileForm.get('password')?.hasError('lettersAndNumbers')"
+    >
+      {{ "Validation-password-numbers" | translate }}
+    </mat-error>
+    <mat-error *ngIf="profileForm.get('password')?.hasError('required')">
+      {{ "Validation-password" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-error>
+    <p *ngIf="updateErrorMessage">
+      {{ "Update-result" | translate }}
+    </p></mat-error
+  >
+  <div>
+    <button class="cancel-btn" type="button" mat-raised-button color="warn" (click)="deleteUser()">
+      {{ "Delete" | translate }}
+    </button>
+    <button class="command-btn" type="submit" mat-raised-button [disabled]="profileForm.invalid">
+      {{ "Update" | translate }}
+    </button>
+  </div>
+</form>

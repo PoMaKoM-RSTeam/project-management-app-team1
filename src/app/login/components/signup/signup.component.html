@@ -1,0 +1,98 @@
+<form [formGroup]="signupForm" (ngSubmit)="authorize()">
+  <div>
+    <h2>{{ "Signup" | translate }}</h2>
+  </div>
+  <p class="form__question">
+    {{ "Login-question" | translate
+    }}<a class="form__link" (click)="signin()">{{ "Login" | translate }}</a>
+  </p>
+  <mat-form-field appearance="fill">
+    <div>{{ "Name" | translate }}</div>
+    <input
+      matInput
+      type="name"
+      formControlName="name"
+      autocomplete="name"
+      placeholder="Name"
+    />
+    <mat-error *ngIf="name?.hasError('required')">
+      {{ "Validation-name" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <div>{{ "Login-name" | translate }}</div>
+    <input
+      matInput
+      type="email"
+      formControlName="login"
+      autocomplete="email"
+      placeholder="Email"
+    />
+    <mat-error *ngIf="login?.hasError('required')">
+      {{ "Validation-login" | translate }}
+    </mat-error>
+    <mat-error *ngIf="login?.hasError('email')">
+      {{ "Validation-login-error" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="password-field">
+    <div>{{ "Password" | translate }}</div>
+    <input
+      matInput
+      formControlName="password"
+      autocomplete="current-password"
+      placeholder="Password"
+      [type]="hide ? 'password' : 'text'"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+      type="button"
+      class="visibility-btn"
+    >
+      <mat-icon class="visibility-icon">{{
+        hide ? "visibility_off" : "visibility"
+      }}</mat-icon>
+    </button>
+    <mat-error
+      *ngIf="
+        signupForm.get('password')?.hasError('minlength') ||
+        signupForm.get('password')?.hasError('lowerAndUpperCase') ||
+        signupForm.get('password')?.hasError('lettersAndNumbers') ||
+        signupForm.get('password')?.hasError('leastOneSpecChar')
+      "
+    >
+      {{ "Validation-password-general" | translate }}
+    </mat-error>
+    <mat-error *ngIf="signupForm.get('password')?.hasError('leastOneSpecChar')">
+      {{ "Validation-password-special" | translate }}
+    </mat-error>
+    <mat-error
+      *ngIf="signupForm.get('password')?.hasError('lowerAndUpperCase')"
+    >
+      {{ "Validation-password-upper" | translate }}
+    </mat-error>
+    <mat-error *ngIf="signupForm.get('password')?.hasError('minlength')">
+      {{ "Validation-password-short" | translate }}
+    </mat-error>
+    <mat-error
+      *ngIf="signupForm.get('password')?.hasError('lettersAndNumbers')"
+    >
+      {{ "Validation-password-numbers" | translate }}
+    </mat-error>
+    <mat-error *ngIf="signupForm.get('password')?.hasError('required')">
+      {{ "Validation-password" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <div>
+    <mat-error *ngIf="authErrorMessage">
+      {{ "Register-result" | translate }} </mat-error
+    ><br />
+    <button type="submit" mat-raised-button [disabled]="signupForm.invalid">
+      {{ "Signup" | translate }}
+    </button>
+  </div>
+</form>

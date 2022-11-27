@@ -1,0 +1,63 @@
+<form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+  <div>
+    <h2>{{ "Login" | translate }}</h2>
+  </div>
+  <p class="form__question">
+    {{ "Signup-question" | translate
+    }}<a class="form__link" (click)="signup()">{{
+      "Signup-welcome" | translate
+    }}</a>
+  </p>
+
+  <mat-form-field appearance="fill">
+    <div>{{ "Login-name" | translate }}</div>
+    <input
+      matInput
+      type="email"
+      formControlName="login"
+      autocomplete="email"
+      placeholder="Email"
+    />
+    <mat-error *ngIf="authForm.get('login')?.hasError('required')">
+      {{ "Validation-login" | translate }}
+    </mat-error>
+    <mat-error *ngIf="authForm.get('login')?.hasError('email')">
+      {{ "Validation-login-error" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="password-field">
+    <div>{{ "Password" | translate }}</div>
+    <input
+      matInput
+      formControlName="password"
+      autocomplete="current-password"
+      [type]="hide ? 'password' : 'text'"
+      placeholder="Password"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+      type="button"
+      class="visibility-btn"
+    >
+      <mat-icon class="visibility-icon">{{
+        hide ? "visibility_off" : "visibility"
+      }}</mat-icon>
+    </button>
+
+    <mat-error *ngIf="authForm.get('password')?.hasError('required')">
+      {{ "Validation-password" | translate }}
+    </mat-error>
+  </mat-form-field>
+  <div>
+    <mat-error *ngIf="isLoginError">
+      {{ "Login-pass-err" | translate }}
+    </mat-error>
+    <button type="submit" mat-raised-button [disabled]="authForm.invalid">
+      {{ "Login" | translate }}
+    </button>
+  </div>
+</form>

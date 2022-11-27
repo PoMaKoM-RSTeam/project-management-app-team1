@@ -1,0 +1,95 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 5% auto;
+}
+
+form {
+  width: 350px;
+  height: 380px;
+  border-radius: 5px;
+  background: #1C2128;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 40px;
+
+  .form__question {
+    font-size: 12px;
+  }
+
+  .form__link {
+    margin-left: 5px;
+    font-weight: bold;
+    color: #2f80ed;
+    cursor: pointer;
+  }
+
+  h2 {
+    margin-top: 18px;
+  }
+
+  mat-form-field {
+    width: 320px;
+    padding-bottom: 0;
+    border-bottom: transparent !important;
+  }
+
+  mat-error {
+    color: red;
+  }
+
+  span {
+    margin-bottom: 10px;
+  }
+
+  .password-field {
+    position: relative;
+  }
+
+  .visibility-btn {
+    position: absolute;
+    top: 14px;
+  }
+
+  input {
+    margin: 5px 0 0 -10px;
+    padding-left: 10px;
+    border: none;
+    background-color: #161B22;
+    color: #fff;
+    height: 33px;
+    width: 310px;
+  }
+
+  button {
+    margin: -6px 0 0 -20px;
+    mat-icon {
+      font-size: 1.8em;
+    }
+  }
+
+  button[type="button"] {
+    color: #fff;
+    background-color: #1C2128;
+  }
+
+  button[type="submit"] {
+    width: 120px;
+    float: right;
+    margin: 20px 40px 0 0;
+  }
+
+  button[type="submit"]:enabled {
+    color: white;
+    background-color: #2f80ed;
+  }
+
+}
+::ng-deep {
+  .mat-form-field-appearance-fill .mat-form-field-infix {
+    padding: 0;
+  }
+}

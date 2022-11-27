@@ -1,0 +1,110 @@
+
+.task-box {
+  background-color: #0D1117;
+  display: flex;
+  justify-content: space-between;
+  min-height: 60px;
+  color: aliceblue;
+  margin: 0 12px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  &__title {
+    font-size: 1.125rem;
+  }
+  &__description {
+    color: #797589;
+  }
+  &__btns {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    &-settings {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 160px;
+    }
+    &-status {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      &-icon {
+        font-size: 1.1rem;
+        color: #04761d;
+        display: flex;
+        align-items: center;
+        width: 18px;
+        height: 18px;
+      }
+      &-label {
+        padding-right: 8px;
+        font-size: 0.925rem;
+        color: #797589;
+      }
+    }
+    &-user {
+      border-radius: 50%;
+      background-color: #b36bd4;
+      font-size: 1.2rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      box-shadow: inset 0 0 0 1px rgb(0 0 0 / 7%)
+    }
+  }
+}
+.task-settings__icons {
+  display: flex;
+  align-items: center;
+}
+.task-settings__attach-icon {
+  font-size: 1.45rem;
+  color: #b36bd4;
+  cursor: pointer;
+  width: 21px;
+  height: 21px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.task-settings__attach-icon:hover {
+  transform: scale(1.1);
+}
+.task-settings__remove-icon {
+  font-size: 1.45rem;
+  color: #228EC4;
+  cursor: pointer;
+  width: 21px;
+  height: 21px;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.task-box:hover {
+  background-color: #212B3A;
+}
+.task-box:hover .task-settings__remove-icon {
+  opacity: 1;
+}
+
+.task-box:hover .task-settings__attach-icon {
+  opacity: 1;
+}
+
+.task-box:hover .task-settings__removeImg-icon {
+  opacity: 1;
+}
+
+img {
+  width: 100%;
+  overflow: hidden;
+}
+

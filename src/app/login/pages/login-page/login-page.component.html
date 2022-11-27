@@ -1,0 +1,9 @@
+<ng-container *ngIf="(isSignup$ | async) === false">
+  <app-login
+    *ngIf="(isLogin$ | async) === false"
+    (showSignup)="showForm(false)"
+  ></app-login>
+</ng-container>
+<ng-container *ngIf="isSignup$ | async">
+  <app-signup (showSignin)="showForm(true)"></app-signup
+></ng-container>

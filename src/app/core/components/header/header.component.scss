@@ -1,0 +1,175 @@
+@import "src/assets/styles/variables";
+
+.header{
+  position: fixed;
+  z-index: 10;
+  background-color: $wBackground;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 60px auto;
+  grid-template-columns: auto minmax(580px, 1000px) minmax(100px, 200px) auto;
+  grid-template-areas: "menu nav lang ."
+                        "load load load load";
+  box-shadow: 0 5px 10px $shadowColor;
+  cursor: default;
+  height: 60px;
+  user-select: none;
+  transition: .5s;
+}
+
+.nav {
+  display: flex;
+  grid-area: nav;
+  max-width: 1000px;
+  min-height: 50px;
+  color: $whiteColor;
+  z-index: 5;
+}
+
+.nav * {
+  align-self: center;
+  flex: 1;
+  text-align: center;
+  transition: .2s;
+}
+
+
+.header-element-container *:hover:not(.active) {
+  cursor: pointer;
+  font-weight: 500;
+  opacity: 1;
+}
+
+.language-container {
+  grid-area: lang;
+  align-self: center;
+  color: $whiteColor;
+  justify-self: center;
+}
+
+.progress {
+  grid-area: load;
+}
+
+.active {
+  opacity: 1;
+}
+
+.disabled {
+  opacity: .15;
+  cursor: pointer;
+}
+
+
+#menu-toggle {
+  opacity: 0;
+}
+
+#menu-toggle:checked ~ .menu-btn > span {
+  transform: rotate(45deg);
+}
+
+#menu-toggle:checked ~ .menu-btn > span::before {
+  top: 0;
+  transform: rotate(0);
+}
+
+#menu-toggle:checked ~ .menu-btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+#menu-toggle:checked ~ .nav {
+  visibility: visible;
+  left: 0;
+}
+
+.menu-btn {
+  grid-area: menu;
+  display: none;
+  position: fixed;
+  top: 25px;
+  left: 25px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.menu-btn > span,
+.menu-btn > span::before,
+.menu-btn > span::after {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: $whiteColor;
+  transition: 0.3s;
+}
+.menu-btn > span::before {
+  content: '';
+  top: -8px;
+}
+.menu-btn > span::after {
+  content: '';
+  top: 8px;
+}
+
+@media (max-width: 760px) {
+  .nav {
+    display: block;
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    height: 100%;
+    margin: 0;
+    padding: 80px 0;
+    list-style: none;
+    text-align: center;
+    background-color: $wBackground;
+    box-shadow: 1px 0 6px rgba(0, 0, 0, .2);
+    transition: 0.3s;
+  }
+
+  .nav::after{
+    content: "";
+    width: 100vw;
+    height: 100vh;
+    background-color: $blackColor;
+    opacity: .5;
+  }
+
+  .nav * {
+    padding: 12px 5px;
+    color: $whiteColor;
+    font-size: 20px;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .header {
+    grid-template-rows: 60px auto;
+    grid-template-columns: auto auto auto auto;
+    grid-template-areas: "menu . . lang"
+                        "load load load load";
+  }
+}
+
+.blur {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  opacity: .3;
+  z-index: 3;
+}
+
+.sticky-header {
+  transition: .5s;
+  height: 50px;
+  grid-template-rows: 50px auto;
+}

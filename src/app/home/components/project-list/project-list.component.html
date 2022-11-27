@@ -1,0 +1,8 @@
+<div class="board-container">
+  <div class="board-title">{{ "Home-Projects" | translate }}</div>
+  <div class="boards-wrap">
+    <div class="boards-rows" *ngIf="(projects$ | async) as projects ">
+        <app-project-preview *ngFor="let project of projects" [project]="project"></app-project-preview>
+    </div>
+  </div>
+</div>

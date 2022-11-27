@@ -1,0 +1,25 @@
+<div class="columns-wrap">
+  <div
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    class="column-list"
+    (cdkDropListDropped)="drop($event)"
+    *ngIf="columns$ | async"
+    cdkDropListGroup
+  >
+    <div class="column-wrap" cdkDrag *ngFor="let column of columns">
+      <app-board-column
+        [column]="column"
+        (removed)="refresh()"
+      ></app-board-column>
+    </div>
+  </div>
+  <div class="new-column" (click)="createColumn()">
+    <div class="new-column__icon">
+      <mat-icon>add</mat-icon>
+    </div>
+    <div class="new-column__title">
+      {{ "Columns-create-column" | translate }}
+    </div>
+  </div>
+</div>

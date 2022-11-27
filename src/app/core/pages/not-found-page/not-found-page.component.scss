@@ -1,0 +1,47 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/mixins";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.error-code-container {
+  display: flex;
+  height: 200px;
+  align-items: center;
+}
+
+.error-code{
+  color: $whiteColor;
+  font-size: 170px;
+  text-shadow: 3px 3px 3px red, -3px -3px 3px blue;
+}
+.error-message{
+  @include NormalText($whiteColor);
+  font-weight: 500;
+}
+
+.error-button {
+  @include NormalText($whiteColor);
+  font-weight: bold;
+  background-color: transparent;
+  border-radius: 10px;
+  width: 250px;
+  height: 50px;
+  box-shadow: 3px 3px 25px red, -3px -3px 25px blue;
+  outline: none;
+  border: none;
+  user-select: none;
+  transition: .2s;
+}
+
+.error-button:hover {
+  cursor: pointer;
+  scale: 105%;
+  font-size: 28px;
+}

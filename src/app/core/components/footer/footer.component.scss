@@ -1,0 +1,49 @@
+@import "src/assets/styles/variables";
+
+.footer {
+  overflow-x: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  color: $whiteColor;
+  box-shadow: 0 -5px 10px $shadowColor;
+  padding-top: 5px;
+  background-color: $wBackground;
+}
+
+.gh-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.gh-list * {
+  display: inline;
+  margin: 0 10px;
+  text-decoration: none;
+  color: $whiteColor;
+  transition : .1s;
+  opacity: .7;
+}
+
+.gh-list *:hover {
+  opacity: 1;
+  text-shadow: 1px 1px 3px $whiteColor, $whiteColor 1px 1px;
+}
+
+.rs-logo {
+  width: 80px;
+  opacity: 0.7;
+  transition: .2s;
+}
+
+.rs-logo:hover {
+  scale: 105%;
+  opacity: 1;
+}
+
+@media (max-width: 760px) {
+  .github-list {
+    order: 3;
+  }
+}

@@ -1,0 +1,109 @@
+import { IBoard, IError } from './../models/data.model';
+import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BoardApi } from './api/board.api';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ProjectsDataService {
+  public projects: BehaviorSubject<IBoard[]> = new BehaviorSubject<IBoard[]>(
+    []
+  );
+
+  public project = new BehaviorSubject<IBoard>({
+    _id: '',
+    title: '',
+    description: '',
+    owner: '',
+    users: [''],
+  });
+
+  constructor(private boardApi: BoardApi) {}
+
+  public getProjectField(): Observable<IBoard[]> {
+    return this.projects.asObservable();
+  }
+
+  public createProject(
+    title: string,
+    description: string,
+    owner: string
+  ): Observable<IBoard | IError | null> {
+    return this.boardApi.createBoard({ title, description, owner }).pipe(
+      map((result) => {
+        if (result === null) {
+          this.boardApi.getBoards().pipe(
+            map((project) => {
+              if (project) {
+                const boards: IBoard[] = project as IBoard[];
+                this.projects.next(boards);
+              }
+              return project as IBoard[];
+            })
+          );
+        }
+        return result;
+      })
+    );
+  }
+
+  public getProjects(): Observable<IBoard[]> {
+    return this.boardApi.getBoards().pipe(
+      map((result) => {
+        if (result) {
+          const boards: IBoard[] = result as IBoard[];
+          this.projects.next(boards);
+        }
+        return result as IBoard[];
+      })
+    );
+  }
+
+  public getProject(boardId: string): Observable<IBoard> {
+    return this.boardApi.getBoard(boardId).pipe(
+      map((result) => {
+        if (result) {
+          const board: IBoard = result as IBoard;
+          this.project.next(board);
+        }
+        return result as IBoard;
+      })
+    );
+  }
+
+  public deleteProject(projectId: string): Observable<IError | null> {
+    return this.boardApi.deleteBoard(projectId).pipe(
+      map((result) => {
+        if (result === null) {
+          this.boardApi.getBoards().pipe(
+            map((project) => {
+              if (project) {
+                const boards: IBoard[] = project as IBoard[];
+                this.projects.next(boards);
+              }
+              return project as IBoard[];
+            })
+          );
+        }
+        return result;
+      })
+    );
+  }
+
+  public updateProject(
+    projectId: string,
+    title: string,
+    description: string,
+    owner: string,
+    users: string[]
+  ): Observable<IBoard> {
+    return this.boardApi
+      .updateBoard(projectId, { title, description, owner, users })
+      .pipe(
+        map((result) => {
+          return result as IBoard;
+        })
+      );
+  }
+}

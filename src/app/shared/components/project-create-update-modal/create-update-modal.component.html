@@ -1,0 +1,131 @@
+<form>
+  <h1 class="dialog-title" mat-dialog-title>
+    {{ title | translate }}
+  </h1>
+
+  <div class="modal-wrap" mat-dialog-content>
+    <div class="task-status__wrap" *ngIf="pointLabel.length > 0">
+      <div class="task-point__label">{{ pointLabel | translate }}</div>
+      <mat-checkbox
+        class="example-margin"
+        name="pointCheck"
+        [(ngModel)]="pointStatus"
+      ></mat-checkbox>
+    </div>
+
+    <mat-form-field class="title-field" appearance="fill">
+      <div class="project-title__label">{{ titleLabel | translate }}</div>
+      <input
+        matInput
+        [(ngModel)]="titleField"
+        #titleInp="ngModel"
+        name="title"
+        required
+      />
+      <mat-error [hidden]="titleInp.valid || titleInp.untouched">
+        {{ "Validation-create-update-modal-title" | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      class="description-field"
+      appearance="fill"
+      *ngIf="descriptionLabel.length > 0"
+    >
+      <div class="project-description__label">
+        {{ descriptionLabel | translate }}
+      </div>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="5"
+        [(ngModel)]="descriptionField"
+        #desriptionInp="ngModel"
+        required
+        name="description1"
+      ></textarea>
+      <mat-error>
+        {{ "Validation-create-update-modal-description" | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      class="users-field"
+      appearance="fill"
+      *ngIf="users.length > 0"
+    >
+      <div class="project-user__label">{{ usersLabel | translate }}</div>
+      <mat-select
+        [(ngModel)]="userName"
+        #userInp="ngModel"
+        name="user"
+        required
+      >
+        <mat-option *ngFor="let user of users" [value]="user.name">
+          {{ user.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error>
+        {{ "Validation-create-update-modal-user" | translate }}
+      </mat-error>
+    </mat-form-field>
+
+    <ng-container *ngIf="task">
+      <div class="task-image__label">
+        {{ "Task-modal-image-title" | translate }}
+      </div>
+      <ng-container *ngIf="img$ | async as img; else noImg">
+        <div id="hover" class="task-img__container">
+          <div id="image">
+            <img class="task-img" [src]="baseUrl + img.path" />
+          </div>
+          <div class="task-settings__icons">
+            <div>
+              <mat-icon
+                class="task-settings__removeImg-icon"
+                [title]="'task-img-delete' | translate"
+                (click)="deleteImg(img._id)"
+                >delete_forever</mat-icon
+              >
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noImg>
+        <input
+          id="input-file-id"
+          (change)="setImg($event)"
+          hidden
+          type="file"
+          accept=".img,.jpeg,.png"
+        />
+        <label for="input-file-id" (click)="uploadImg()">
+          <mat-icon
+            class="task-settings__attach-icon"
+            [title]="'task-img-attach' | translate"
+            >attachment</mat-icon
+          >
+        </label>
+      </ng-template>
+    </ng-container>
+  </div>
+
+  <div mat-dialog-actions>
+    <button class="cancel-btn" mat-button (click)="onCancel()">
+      {{ "Cancel" | translate }}
+    </button>
+    <button
+      class="command-btn"
+      mat-raised-button
+      type="submit"
+      (click)="onCommand()"
+      [disabled]="
+        titleField === '' ||
+        (descriptionLabel.length !== 0 && descriptionField === '') ||
+        (users.length !== 0 && userName === '')
+      "
+    >
+      {{ commandName | translate }}
+    </button>
+  </div>
+</form>

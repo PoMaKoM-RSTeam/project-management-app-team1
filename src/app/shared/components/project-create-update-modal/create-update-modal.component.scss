@@ -1,0 +1,162 @@
+@import "src/assets/styles/variables";
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  background: #1C2128;
+  width: 300px;
+  height: 100%;
+  padding: 10px 0;
+  border-radius: 8px;
+}
+
+.form__question {
+  font-size: 12px;
+}
+
+.form__link {
+  margin-left: 5px;
+  font-weight: bold;
+  color: #2f80ed;
+  cursor: pointer;
+}
+
+.modal-wrap {
+  width: 100%;
+  .task-status__wrap {
+    display: flex ;
+    padding-left: 12px;
+    gap: 8px;
+    align-items: center;
+  }
+}
+
+.project-title__label,
+.project-description__label,
+.project-user__label {
+  margin-bottom: 5px;
+}
+
+h2 {
+  margin-top: 18px;
+}
+
+.dialog-title {
+  text-align: center;
+}
+
+mat-form-field {
+  width: 300px;
+  padding-bottom: 0;
+  border-bottom: transparent !important;
+}
+
+mat-error {
+  color: red;
+}
+
+span {
+  margin-bottom: 10px;
+}
+
+input {
+  text-indent: 5px;
+  border: none;
+  background-color: #161B22;
+  height: 33px;
+  color: #fff;
+  width: 280px;
+}
+
+textarea {
+  width: 280px;
+  background-color: #161B22;
+  color: #fff;
+  text-indent: 5px;
+  padding-top: 5px;
+}
+
+.cancel-btn {
+  color: #fff;
+  background-color: #39424c;
+}
+
+::ng-deep {
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+  }
+
+  .mat-select-panel {
+    background: white;
+  }
+
+  .mat-dialog-actions {
+    margin-bottom: -10px;
+  }
+
+  .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+    background: rgba(0, 0, 0, .12);
+  }
+
+  .mat-option:hover:not(.mat-option-disabled),
+  .mat-option:focus:not(.mat-option-disabled) {
+    background: rgba(0, 0, 0, .04);
+  }
+
+  .mat-select-panel:not([class*=mat-elevation-z]) {
+    box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+  }
+
+  .users-field.mat-form-field-appearance-fill .mat-form-field-infix {
+    border-bottom: 1px solid #000;
+  }
+
+  .mat-dialog-actions {
+    justify-content: center;
+  }
+}
+
+.task-img__container {
+  display: flex;
+  justify-content: center;
+  .task-img{
+    width: 70px;
+  }
+}
+
+.task-image__label {
+  padding: 18px 0px 10px 12px;
+}
+
+.task-settings__attach-icon {
+  padding: 0px 0px 10px 12px;
+  font-size: 1.45rem;
+  color: #b36bd4;
+  cursor: pointer;
+  width: 21px;
+  height: 21px;
+  transition: 0.2s;
+}
+.task-settings__attach-icon:hover {
+  transform: scale(1.1);
+}
+
+.task-settings__removeImg-icon {
+  font-size: 1.45rem;
+  color: #2f80ed;
+  cursor: pointer;
+  width: 21px;
+  height: 21px;
+  transition: 0.2s;
+}
+.task-settings__removeImg-icon:hover {
+  transform: scale(1.1);
+}
+
+button[type="submit"]:enabled {
+  color: #fff;
+  background-color: #228EC4;
+}
