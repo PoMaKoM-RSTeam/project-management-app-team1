@@ -22,6 +22,8 @@ import {
   OnDestroy,
   OnInit,
   ChangeDetectionStrategy,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import {
   CdkDragDrop,
@@ -39,6 +41,8 @@ import { UserStatusService } from 'src/app/core/services/user-status.service';
 })
 export class BoardColumnComponent implements OnInit, OnDestroy {
   @Input() public column!: IColumn;
+
+  @Output() public removed = new EventEmitter<any>();
 
   public users$!: Observable<IUser[]>;
 
@@ -230,7 +234,9 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
               ),
               take(1)
             )
-            .subscribe();
+            .subscribe(() => {
+              this.removed.emit();
+            });
         }
       });
   }
@@ -269,10 +275,14 @@ export class BoardColumnComponent implements OnInit, OnDestroy {
               map((task) => {
                 if (task) {
                   const CurrentTask = task as ITask;
-                  this.pointService.createPoint({ title: 'Point',
-                    done: false,
-                    taskId: CurrentTask._id,
-                    boardId: CurrentTask.boardId }).subscribe();
+                  this.pointService
+                    .createPoint({
+                      title: 'Point',
+                      done: false,
+                      taskId: CurrentTask._id,
+                      boardId: CurrentTask.boardId,
+                    })
+                    .subscribe();
                 }
                 return task as ITask;
               }),

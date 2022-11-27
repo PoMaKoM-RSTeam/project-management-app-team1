@@ -8,7 +8,10 @@
     cdkDropListGroup
   >
     <div class="column-wrap" cdkDrag *ngFor="let column of columns">
-      <app-board-column [column]="column"></app-board-column>
+      <app-board-column
+        [column]="column"
+        (removed)="refresh()"
+      ></app-board-column>
     </div>
   </div>
   <div class="new-column" (click)="createColumn()">

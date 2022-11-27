@@ -36,16 +36,23 @@ export class ColumnsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.columns$ = this.columnsService
+      .getColumnsField()
+      .pipe((value) => value);
+    this.getList();
+  }
+
+  getList() {
     this.columnsService
       .getColumns(this.activatedRoute.snapshot.params['id'])
       .pipe(takeUntil(this.destroy$))
       .subscribe((columns) => {
-        if (columns && columns.length > 0)
+        if (columns && columns.length > 0) {
           this.columns = columns.sort((a, b) => (a.order > b.order ? 1 : -1));
+        } else {
+          this.columns = [];
+        }
       });
-    this.columns$ = this.columnsService
-      .getColumnsField()
-      .pipe((value) => value);
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -119,6 +126,10 @@ export class ColumnsComponent implements OnInit, OnDestroy {
             });
         }
       });
+  }
+
+  refresh() {
+    this.getList();
   }
 
   ngOnDestroy() {
